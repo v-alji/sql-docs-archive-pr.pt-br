@@ -1,0 +1,53 @@
+---
+title: Adicionar um total a um grupo ou a uma região de dados Tablix (Construtor de Relatórios e SSRS) | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: reporting-services-native
+ms.topic: conceptual
+ms.assetid: cf1b96c3-7f0f-4c94-ad08-5239c77ccfe4
+author: maggiesMSFT
+ms.author: maggies
+manager: kfile
+ms.openlocfilehash: f626621a37a327ae32664ab9444e72ce4931ac0e
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87569093"
+---
+# <a name="add-a-total-to-a-group-or-tablix-data-region-report-builder-and-ssrs"></a><span data-ttu-id="63de0-102">Adicionar um total a um grupo ou a uma região de dados Tablix (Construtor de Relatórios e SSRS)</span><span class="sxs-lookup"><span data-stu-id="63de0-102">Add a Total to a Group or Tablix Data Region (Report Builder and SSRS)</span></span>
+  <span data-ttu-id="63de0-103">É possível adicionar totais em uma região de dados tablix para um grupo ou para toda a região de dados.</span><span class="sxs-lookup"><span data-stu-id="63de0-103">You can add totals in a tablix data region for a group or for the entire data region.</span></span> <span data-ttu-id="63de0-104">Por padrão, total é a soma dos dados numéricos, não nulos, em um grupo ou na região de dados, após a aplicação de filtros.</span><span class="sxs-lookup"><span data-stu-id="63de0-104">By default, a total is the sum of the numeric, non-null data in a group or in the data region, after filters are applied.</span></span> <span data-ttu-id="63de0-105">Para adicionar totais de um grupo, clique em **Adicionar Total** no menu de atalho do grupo no painel Agrupamento.</span><span class="sxs-lookup"><span data-stu-id="63de0-105">To add totals for a group, click **Add Total** on the shortcut menu for the group in the Grouping pane.</span></span> <span data-ttu-id="63de0-106">Para adicionar totais de uma célula individual na área de corpo tablix, clique em **Adicionar Total** no menu de atalho da célula.</span><span class="sxs-lookup"><span data-stu-id="63de0-106">To add totals for an individual cell in the tablix body area, click **Add Total** on the shortcut menu for the cell.</span></span> <span data-ttu-id="63de0-107">O comando **Adicionar Total** é contextual e habilitado apenas para campos numéricos.</span><span class="sxs-lookup"><span data-stu-id="63de0-107">The **Add Total** command is context-sensitive and enabled only for numeric fields.</span></span> <span data-ttu-id="63de0-108">Dependendo da célula tablix selecionada, é possível adicionar um total de uma única célula selecionando uma célula na área do corpo tablix, ou de todo o grupo selecionando uma célula na área do grupo de linhas tablix ou na área do grupo de colunas tablix.</span><span class="sxs-lookup"><span data-stu-id="63de0-108">Depending on the tablix cell that you select, you can add a total for a single cell by selecting a cell in the tablix body area or for the entire group by selecting a cell in the tablix row group area or the tablix column group area.</span></span> <span data-ttu-id="63de0-109">Para obter mais informações sobre áreas tablix, consulte [Região de dados Tablix &#40;Construtor de Relatórios e SSRS&#41;](../tablix-data-region-report-builder-and-ssrs.md).</span><span class="sxs-lookup"><span data-stu-id="63de0-109">For more information about tablix areas, see [Tablix Data Region &#40;Report Builder and SSRS&#41;](../tablix-data-region-report-builder-and-ssrs.md).</span></span>  
+  
+ <span data-ttu-id="63de0-110">Depois de adicionar um total, você pode alterar a função padrão Sum para outra função de agregação da lista de funções de relatório internas.</span><span class="sxs-lookup"><span data-stu-id="63de0-110">After you add a total, you can change the default function Sum to a different aggregate function from the list of built-in report functions.</span></span> <span data-ttu-id="63de0-111">Para obter mais informações, consulte [referência de funções de agregação &#40;Construtor de relatórios e SSRS&#41;](report-builder-functions-aggregate-functions-reference.md).[!INCLUDE[ssRBRDDup](../../includes/ssrbrddup-md.md)]</span><span class="sxs-lookup"><span data-stu-id="63de0-111">For more information, see [Aggregate Functions Reference &#40;Report Builder and SSRS&#41;](report-builder-functions-aggregate-functions-reference.md).[!INCLUDE[ssRBRDDup](../../includes/ssrbrddup-md.md)]</span></span>  
+  
+### <a name="to-add-a-total-for-an-individual-value-in-the-tablix-body-area"></a><span data-ttu-id="63de0-112">Para adicionar um total de um valor individual na área do corpo tablix</span><span class="sxs-lookup"><span data-stu-id="63de0-112">To add a total for an individual value in the tablix body area</span></span>  
+  
+-   <span data-ttu-id="63de0-113">Na área do corpo da região de dados tablix, clique com o botão direito do mouse no local em que você deseja adicionar o total.</span><span class="sxs-lookup"><span data-stu-id="63de0-113">In the tablix data region body area, right-click the cell where you want to add the total.</span></span> <span data-ttu-id="63de0-114">A célula deve conter um campo numérico.</span><span class="sxs-lookup"><span data-stu-id="63de0-114">The cell must contain a numeric field.</span></span> <span data-ttu-id="63de0-115">Aponte para **Adicionar Total**e clique em **Linha** ou **Coluna**.</span><span class="sxs-lookup"><span data-stu-id="63de0-115">Point to **Add Total**, and then click **Row** or **Column**.</span></span>  
+  
+     <span data-ttu-id="63de0-116">Uma nova linha ou coluna fora do grupo atual é adicionada à região de dados com um total padrão do campo na célula em que você clicou.</span><span class="sxs-lookup"><span data-stu-id="63de0-116">A new row or column outside the current group is added to the data region, with a default total for the field in the cell you clicked.</span></span>  
+  
+     <span data-ttu-id="63de0-117">Se a região de dados tablix for uma tabela, uma linha será adicionada automaticamente.</span><span class="sxs-lookup"><span data-stu-id="63de0-117">If the tablix data region is a table, a row is automatically added.</span></span>  
+  
+### <a name="to-add-totals-for-a-row-group"></a><span data-ttu-id="63de0-118">Para adicionar totais de um grupo de linhas</span><span class="sxs-lookup"><span data-stu-id="63de0-118">To add totals for a row group</span></span>  
+  
+-   <span data-ttu-id="63de0-119">Na área do grupo de linhas da região de dados tablix, clique com o botão direito do mouse em uma célula para a qual você deseja adicionar totais, aponte para **Adicionar Total**e clique em **Antes** ou **Depois**.</span><span class="sxs-lookup"><span data-stu-id="63de0-119">In the tablix data region row group area, right-click a cell in the row group area for which you want totals, point to **Add Total**, and then click **Before** or **After**.</span></span>  
+  
+     <span data-ttu-id="63de0-120">Uma nova linha fora do grupo atual é adicionada à região de dados, e um total padrão é adicionado a todos os campos numéricos da linha.</span><span class="sxs-lookup"><span data-stu-id="63de0-120">A new row outside the current group is added to the data region, and then a default total is added for each numeric field in the row.</span></span>  
+  
+### <a name="to-add-totals-for-a-column-group"></a><span data-ttu-id="63de0-121">Para adicionar totais de um grupo de colunas</span><span class="sxs-lookup"><span data-stu-id="63de0-121">To add totals for a column group</span></span>  
+  
+-   <span data-ttu-id="63de0-122">Na área do grupo de linhas da região de dados tablix, clique com o botão direito do mouse em uma célula da área do grupo de colunas para a qual você deseja adicionar totais, aponte para **Adicionar Total**e clique em **Antes** ou **Depois**.</span><span class="sxs-lookup"><span data-stu-id="63de0-122">In the tablix data region row group area, right-click a cell in the column group area for which you want totals, then point to **Add Total**, and click **Before** or **After**.</span></span>  
+  
+     <span data-ttu-id="63de0-123">Uma nova coluna fora do grupo atual é adicionada à região de dados, e um total padrão é adicionado a todos os campos numéricos da coluna.</span><span class="sxs-lookup"><span data-stu-id="63de0-123">A new column outside the current group is added to the data region, and then a default total is added for each numeric field in the column.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="63de0-124">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="63de0-124">See Also</span></span>  
+ <span data-ttu-id="63de0-125">[Escopo de expressão para totais, agregações e coleções internas &#40;Construtor de Relatórios e SSRS&#41;](expression-scope-for-totals-aggregates-and-built-in-collections.md) </span><span class="sxs-lookup"><span data-stu-id="63de0-125">[Expression Scope for Totals, Aggregates, and Built-in Collections &#40;Report Builder and SSRS&#41;](expression-scope-for-totals-aggregates-and-built-in-collections.md) </span></span>  
+ <span data-ttu-id="63de0-126">[Região de dados Tablix &#40;Construtor de Relatórios e SSRS&#41;](../tablix-data-region-report-builder-and-ssrs.md) </span><span class="sxs-lookup"><span data-stu-id="63de0-126">[Tablix Data Region &#40;Report Builder and SSRS&#41;](../tablix-data-region-report-builder-and-ssrs.md) </span></span>  
+ <span data-ttu-id="63de0-127">[Tabelas &#40;Construtor de Relatórios e SSRS&#41;](tables-report-builder-and-ssrs.md) </span><span class="sxs-lookup"><span data-stu-id="63de0-127">[Tables &#40;Report Builder  and SSRS&#41;](tables-report-builder-and-ssrs.md) </span></span>  
+ <span data-ttu-id="63de0-128">[Matrizes &#40;Construtor de Relatórios e SSRS&#41;](create-a-matrix-report-builder-and-ssrs.md) </span><span class="sxs-lookup"><span data-stu-id="63de0-128">[Matrices &#40;Report Builder and SSRS&#41;](create-a-matrix-report-builder-and-ssrs.md) </span></span>  
+ <span data-ttu-id="63de0-129">[Lista &#40;Construtor de Relatórios e SSRS&#41;](create-invoices-and-forms-with-lists-report-builder-and-ssrs.md) </span><span class="sxs-lookup"><span data-stu-id="63de0-129">[Lists &#40;Report Builder and SSRS&#41;](create-invoices-and-forms-with-lists-report-builder-and-ssrs.md) </span></span>  
+ [<span data-ttu-id="63de0-130">Tabelas, matrizes e listas &#40;Construtor de Relatórios e SSRS&#41;</span><span class="sxs-lookup"><span data-stu-id="63de0-130">Tables, Matrices, and Lists &#40;Report Builder and SSRS&#41;</span></span>](tables-matrices-and-lists-report-builder-and-ssrs.md)  
+  
+  

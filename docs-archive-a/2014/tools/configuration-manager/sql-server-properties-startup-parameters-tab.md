@@ -1,0 +1,81 @@
+---
+title: Propriedades de SQL Server (guia parâmetros de inicialização) | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: configuration
+ms.topic: conceptual
+ms.assetid: 16942624-5374-446c-8de4-ee6ed34d6e94
+author: stevestein
+ms.author: sstein
+ms.openlocfilehash: 66c4b71433face008ba78af93579cf175fb4bed4
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87573337"
+---
+# <a name="sql-server-properties-startup-parameters-tab"></a><span data-ttu-id="527ea-102">Propriedades do SQL Server (guia Parâmetros de Inicialização)</span><span class="sxs-lookup"><span data-stu-id="527ea-102">SQL Server Properties (Startup Parameters Tab)</span></span>
+  <span data-ttu-id="527ea-103">Use esta caixa de diálogo para adicionar ou remover parâmetros de inicialização do [!INCLUDE[ssDE](../../includes/ssde-md.md)].</span><span class="sxs-lookup"><span data-stu-id="527ea-103">Use this dialog box to add or remove startup parameters for the [!INCLUDE[ssDE](../../includes/ssde-md.md)].</span></span> <span data-ttu-id="527ea-104">Os parâmetros de inicialização podem ter um grande efeito no desempenho do [!INCLUDE[ssDE](../../includes/ssde-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="527ea-104">Startup parameters can have a large effect on the [!INCLUDE[ssDE](../../includes/ssde-md.md)] performance.</span></span> <span data-ttu-id="527ea-105">Antes de adicionar ou alterar os parâmetros de inicialização, consulte o tópico "Usando as opções de inicialização do Serviço [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] " nos Manuais Online do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="527ea-105">Before adding or changing startup parameters, see the topic "Using the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Service Startup Options" in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Books Online.</span></span>  
+  
+## <a name="options"></a><span data-ttu-id="527ea-106">Opções</span><span class="sxs-lookup"><span data-stu-id="527ea-106">Options</span></span>  
+ <span data-ttu-id="527ea-107">**Especificar um parâmetro de inicialização**</span><span class="sxs-lookup"><span data-stu-id="527ea-107">**Specify a startup parameter**</span></span>  
+ <span data-ttu-id="527ea-108">Para adicionar um parâmetro, digite o parâmetro e clique em **Adicionar**.</span><span class="sxs-lookup"><span data-stu-id="527ea-108">To add a parameter, type the parameter, and then click **Add**.</span></span>  
+  
+ <span data-ttu-id="527ea-109">Para modificar um dos parâmetros necessários, selecione o parâmetro na caixa **Parâmetros existentes** , altere os valores da caixa **Especificar um parâmetro de inicialização** e clique em **Atualizar**.</span><span class="sxs-lookup"><span data-stu-id="527ea-109">To modify one of the required parameters, select the parameter in the **Existing parameters** box, change the values in the **Specify a startup parameter** box, and then click **Update**.</span></span>  
+  
+ <span data-ttu-id="527ea-110">**Parâmetros existentes**</span><span class="sxs-lookup"><span data-stu-id="527ea-110">**Existing parameters**</span></span>  
+ <span data-ttu-id="527ea-111">Para remover um parâmetro, selecione um parâmetro e clique em **Remover**.</span><span class="sxs-lookup"><span data-stu-id="527ea-111">To remove a parameter, select a parameter, and then click **Remove**.</span></span>  
+  
+## <a name="parameter-format"></a><span data-ttu-id="527ea-112">Formato do parâmetro</span><span class="sxs-lookup"><span data-stu-id="527ea-112">Parameter Format</span></span>  
+ <span data-ttu-id="527ea-113">Não insira um separador entre parâmetros.</span><span class="sxs-lookup"><span data-stu-id="527ea-113">Do not enter a separator between parameters.</span></span> [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] <span data-ttu-id="527ea-114">Configuration Manager adiciona o separador automaticamente.</span><span class="sxs-lookup"><span data-stu-id="527ea-114">Configuration Manager automatically adds the separator.</span></span> [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] <span data-ttu-id="527ea-115">Configuration Manager impõe os seguintes requisitos de parâmetros.</span><span class="sxs-lookup"><span data-stu-id="527ea-115">Configuration Manager enforces the following parameter requirements.</span></span>  
+  
+-   <span data-ttu-id="527ea-116">Espaços à direita e à esquerda são cortados de qualquer parâmetro de inicialização.</span><span class="sxs-lookup"><span data-stu-id="527ea-116">Leading and trailing spaces are trimmed from any startup parameter.</span></span>  
+  
+-   <span data-ttu-id="527ea-117">Todos os parâmetros de inicialização começam com um - (traço) e o segundo valor é uma letra.</span><span class="sxs-lookup"><span data-stu-id="527ea-117">All startup parameters start with a - (dash) and the second value is a letter.</span></span>  
+  
+## <a name="required-parameters"></a><span data-ttu-id="527ea-118">Parâmetros obrigatórios</span><span class="sxs-lookup"><span data-stu-id="527ea-118">Required Parameters</span></span>  
+ <span data-ttu-id="527ea-119">As seguintes parâmetros são necessários.</span><span class="sxs-lookup"><span data-stu-id="527ea-119">The following parameters are required.</span></span> <span data-ttu-id="527ea-120">Eles podem ser alterados, mas não poder ser removidos.</span><span class="sxs-lookup"><span data-stu-id="527ea-120">They can be changed but not removed.</span></span>  
+  
+-   <span data-ttu-id="527ea-121">-d é o caminho do arquivo **master.mdf** (o arquivo de dados do banco de dados mestre).</span><span class="sxs-lookup"><span data-stu-id="527ea-121">-d is the path of the **master.mdf** file (the master database data file).</span></span>  
+  
+-   <span data-ttu-id="527ea-122">-l é o caminho do arquivo **master.ldf** (o arquivo de log do banco de dados mestre).</span><span class="sxs-lookup"><span data-stu-id="527ea-122">-l is the path of the **master.ldf** file (the master database log file).</span></span>  
+  
+-   <span data-ttu-id="527ea-123">-e é o caminho dos arquivos de log de erros do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="527ea-123">-e is the path of the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] error log files.</span></span>  
+  
+> [!CAUTION]  
+>  <span data-ttu-id="527ea-124">Se os parâmetros de caminho de arquivo estiverem incorretos, talvez o [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] não possa ser iniciado.</span><span class="sxs-lookup"><span data-stu-id="527ea-124">If the file path parameters are incorrect [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] might not start.</span></span>  
+  
+ <span data-ttu-id="527ea-125">Para obter mais informações sobre como mover o banco de dados mestre, consulte o tópico "Movendo bancos de dados do sistema" nos Manuais Online do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="527ea-125">For more information about how to move the master database, see the topic "Moving System Databases" in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Books Online.</span></span>  
+  
+## <a name="optional-parameters"></a><span data-ttu-id="527ea-126">Parâmetros opcionais</span><span class="sxs-lookup"><span data-stu-id="527ea-126">Optional Parameters</span></span>  
+ <span data-ttu-id="527ea-127">Todos os parâmetros de inicialização com suporte são descritos no tópico "Usando as opções de inicialização do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ", nos Manuais Online do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="527ea-127">All of the supported startup parameters are described in the topic "Using the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Service Startup Options," in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Books Online.</span></span> <span data-ttu-id="527ea-128">Um parâmetro de inicialização -T*trace#* indica que uma instância do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] deve ser iniciada com um sinalizador de rastreamento (*trace#* ) em vigor.</span><span class="sxs-lookup"><span data-stu-id="527ea-128">A startup parameter of -T*trace#* indicates that an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] should be started with a specified trace flag (*trace#*) in effect.</span></span> <span data-ttu-id="527ea-129">São usados sinalizadores de rastreamento para iniciar o servidor com comportamento fora do padrão.</span><span class="sxs-lookup"><span data-stu-id="527ea-129">Trace flags are used to start the server with nonstandard behavior.</span></span> <span data-ttu-id="527ea-130">Para obter mais informações sobre sinalizadores de rastreamento, consulte o tópico “Sinalizadores de rastreamento ([!INCLUDE[tsql](../../includes/tsql-md.md)])” nos Manuais Online do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="527ea-130">For more information about trace flags, see the topic "Trace Flags ([!INCLUDE[tsql](../../includes/tsql-md.md)])" in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Books Online.</span></span>  
+  
+> [!CAUTION]  
+>  <span data-ttu-id="527ea-131">Talvez você veja parâmetros de inicialização e sinalizadores de rastreamento adicionais não documentados na Internet.</span><span class="sxs-lookup"><span data-stu-id="527ea-131">You might see additional undocumented startup parameters and trace flags described on the Internet.</span></span> <span data-ttu-id="527ea-132">Os parâmetros de inicialização e os indicadores de rastreamento não documentados são criados para resolver problemas ou para forçar determinas condições necessárias para testes.</span><span class="sxs-lookup"><span data-stu-id="527ea-132">Undocumented startup parameters and trace flags are created to address uncommon problems or to force certain conditions required for testing.</span></span> <span data-ttu-id="527ea-133">O uso de parâmetros de inicialização não documentados pode ter resultados inesperados.</span><span class="sxs-lookup"><span data-stu-id="527ea-133">Using undocumented startup parameters can have unexpected results.</span></span> <span data-ttu-id="527ea-134">Não use parâmetros não documentados a não ser quando direcionado pelos Serviços de Atendimento ao Cliente da Microsoft.</span><span class="sxs-lookup"><span data-stu-id="527ea-134">Do not use undocumented parameters unless directed by Microsoft Customer Support Services.</span></span>  
+  
+ <span data-ttu-id="527ea-135">A lista a seguir descreve alguns parâmetros opcionais comuns.</span><span class="sxs-lookup"><span data-stu-id="527ea-135">The following list describes some common optional parameters.</span></span>  
+  
+|<span data-ttu-id="527ea-136">Parâmetro</span><span class="sxs-lookup"><span data-stu-id="527ea-136">Parameter</span></span>|<span data-ttu-id="527ea-137">Descrição breve</span><span class="sxs-lookup"><span data-stu-id="527ea-137">Short description</span></span>|  
+|---------------|-----------------------|  
+|<span data-ttu-id="527ea-138">-M</span><span class="sxs-lookup"><span data-stu-id="527ea-138">-m</span></span>|<span data-ttu-id="527ea-139">Inicia uma instância do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] em modo de usuário único.</span><span class="sxs-lookup"><span data-stu-id="527ea-139">Starts an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] in single-user mode.</span></span>|  
+|<span data-ttu-id="527ea-140">-T1204</span><span class="sxs-lookup"><span data-stu-id="527ea-140">-T1204</span></span>|<span data-ttu-id="527ea-141">Retorna os recursos e tipos de bloqueios que participam de um deadlock e também o comando atual afetado.</span><span class="sxs-lookup"><span data-stu-id="527ea-141">Returns the resources and types of locks participating in a deadlock and also the current command affected.</span></span>|  
+|<span data-ttu-id="527ea-142">-T1224</span><span class="sxs-lookup"><span data-stu-id="527ea-142">-T1224</span></span>|<span data-ttu-id="527ea-143">Desabilita o escalonamento de bloqueios com base no número de bloqueios.</span><span class="sxs-lookup"><span data-stu-id="527ea-143">Disables lock escalation based on the number of locks.</span></span>|  
+|<span data-ttu-id="527ea-144">-T3608</span><span class="sxs-lookup"><span data-stu-id="527ea-144">-T3608</span></span>|<span data-ttu-id="527ea-145">Impede que o [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] inicie ou recupere automaticamente qualquer banco de dados, exceto o banco de dados mestre.</span><span class="sxs-lookup"><span data-stu-id="527ea-145">Prevents [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] from automatically starting and recovering any database except the master database.</span></span>|  
+|<span data-ttu-id="527ea-146">-T7806</span><span class="sxs-lookup"><span data-stu-id="527ea-146">-T7806</span></span>|<span data-ttu-id="527ea-147">Habilita uma conexão de administrador dedicada (DAC) no [!INCLUDE[ssExpress](../../includes/ssexpress-md.md)].</span><span class="sxs-lookup"><span data-stu-id="527ea-147">Enables a dedicated administrator connection (DAC) on [!INCLUDE[ssExpress](../../includes/ssexpress-md.md)].</span></span>|  
+  
+> [!CAUTION]  
+>  <span data-ttu-id="527ea-148">Alguns parâmetros opcionais podem alterar o comportamento do servidor e afetar o desempenho.</span><span class="sxs-lookup"><span data-stu-id="527ea-148">Some optional parameters can change server behavior and may affect performance.</span></span>  
+  
+## <a name="permissions"></a><span data-ttu-id="527ea-149">Permissões</span><span class="sxs-lookup"><span data-stu-id="527ea-149">Permissions</span></span>  
+ <span data-ttu-id="527ea-150">O uso desta página é restrito a usuários que podem alterar as entradas relacionadas no Registro.</span><span class="sxs-lookup"><span data-stu-id="527ea-150">Use of this page is restricted to users who can change the related entries in the registry.</span></span> <span data-ttu-id="527ea-151">Isso inclui os seguintes usuários.</span><span class="sxs-lookup"><span data-stu-id="527ea-151">This includes the following users.</span></span>  
+  
+-   <span data-ttu-id="527ea-152">Membros do grupo Administradores local.</span><span class="sxs-lookup"><span data-stu-id="527ea-152">Members of the local administrators group.</span></span>  
+  
+-   <span data-ttu-id="527ea-153">A conta de domínio usada pelo [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], se o [!INCLUDE[ssDE](../../includes/ssde-md.md)] estiver configurado para ser executado em uma conta de domínio.</span><span class="sxs-lookup"><span data-stu-id="527ea-153">The domain account that is used by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], if the [!INCLUDE[ssDE](../../includes/ssde-md.md)] is configured to run under a domain account.</span></span>  
+  
+## <a name="books-online-references"></a><span data-ttu-id="527ea-154">Referências dos Manuais Online</span><span class="sxs-lookup"><span data-stu-id="527ea-154">Books Online References</span></span>  
+ <span data-ttu-id="527ea-155">Para obter mais informações sobre os parâmetros de inicialização do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] , consulte “Como configurar as opções de inicialização do servidor ([!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Configuration Manager)” nos Manuais Online do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="527ea-155">For additional information about [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] startup parameters, see "How to: Configure Server Startup Options ([!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Configuration Manager)" in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Books Online.</span></span>  
+  
+  

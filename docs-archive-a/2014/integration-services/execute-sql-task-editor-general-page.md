@@ -1,0 +1,118 @@
+---
+title: Editor da tarefa Executar SQL (página Geral) | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: integration-services
+ms.topic: conceptual
+f1_keywords:
+- sql12.dts.designer.executesqltask.general.f1
+helpviewer_keywords:
+- Execute SQL Task Editor
+ms.assetid: beb39086-28ce-46af-b6d8-f7b4fb8d9069
+author: chugugrace
+ms.author: chugu
+ms.openlocfilehash: 32bec035646c976442eb66ff1270b961835b243b
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87570767"
+---
+# <a name="execute-sql-task-editor-general-page"></a><span data-ttu-id="42302-102">Editor da Tarefa Executar SQL (página Geral)</span><span class="sxs-lookup"><span data-stu-id="42302-102">Execute SQL Task Editor (General Page)</span></span>
+  <span data-ttu-id="42302-103">Use a página **Geral** da caixa de diálogo **Editor da Tarefa Executar SQL** para configurar a tarefa Executar SQL e fornecer a instrução SQL executada pela tarefa.</span><span class="sxs-lookup"><span data-stu-id="42302-103">Use the **General** page of the **Execute SQL Task Editor** dialog box to configure the Execute SQL task and provide the SQL statement that the task runs.</span></span>  
+  
+ <span data-ttu-id="42302-104">Para saber mais sobre essa tarefa, consulte [Tarefa Executar SQL](control-flow/execute-sql-task.md) e [Parâmetros e códigos de retorno na Tarefa Executar SQL](../../2014/integration-services/parameters-and-return-codes-in-the-execute-sql-task.md) e [Conjuntos de resultados na tarefa Executar SQL](../../2014/integration-services/result-sets-in-the-execute-sql-task.md).</span><span class="sxs-lookup"><span data-stu-id="42302-104">To learn about this task, see [Execute SQL Task](control-flow/execute-sql-task.md), [Parameters and Return Codes in the Execute SQL Task](../../2014/integration-services/parameters-and-return-codes-in-the-execute-sql-task.md), and [Result Sets in the Execute SQL Task](../../2014/integration-services/result-sets-in-the-execute-sql-task.md).</span></span> <span data-ttu-id="42302-105">Para saber mais sobre a linguagem de consulta Transact-SQL, consulte [Referência de Transact-SQL &#40;Mecanismo de Banco de Dados&#41;](/sql/t-sql/language-reference).</span><span class="sxs-lookup"><span data-stu-id="42302-105">To learn more about the Transact-SQL query language, see [Transact-SQL Reference &#40;Database Engine&#41;](/sql/t-sql/language-reference).</span></span>  
+  
+## <a name="static-options"></a><span data-ttu-id="42302-106">Opções estáticas</span><span class="sxs-lookup"><span data-stu-id="42302-106">Static Options</span></span>  
+ <span data-ttu-id="42302-107">**Nome**</span><span class="sxs-lookup"><span data-stu-id="42302-107">**Name**</span></span>  
+ <span data-ttu-id="42302-108">Forneça um nome exclusivo para a tarefa Executar SQL no fluxo de trabalho.</span><span class="sxs-lookup"><span data-stu-id="42302-108">Provide a unique name for the Execute SQL task in the workflow.</span></span> <span data-ttu-id="42302-109">O nome fornecido será exibido no Designer do [!INCLUDE[ssIS](../includes/ssis-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="42302-109">The name that is provided will be displayed within [!INCLUDE[ssIS](../includes/ssis-md.md)] Designer.</span></span>  
+  
+ <span data-ttu-id="42302-110">**Descrição**</span><span class="sxs-lookup"><span data-stu-id="42302-110">**Description**</span></span>  
+ <span data-ttu-id="42302-111">Descreva a tarefa Executar SQL.</span><span class="sxs-lookup"><span data-stu-id="42302-111">Describe the Execute SQL task.</span></span> <span data-ttu-id="42302-112">Como prática recomendável, para tornar os pacotes autodocumentados e mais fáceis de manter, descreva a tarefa de acordo com a sua finalidade.</span><span class="sxs-lookup"><span data-stu-id="42302-112">As a best practice, to make packages self-documenting and easier to maintain, describe the task in terms of its purpose.</span></span>  
+  
+ <span data-ttu-id="42302-113">**TimeOut**</span><span class="sxs-lookup"><span data-stu-id="42302-113">**TimeOut**</span></span>  
+ <span data-ttu-id="42302-114">Especifique o número máximo de segundos que a tarefa será executada antes de exceder o tempo limite. O valor 0 indica que não há limite de tempo.</span><span class="sxs-lookup"><span data-stu-id="42302-114">Specify the maximum number of seconds the task will run before timing out. A value of 0 indicates an infinite time.</span></span> <span data-ttu-id="42302-115">O padrão é 0.</span><span class="sxs-lookup"><span data-stu-id="42302-115">The default is 0.</span></span>  
+  
+> [!NOTE]  
+>  <span data-ttu-id="42302-116">Procedimentos armazenados não atingirão o tempo limite se emularem uma funcionalidade de suspensão fornecendo um tempo para que as conexões sejam estabelecidas e as transações completadas sejam maior que o número de segundos especificados pelo **TimeOut**.</span><span class="sxs-lookup"><span data-stu-id="42302-116">Stored procedures do not time out if they emulate sleep functionality by providing time for connections to be made and transactions to complete that is greater than the number of seconds specified by **TimeOut**.</span></span> <span data-ttu-id="42302-117">Porém, os procedimentos armazenados que executam as consultas estão sempre sujeitos à restrição de tempo especificada pelo **TimeOut**.</span><span class="sxs-lookup"><span data-stu-id="42302-117">However, stored procedures that execute queries are always subject to the time restriction specified by **TimeOut**.</span></span>  
+  
+ <span data-ttu-id="42302-118">**CodePage**</span><span class="sxs-lookup"><span data-stu-id="42302-118">**CodePage**</span></span>  
+ <span data-ttu-id="42302-119">Especifique a página de código a ser usada ao converter valores Unicode em variáveis.</span><span class="sxs-lookup"><span data-stu-id="42302-119">Specify the code page to use when translating Unicode values in variables.</span></span> <span data-ttu-id="42302-120">O valor padrão é a página de código do computador local.</span><span class="sxs-lookup"><span data-stu-id="42302-120">The default value is the code page of the local computer.</span></span>  
+  
+> [!NOTE]  
+>  <span data-ttu-id="42302-121">Quando a tarefa Executar SQL usa um gerenciador de conexões ADO ou ODBC, a propriedade **CodePage** não fica disponível.</span><span class="sxs-lookup"><span data-stu-id="42302-121">When the Execute SQL task uses an ADO or ODBC connection manager, the **CodePage** property is not available.</span></span> <span data-ttu-id="42302-122">Se a sua solução requer o uso de uma página de código, utilize um gerenciador de conexões OLE DB ou ADO.NET com a tarefa Executar SQL.</span><span class="sxs-lookup"><span data-stu-id="42302-122">If your solution requires the use of a code page, use an OLE DB or an ADO.NET connection manager with the Execute SQL task.</span></span>  
+  
+ <span data-ttu-id="42302-123">**TypeConversionMode**</span><span class="sxs-lookup"><span data-stu-id="42302-123">**TypeConversionMode**</span></span>  
+ <span data-ttu-id="42302-124">Quando você definir essa propriedade como `Allowed`, a Tarefa Executar SQL tentará converter o parâmetro de saída e os resultados da consulta no tipo de dados da variável à qual os resultados estão atribuídos.</span><span class="sxs-lookup"><span data-stu-id="42302-124">When you set this property to `Allowed`, the Execute SQL Task will attempt to convert output parameter and query results to the data type of the variable the results are assigned to.</span></span> <span data-ttu-id="42302-125">Isso se aplica ao tipo de conjunto de resultados de **Linha única** .</span><span class="sxs-lookup"><span data-stu-id="42302-125">This applies to the **Single row** result set type.</span></span>  
+  
+ <span data-ttu-id="42302-126">**ResultSet**</span><span class="sxs-lookup"><span data-stu-id="42302-126">**ResultSet**</span></span>  
+ <span data-ttu-id="42302-127">Especifique o tipo de resultado esperado pela instrução SQL que está sendo executada.</span><span class="sxs-lookup"><span data-stu-id="42302-127">Specify the result type expected by the SQL statement being run.</span></span> <span data-ttu-id="42302-128">Escolha entre **Linha Simples**, **Conjunto de Resultados Completo**, **XML**, ou **Nenhum**.</span><span class="sxs-lookup"><span data-stu-id="42302-128">Choose among **Single row**, **Full result set**, **XML**, or **None**.</span></span>  
+  
+ <span data-ttu-id="42302-129">**ConnectionType**</span><span class="sxs-lookup"><span data-stu-id="42302-129">**ConnectionType**</span></span>  
+ <span data-ttu-id="42302-130">Escolha o tipo de gerenciador de conexões a ser usado para conectar-se à fonte de dados.</span><span class="sxs-lookup"><span data-stu-id="42302-130">Choose the type of connection manager to use to connect to the data source.</span></span> <span data-ttu-id="42302-131">Os tipos de conexão disponíveis incluem **OLE DB**, **ODBC**, **ADO**, **ADO.NET** e **SQLMOBILE**.</span><span class="sxs-lookup"><span data-stu-id="42302-131">Available connection types include **OLE DB**, **ODBC**, **ADO**, **ADO.NET** and **SQLMOBILE**.</span></span>  
+  
+ <span data-ttu-id="42302-132">**Tópicos relacionados:** [Gerenciador de conexões do OLE DB](connection-manager/ole-db-connection-manager.md)e [Gerenciador de conexões ODBC](connection-manager/odbc-connection-manager.md)e [Gerenciador de conexões ADO](connection-manager/ado-connection-manager.md)e [Gerenciador de conexões ADO.NET](connection-manager/ado-net-connection-manager.md)e [Gerenciador de conexões do SQL Server Compact Edition](connection-manager/sql-server-compact-edition-connection-manager.md)</span><span class="sxs-lookup"><span data-stu-id="42302-132">**Related Topics:** [OLE DB Connection Manager](connection-manager/ole-db-connection-manager.md), [ODBC Connection Manager](connection-manager/odbc-connection-manager.md), [ADO Connection Manager](connection-manager/ado-connection-manager.md), [ADO.NET Connection Manager](connection-manager/ado-net-connection-manager.md), [SQL Server Compact Edition Connection Manager](connection-manager/sql-server-compact-edition-connection-manager.md)</span></span>  
+  
+ <span data-ttu-id="42302-133">**Conexão**</span><span class="sxs-lookup"><span data-stu-id="42302-133">**Connection**</span></span>  
+ <span data-ttu-id="42302-134">Escolha a conexão a partir de uma lista definida de gerenciadores de conexões.</span><span class="sxs-lookup"><span data-stu-id="42302-134">Choose the connection from a list of defined connection managers.</span></span> <span data-ttu-id="42302-135">Para criar uma conexão, selecione \<**New connection...**>.</span><span class="sxs-lookup"><span data-stu-id="42302-135">To create a new connection, select \<**New connection...**>.</span></span>  
+  
+ <span data-ttu-id="42302-136">**SQLSourceType**</span><span class="sxs-lookup"><span data-stu-id="42302-136">**SQLSourceType**</span></span>  
+ <span data-ttu-id="42302-137">Selecione o tipo de origem da instrução SQL que a tarefa executa.</span><span class="sxs-lookup"><span data-stu-id="42302-137">Select the source type of the SQL statement that the task runs.</span></span>  
+  
+ <span data-ttu-id="42302-138">Dependendo do tipo de gerenciador de conexões que a tarefa Executar SQL utiliza, você deve usar marcadores de parâmetro específicos em instruções SQL com parâmetros.</span><span class="sxs-lookup"><span data-stu-id="42302-138">Depending on the connection manager type that Execute SQL task uses, you must use specific parameter markers in parameterized SQL statements.</span></span>  
+  
+ <span data-ttu-id="42302-139">**Tópicos Relacionados:** seção Executando comandos SQL com parâmetros em [Tarefa Executar SQL](control-flow/execute-sql-task.md)</span><span class="sxs-lookup"><span data-stu-id="42302-139">**Related Topics:** Running Parameterized SQL Commands section in [Execute SQL Task](control-flow/execute-sql-task.md)</span></span>  
+  
+ <span data-ttu-id="42302-140">As opções dessa propriedade são listadas na tabela a seguir.</span><span class="sxs-lookup"><span data-stu-id="42302-140">This property has the options listed in the following table.</span></span>  
+  
+|<span data-ttu-id="42302-141">Valor</span><span class="sxs-lookup"><span data-stu-id="42302-141">Value</span></span>|<span data-ttu-id="42302-142">Descrição</span><span class="sxs-lookup"><span data-stu-id="42302-142">Description</span></span>|  
+|-----------|-----------------|  
+|<span data-ttu-id="42302-143">**Entrada Direta**</span><span class="sxs-lookup"><span data-stu-id="42302-143">**Direct input**</span></span>|<span data-ttu-id="42302-144">Defina a fonte como uma instrução Transact-SQL.</span><span class="sxs-lookup"><span data-stu-id="42302-144">Set the source to a Transact-SQL statement.</span></span> <span data-ttu-id="42302-145">Selecionando esse valor, a opção dinâmica **Instrução SQL**é exibida.</span><span class="sxs-lookup"><span data-stu-id="42302-145">Selecting this value displays the dynamic option, **SQLStatement**.</span></span>|  
+|<span data-ttu-id="42302-146">**Conexão do Arquivo**</span><span class="sxs-lookup"><span data-stu-id="42302-146">**File connection**</span></span>|<span data-ttu-id="42302-147">Selecione um arquivo que contém uma instrução Transact-SQL.</span><span class="sxs-lookup"><span data-stu-id="42302-147">Select a file that contains a Transact-SQL statement.</span></span> <span data-ttu-id="42302-148">Definindo essa opção, a opção dinâmica **FileConnection**é exibida.</span><span class="sxs-lookup"><span data-stu-id="42302-148">Setting this option displays the dynamic option, **FileConnection**.</span></span>|  
+|<span data-ttu-id="42302-149">**Variável**</span><span class="sxs-lookup"><span data-stu-id="42302-149">**Variable**</span></span>|<span data-ttu-id="42302-150">Defina a fonte como uma variável que identifique a instrução Transact-SQL.</span><span class="sxs-lookup"><span data-stu-id="42302-150">Set the source to a variable that defines the Transact-SQL statement.</span></span> <span data-ttu-id="42302-151">Selecionando esse valor, a opção dinâmica **SourceVariable**é exibida.</span><span class="sxs-lookup"><span data-stu-id="42302-151">Selecting this value displays the dynamic option, **SourceVariable**.</span></span>|  
+  
+ <span data-ttu-id="42302-152">**QueryIsStoredProcedure**</span><span class="sxs-lookup"><span data-stu-id="42302-152">**QueryIsStoredProcedure**</span></span>  
+ <span data-ttu-id="42302-153">Indica se a instrução SQL especificada a ser executada é um procedimento armazenado.</span><span class="sxs-lookup"><span data-stu-id="42302-153">Indicates whether the specified SQL statement to be run is a stored procedure.</span></span> <span data-ttu-id="42302-154">Essa propriedade será de somente leitura/gravação se a tarefa usar o gerenciador de conexões ADO.</span><span class="sxs-lookup"><span data-stu-id="42302-154">This property is read/write only if the task uses the ADO connection manager.</span></span> <span data-ttu-id="42302-155">Caso contrário a propriedade será somente leitura e seu valor será `false`.</span><span class="sxs-lookup"><span data-stu-id="42302-155">Otherwise the property is read-only and its value is `false`.</span></span>  
+  
+ <span data-ttu-id="42302-156">**BypassPrepare**</span><span class="sxs-lookup"><span data-stu-id="42302-156">**BypassPrepare**</span></span>  
+ <span data-ttu-id="42302-157">Indique se a instrução SQL está preparada.</span><span class="sxs-lookup"><span data-stu-id="42302-157">Indicate whether the SQL statement is prepared.</span></span>  <span data-ttu-id="42302-158">`true` ignora a preparação; `false` prepara a instrução SQL antes de executá-la.</span><span class="sxs-lookup"><span data-stu-id="42302-158">`true` skips preparation; `false` prepares the SQL statement before running it.</span></span> <span data-ttu-id="42302-159">Essa opção só está disponível com conexões OLE DB que dão suporte à preparação.</span><span class="sxs-lookup"><span data-stu-id="42302-159">This option is available only with OLE DB connections that support preparation.</span></span>  
+  
+ <span data-ttu-id="42302-160">**Tópicos relacionados:**  [Execução preparada](../relational-databases/native-client-odbc-queries/executing-statements/prepared-execution.md)</span><span class="sxs-lookup"><span data-stu-id="42302-160">**Related Topics:**  [Prepared Execution](../relational-databases/native-client-odbc-queries/executing-statements/prepared-execution.md)</span></span>  
+  
+ <span data-ttu-id="42302-161">**Procurar**</span><span class="sxs-lookup"><span data-stu-id="42302-161">**Browse**</span></span>  
+ <span data-ttu-id="42302-162">Localize um arquivo que contém uma instrução SQL usando a caixa de diálogo **Abrir** .</span><span class="sxs-lookup"><span data-stu-id="42302-162">Locate a file that contains a SQL statement by using the **Open** dialog box.</span></span> <span data-ttu-id="42302-163">Selecione um arquivo para copiar o conteúdo do arquivo como uma instrução SQL para a propriedade **SQLStatement** .</span><span class="sxs-lookup"><span data-stu-id="42302-163">Select a file to copy the contents of the file as a SQL statement into the **SQLStatement** property.</span></span>  
+  
+ <span data-ttu-id="42302-164">**Construir Consulta**</span><span class="sxs-lookup"><span data-stu-id="42302-164">**Build Query**</span></span>  
+ <span data-ttu-id="42302-165">Crie uma instrução SQL usando a caixa de diálogo **Construtor de Consultas** , uma ferramenta gráfica usada para criar consultas.</span><span class="sxs-lookup"><span data-stu-id="42302-165">Create an SQL statement using the **Query Builder** dialog box, a graphical tool used to create queries.</span></span> <span data-ttu-id="42302-166">Esta opção está disponível quando a opção **SQLSourceType** é definida como **Entrada Direta**.</span><span class="sxs-lookup"><span data-stu-id="42302-166">This option is available when the **SQLSourceType** option is set to **Direct input**.</span></span>  
+  
+ <span data-ttu-id="42302-167">**Analisar Consulta**</span><span class="sxs-lookup"><span data-stu-id="42302-167">**Parse Query**</span></span>  
+ <span data-ttu-id="42302-168">Valide a sintaxe da instrução SQL.</span><span class="sxs-lookup"><span data-stu-id="42302-168">Validate the syntax of the SQL statement.</span></span>  
+  
+## <a name="sqlsourcetype-dynamic-options"></a><span data-ttu-id="42302-169">Opções dinâmicas SQLSourceType</span><span class="sxs-lookup"><span data-stu-id="42302-169">SQLSourceType Dynamic Options</span></span>  
+  
+### <a name="sqlsourcetype--direct-input"></a><span data-ttu-id="42302-170">SQLSourceType = Entrada direta</span><span class="sxs-lookup"><span data-stu-id="42302-170">SQLSourceType = Direct input</span></span>  
+ <span data-ttu-id="42302-171">**SQLStatement**</span><span class="sxs-lookup"><span data-stu-id="42302-171">**SQLStatement**</span></span>  
+ <span data-ttu-id="42302-172">Digite a instrução SQL a ser executada na caixa de opções ou clique no botão Procurar (...) para digitar a instrução SQL na caixa de diálogo **Inserir Consulta SQL** ou clique em **Construir Consulta** para redigir a instrução usando a caixa de diálogo **Construtor de Consultas**.</span><span class="sxs-lookup"><span data-stu-id="42302-172">Type the SQL statement to execute in the option box, or click the browse button (...) to type the SQL statement in the **Enter SQL Query** dialog box, or click **Build Query** to compose the statement using the **Query Builder** dialog box.</span></span>  
+  
+ <span data-ttu-id="42302-173">**Tópicos relacionados:** [Construtor de Consultas](../../2014/integration-services/query-builder.md)</span><span class="sxs-lookup"><span data-stu-id="42302-173">**Related Topics:** [Query Builder](../../2014/integration-services/query-builder.md)</span></span>  
+  
+### <a name="sqlsourcetype--file-connection"></a><span data-ttu-id="42302-174">SQLSourceType = Conexão do Arquivo</span><span class="sxs-lookup"><span data-stu-id="42302-174">SQLSourceType = File connection</span></span>  
+ <span data-ttu-id="42302-175">**FileConnection**</span><span class="sxs-lookup"><span data-stu-id="42302-175">**FileConnection**</span></span>  
+ <span data-ttu-id="42302-176">Selecione um gerenciador de conexões de Arquivo existente ou clique em \<**New connection...**> para criar um gerenciador de conexões.</span><span class="sxs-lookup"><span data-stu-id="42302-176">Select an existing File connection manager, or click \<**New connection...**> to create a new connection manager.</span></span>  
+  
+ <span data-ttu-id="42302-177">**Tópicos relacionados:** [Gerenciador de conexões de arquivos](connection-manager/file-connection-manager.md), [Editor do Gerenciador de conexões de Arquivos](../../2014/integration-services/file-connection-manager-editor.md)</span><span class="sxs-lookup"><span data-stu-id="42302-177">**Related Topics:** [File Connection Manager](connection-manager/file-connection-manager.md), [File Connection Manager Editor](../../2014/integration-services/file-connection-manager-editor.md)</span></span>  
+  
+### <a name="sqlsourcetype--variable"></a><span data-ttu-id="42302-178">SQLSourceType = Variável</span><span class="sxs-lookup"><span data-stu-id="42302-178">SQLSourceType = Variable</span></span>  
+ <span data-ttu-id="42302-179">**SourceVariable**</span><span class="sxs-lookup"><span data-stu-id="42302-179">**SourceVariable**</span></span>  
+ <span data-ttu-id="42302-180">Selecione uma variável existente ou clique em \<**New variable...**> para criar uma variável.</span><span class="sxs-lookup"><span data-stu-id="42302-180">Select an existing variable, or click \<**New variable...**> to create a new variable.</span></span>  
+  
+ <span data-ttu-id="42302-181">**Tópicos relacionados:** [Variáveis do Integration Services &#40;SSIS&#41;](integration-services-ssis-variables.md), [Adicionar variável](../../2014/integration-services/add-variable.md)</span><span class="sxs-lookup"><span data-stu-id="42302-181">**Related Topics:** [Integration Services &#40;SSIS&#41; Variables](integration-services-ssis-variables.md), [Add Variable](../../2014/integration-services/add-variable.md)</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="42302-182">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="42302-182">See Also</span></span>  
+ <span data-ttu-id="42302-183">[Referência de mensagens e erros do Integration Services](../../2014/integration-services/integration-services-error-and-message-reference.md) </span><span class="sxs-lookup"><span data-stu-id="42302-183">[Integration Services Error and Message Reference](../../2014/integration-services/integration-services-error-and-message-reference.md) </span></span>  
+ <span data-ttu-id="42302-184">[Editor da tarefa Executar SQL &#40;página mapeamento de parâmetro&#41;](../../2014/integration-services/execute-sql-task-editor-parameter-mapping-page.md) </span><span class="sxs-lookup"><span data-stu-id="42302-184">[Execute SQL Task Editor &#40;Parameter Mapping Page&#41;](../../2014/integration-services/execute-sql-task-editor-parameter-mapping-page.md) </span></span>  
+ [<span data-ttu-id="42302-185">Editor da tarefa Executar SQL &#40;página conjunto de resultados&#41;</span><span class="sxs-lookup"><span data-stu-id="42302-185">Execute SQL Task Editor &#40;Result Set Page&#41;</span></span>](../../2014/integration-services/execute-sql-task-editor-result-set-page.md)  
+  
+  
