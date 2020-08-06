@@ -1,0 +1,46 @@
+---
+title: Resolvedores personalizados baseados em COM | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: replication
+ms.topic: conceptual
+helpviewer_keywords:
+- COM-based resolvers [SQL Server replication]
+- custom resolvers [SQL Server replication]
+ms.assetid: 94195797-ad7a-4962-a8e3-b259cd13aa38
+author: MashaMSFT
+ms.author: mathoma
+ms.openlocfilehash: 2b28795c1a7d43bcd4e8cb3f18723e05f9e76966
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87681610"
+---
+# <a name="com-based-custom-resolvers"></a><span data-ttu-id="183c2-102">COM-Based Custom Resolvers</span><span class="sxs-lookup"><span data-stu-id="183c2-102">COM-Based Custom Resolvers</span></span>
+  <span data-ttu-id="183c2-103">Resolvedores personalizados fornecem maior flexibilidade do que o mecanismo de resolução padrão, e podem implementar a lógica comercial exigida por aplicativos usando dados replicados.</span><span class="sxs-lookup"><span data-stu-id="183c2-103">Custom resolvers provide more flexibility than the default resolution mechanism, and they can implement business logic required by applications using the replicated data.</span></span> <span data-ttu-id="183c2-104">Um resolvedor personalizado com base em COM é uma biblioteca de vínculo dinâmico (DLL) que implementa a interface COM **ICustomResolver** , seus métodos e propriedades e outras interfaces de suporte e definições de tipo criadas especificamente para resolução de conflito.</span><span class="sxs-lookup"><span data-stu-id="183c2-104">A COM-based custom resolver is a dynamic-link library (DLL) that implements the **ICustomResolver** COM interface, its methods and properties, and other supporting interfaces and type definitions designed specifically for conflict resolution.</span></span>  
+  
+> [!NOTE]  
+>  <span data-ttu-id="183c2-105">Se possível, recomenda-se o uso de um manipulador de lógica de negócios em vez de um resolvedor personalizado com base em COM.</span><span class="sxs-lookup"><span data-stu-id="183c2-105">It is recommended to use a business logic handler rather than a COM-based custom resolver if possible.</span></span> <span data-ttu-id="183c2-106">Para obter mais informações sobre manipuladores de lógica de negócios, consulte [Executar lógica de negócios durante a sincronização de mesclagem](execute-business-logic-during-merge-synchronization.md).</span><span class="sxs-lookup"><span data-stu-id="183c2-106">For more information on business logic handlers, see [Execute Business Logic During Merge Synchronization](execute-business-logic-during-merge-synchronization.md).</span></span>  
+  
+ <span data-ttu-id="183c2-107">Para criar um resolvedor COM personalizado, é possível usar a biblioteca de tipos fornecida em replrec.dll; por padrão, essa biblioteca é instalada em [!INCLUDE[ssInstallPath](../../../includes/ssinstallpath-md.md)]COM.</span><span class="sxs-lookup"><span data-stu-id="183c2-107">To build a custom COM resolver, you can use the type library that is provided in the replrec.dll; by default, this library is installed at [!INCLUDE[ssInstallPath](../../../includes/ssinstallpath-md.md)]COM.</span></span>  
+  
+ <span data-ttu-id="183c2-108">Antes de gravar um resolvedor COM personalizado, é necessário decidir:</span><span class="sxs-lookup"><span data-stu-id="183c2-108">Before writing a custom COM resolver, you need to decide:</span></span>  
+  
+-   <span data-ttu-id="183c2-109">Os tipos de alterações de linhas que você quer resolver, como atualizações, inserções e exclusões, e se o resolvedor deve ser chamado durante o carregamento de alterações de mesclagem, o download de alterações de mesclagem ou ambos.</span><span class="sxs-lookup"><span data-stu-id="183c2-109">The types of row changes you want to resolve, such as updates, inserts, and deletes, and whether the resolver should be invoked during the upload of merge changes, the download of merge changes, or both.</span></span> <span data-ttu-id="183c2-110">É possível especificar um tipo de alteração, todas as alterações ou qualquer combinação.</span><span class="sxs-lookup"><span data-stu-id="183c2-110">You can specify one type of change, all changes, or any combination.</span></span> <span data-ttu-id="183c2-111">O resolvedor de conflito padrão de mesclagem controla quaisquer conflitos não controlados por um resolvedor personalizado.</span><span class="sxs-lookup"><span data-stu-id="183c2-111">The default merge conflict resolver handles any conflicts not covered by a custom resolver.</span></span>  
+  
+-   <span data-ttu-id="183c2-112">Quando usar controle de coluna ao resolver o conflito.</span><span class="sxs-lookup"><span data-stu-id="183c2-112">Whether to use column tracking when resolving the conflict.</span></span> <span data-ttu-id="183c2-113">Quando rastreamento de nível de coluna estiver habilitado, somente dados naquelas colunas em que existir um conflito serão sinalizados como conflito, caso contrário os dados serão mesclados.</span><span class="sxs-lookup"><span data-stu-id="183c2-113">When column-level tracking is on, only data in those columns where a conflict exists are flagged as a conflict, otherwise the data is merged.</span></span> <span data-ttu-id="183c2-114">No entanto, conflitos são resolvidos da mesma forma que rastreamento em nível de linha: o vencedor de prioridade substitui toda a coluna de dados (mas os dados podem ser uma mistura de valores do Publicador, Assinantes ou alguns valores alterados que não eram nem do Publicador e nem dos Assinantes).</span><span class="sxs-lookup"><span data-stu-id="183c2-114">However, conflicts are resolved in the same way as row-level tracking: the priority winner overwrites the entire row of data (but the data can be a mix of values from the Publisher, Subscribers, or some altered values that were from neither Publisher nor Subscribers).</span></span> <span data-ttu-id="183c2-115">Para obter mais informações, consulte [Detectar e resolver conflitos de replicação de mesclagem](advanced-merge-replication-conflict-detection-and-resolution.md).</span><span class="sxs-lookup"><span data-stu-id="183c2-115">For more information, see [Detect and Resolve Merge Replication Conflicts](advanced-merge-replication-conflict-detection-and-resolution.md).</span></span>  
+  
+ <span data-ttu-id="183c2-116">Para implementar um resolvedor de conflito personalizado com base em COM, consulte [Implementar um resolvedor de conflitos personalizado para um artigo de mesclagem](../implement-a-custom-conflict-resolver-for-a-merge-article.md)</span><span class="sxs-lookup"><span data-stu-id="183c2-116">To implement a COM-based custom conflict resolver, see [Implement a Custom Conflict Resolver for a Merge Article](../implement-a-custom-conflict-resolver-for-a-merge-article.md).</span></span>  
+  
+ <span data-ttu-id="183c2-117">Um resolvedor personalizado é especificado para um artigo, não para uma publicação inteira.</span><span class="sxs-lookup"><span data-stu-id="183c2-117">A custom resolver is specified for an article, not an entire publication.</span></span> <span data-ttu-id="183c2-118">O mesmo resolvedor pode ser usado com mais de um artigo, mas a lógica em resolvedores personalizados é em geral específica para uma determinada tabela.</span><span class="sxs-lookup"><span data-stu-id="183c2-118">The same resolver can be used with more than one article, but the logic in custom resolvers is often specific to a particular table.</span></span> <span data-ttu-id="183c2-119">Se a tabela usada no artigo for modificada depois que o resolvedor for criado (por exemplo, renomeando o nome da coluna que é usada em resolução de conflito), o resolvedor personalizado pode precisar ser modificado e recompilado.</span><span class="sxs-lookup"><span data-stu-id="183c2-119">If the table used in the article is modified after the resolver is created (for example, renaming the column name that is used in conflict resolution), the custom resolver might need to be modified and recompiled.</span></span>  
+  
+ <span data-ttu-id="183c2-120">Para especificar um resolvedor personalizado, consulte [Especificar um resolvedor de artigo de mesclagem](../publish/specify-a-merge-article-resolver.md).</span><span class="sxs-lookup"><span data-stu-id="183c2-120">To specify a custom resolver, see [Specify a Merge Article Resolver](../publish/specify-a-merge-article-resolver.md).</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="183c2-121">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="183c2-121">See Also</span></span>  
+ <span data-ttu-id="183c2-122">[Detecção e resolução de conflito de replicação de mesclagem avançada](advanced-merge-replication-conflict-detection-and-resolution.md) </span><span class="sxs-lookup"><span data-stu-id="183c2-122">[Advanced Merge Replication Conflict Detection and Resolution](advanced-merge-replication-conflict-detection-and-resolution.md) </span></span>  
+ [<span data-ttu-id="183c2-123">Resolvedores baseados em do Microsoft</span><span class="sxs-lookup"><span data-stu-id="183c2-123">Microsoft COM-Based Resolvers</span></span>](advanced-merge-replication-conflict-com-based-resolvers.md)  
+  
+  
