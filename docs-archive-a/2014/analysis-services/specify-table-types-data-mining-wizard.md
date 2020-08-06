@@ -1,0 +1,47 @@
+---
+title: Especificar tipos de tabela (Assistente de mineração de dados) | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: analysis-services
+ms.topic: conceptual
+f1_keywords:
+- sql12.dm.dmwizard.specifytabletypes.f1
+ms.assetid: 8209a707-faef-4ffc-8991-6c13bb350753
+author: minewiskan
+ms.author: owend
+ms.openlocfilehash: 88c09f26958c37ed0a99efb54a5eb5c08505d16b
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87581492"
+---
+# <a name="specify-table-types-data-mining-wizard"></a>Especificar tipos de tabelas (Assistente de Mineração de Dados)
+  Use a página **Especificar Tipos de Tabelas** para identificar as tabelas a serem usadas para definir a estrutura de mineração. Se uma tabela não for selecionada, ela não será usada para definir a estrutura de mineração.  
+  
+> [!NOTE]  
+>  Você pode adicionar tabelas mais tarde na guia **Estrutura de Mineração** do **Designer de Data Mining**.  
+  
+ **Para obter mais informações:** [Tabelas Aninhadas &#40;Analysis Services – Data mining&#41;](data-mining/nested-tables-analysis-services-data-mining.md), [Assistente de Data Mining &#40;Analysis Services – Data Mining&#41;](data-mining/data-mining-wizard-analysis-services-data-mining.md) e [Criar uma estrutura de mineração relacional](data-mining/create-a-relational-mining-structure.md)  
+  
+## <a name="options"></a>Opções  
+ **Tabelas**  
+ Exibe as tabelas na exibição da fonte de dados selecionada na página **Selecionar Exibição da Fonte de Dados** do assistente.  
+  
+ **Casos**  
+ Selecione uma tabela a ser usada como a tabela de casos.  
+  
+ **Aninhado**  
+ Selecione as tabelas a serem usadas como tabelas aninhadas.  
+  
+> [!NOTE]  
+>  Essas tabelas devem ter uma relação de muitos para um com a tabela de casos e não uma relação de um para muitos. Você deve especificar essa relação na exibição da fonte de dados para poder selecionar a tabela como aninhada.  
+  
+## <a name="see-also"></a>Consulte Também  
+ [Ajuda F1 do assistente de mineração de dados &#40;Analysis Services Data Mining&#41;](data-mining-wizard-f1-help-analysis-services-data-mining.md)   
+ [Selecione exibição da fonte de dados &#40;assistente de mineração de dados&#41;](select-data-source-view-data-mining-wizard.md)   
+ [Especifique os dados de treinamento &#40;assistente de mineração de dados&#41;](specify-the-training-data-data-mining-wizard.md)  
+  
+  
