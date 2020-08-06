@@ -1,0 +1,134 @@
+---
+title: Localizar em Arquivos
+ms.custom: seo-lt-2019
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: database-engine
+ms.topic: conceptual
+helpviewer_keywords:
+- Find in Files dialog box
+ms.assetid: bf92770a-33df-43ef-85ad-5a9223649b98
+author: rothja
+ms.author: jroth
+ms.openlocfilehash: a7bd3051817198fb22e2bf7e96393ddf2023b703
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87582969"
+---
+# <a name="find-in-files"></a><span data-ttu-id="e8942-102">Localizar em Arquivos</span><span class="sxs-lookup"><span data-stu-id="e8942-102">Find in Files</span></span>
+  <span data-ttu-id="e8942-103">A guia **Localizar nos Arquivos** da janela Localizar e Substituir permite pesquisar uma cadeia de caracteres ou expressão no código de um conjunto de arquivos específico.</span><span class="sxs-lookup"><span data-stu-id="e8942-103">The **Find in Files** tab of the Find and Replace window enables you to search the code of a specified set of files for a string or expression.</span></span> <span data-ttu-id="e8942-104">As correspondências encontradas e as ações tomadas são listadas na janela Localizar Resultados selecionada nas **Opções de Resultados**.</span><span class="sxs-lookup"><span data-stu-id="e8942-104">The matches found and actions taken are listed in the Find Results window selected in **Result Options**.</span></span>  
+  
+ <span data-ttu-id="e8942-105">Também há botões da barra de ferramentas e teclas de atalho disponíveis para abrir a caixa de diálogo **Localizar e Substituir** .</span><span class="sxs-lookup"><span data-stu-id="e8942-105">Toolbar buttons and shortcut keys are also available to open the **Find and Replace** dialog box.</span></span>  
+  
+ <span data-ttu-id="e8942-106">As seções a seguir listam os controles disponíveis na guia **Localizar nos Arquivos** .</span><span class="sxs-lookup"><span data-stu-id="e8942-106">The sections that follow list controls available on the **Find in Files** tab.</span></span>  
+  
+## <a name="find-what"></a><span data-ttu-id="e8942-107">Localizar</span><span class="sxs-lookup"><span data-stu-id="e8942-107">Find What</span></span>  
+ <span data-ttu-id="e8942-108">Esses controles da guia **Localizar nos Arquivos** permitem especificar a cadeia de caracteres ou expressão que será procurada.</span><span class="sxs-lookup"><span data-stu-id="e8942-108">These controls on the **Find in Files** tab enable you to specify the string or expression that will be matched.</span></span>  
+  
+ <span data-ttu-id="e8942-109">**Localizar**</span><span class="sxs-lookup"><span data-stu-id="e8942-109">**Find what**</span></span>  
+ <span data-ttu-id="e8942-110">Digite o texto a procurar.</span><span class="sxs-lookup"><span data-stu-id="e8942-110">Type the text to search for.</span></span> <span data-ttu-id="e8942-111">A caixa de diálogo tenta preencher um texto de pesquisa provável, usando o texto selecionado com o cursor antes de a caixa de diálogo ser aberta, um texto próximo a ele ou um texto pesquisado anteriormente.</span><span class="sxs-lookup"><span data-stu-id="e8942-111">The dialog box attempts to fill in a probable search text, using text selected with the cursor before opening the dialog box, or nearby text, or previously searched-for text.</span></span> <span data-ttu-id="e8942-112">Você pode reutilizar uma das últimas 20 cadeias de caracteres pesquisadas selecionando-a nessa lista suspensa.</span><span class="sxs-lookup"><span data-stu-id="e8942-112">You can reuse one of the last 20 search strings by selecting it from this drop-down list.</span></span>  
+  
+ <span data-ttu-id="e8942-113">**[cadeia de caracteres com curingas]**</span><span class="sxs-lookup"><span data-stu-id="e8942-113">**[string with wildcards]**</span></span>  
+ <span data-ttu-id="e8942-114">Para usar curingas, como asteriscos (`*`) e pontos de interrogação (`?`), em sua cadeia de caracteres de pesquisa, marque a caixa de seleção **Usar** em **Opções de Busca** e clique em **Curingas**.</span><span class="sxs-lookup"><span data-stu-id="e8942-114">If you want to use wildcards such as asterisks (`*`) and question marks (`?`) in your search string, select the **Use** check box under **Find Options** and then click **Wildcards**.</span></span>  
+  
+ <span data-ttu-id="e8942-115">**[expressão regular]**</span><span class="sxs-lookup"><span data-stu-id="e8942-115">**[regular expression]**</span></span>  
+ <span data-ttu-id="e8942-116">Para fazer com que o mecanismo de pesquisa interprete a sua cadeia de caracteres de pesquisa como uma expressão regular, marque a caixa de seleção **Usar** em **Opções de Busca** e clique em **Expressões regulares**.</span><span class="sxs-lookup"><span data-stu-id="e8942-116">To cause the search engine to interpret your search string as a regular expression, select the **Use** check box under **Find Options** and then click **Regular expressions**.</span></span>  
+  
+ <span data-ttu-id="e8942-117">**Construtor de Expressões**</span><span class="sxs-lookup"><span data-stu-id="e8942-117">**Expression Builder**</span></span>  
+ <span data-ttu-id="e8942-118">Esse botão triangular ao lado da caixa **Localizar** torna-se disponível quando a caixa de seleção **Usar** é selecionada nas **Opções de Busca**.</span><span class="sxs-lookup"><span data-stu-id="e8942-118">This triangular button next to the **Find what** box becomes available when the **Use** check box is selected in **Find Options**.</span></span> <span data-ttu-id="e8942-119">Clique nesse botão para exibir uma lista de curingas ou expressões regulares, dependendo da opção **Usar** selecionada.</span><span class="sxs-lookup"><span data-stu-id="e8942-119">Click this button to display a list of wildcards or regular expressions, depending upon the **Use** option selected.</span></span> <span data-ttu-id="e8942-120">A escolha de qualquer item nessa lista o adiciona à cadeia de caracteres em **Localizar** .</span><span class="sxs-lookup"><span data-stu-id="e8942-120">Choosing any item from this list adds it to the **Find what** string.</span></span>  
+  
+## <a name="look-in"></a><span data-ttu-id="e8942-121">Examinar</span><span class="sxs-lookup"><span data-stu-id="e8942-121">Look In</span></span>  
+ <span data-ttu-id="e8942-122">A opção escolhida na lista suspensa **Examinar** determina se a opção **Localizar nos Arquivos** só pesquisará em arquivos ativos ou em todos os arquivos armazenados em determinadas pastas.</span><span class="sxs-lookup"><span data-stu-id="e8942-122">The option chosen from the **Look in** drop-down list determines whether **Find in Files** searches only in currently active files or in all files stored within certain folders.</span></span> <span data-ttu-id="e8942-123">Selecione um escopo da pesquisa na lista, digite um caminho da pasta ou clique no botão **Procurar** para exibir a caixa de diálogo **Personalizar Conjunto de Diretórios** e escolha um conjunto de pastas a ser pesquisado.</span><span class="sxs-lookup"><span data-stu-id="e8942-123">Select a search scope from the list, type a folder path, or click the **Browse** button to display the **Custom Directory Set Dialog Box** and choose a set of folders to search.</span></span>  
+  
+> [!NOTE]  
+>  <span data-ttu-id="e8942-124">Se a opção **Examinar** selecionada fizer você pesquisar um arquivo do qual foi efetuado check-out do controle do código-fonte, será pesquisada apenas a versão desse arquivo que foi baixada em seu computador local.</span><span class="sxs-lookup"><span data-stu-id="e8942-124">If the **Look in** option selected causes you to search a file that you have checked out from source code control, only the version of that file which has been downloaded to your local computer is searched.</span></span>  
+  
+ <span data-ttu-id="e8942-125">**Look in**</span><span class="sxs-lookup"><span data-stu-id="e8942-125">**Look in**</span></span>  
+ <span data-ttu-id="e8942-126">Selecione um escopo da pesquisa predefinido nessa lista ou use a caixa de diálogo **Personalizar Conjunto de Diretórios** para inserir seu próprio conjunto de diretórios.</span><span class="sxs-lookup"><span data-stu-id="e8942-126">Select a predefined search scope from this list, or use the **Custom Directory Set** dialog box to enter your own set of directories.</span></span>  
+  
+ <span data-ttu-id="e8942-127">**Documento Atual**</span><span class="sxs-lookup"><span data-stu-id="e8942-127">**Current Document**</span></span>  
+ <span data-ttu-id="e8942-128">Essa opção fica disponível quando um documento está aberto em um editor.</span><span class="sxs-lookup"><span data-stu-id="e8942-128">This option is available when a document is open in an editor.</span></span> <span data-ttu-id="e8942-129">Ela pesquisa apenas o documento ativo para a cadeia de caracteres em **Localizar**.</span><span class="sxs-lookup"><span data-stu-id="e8942-129">It searches only the active document for the string in **Find what**.</span></span>  
+  
+ <span data-ttu-id="e8942-130">**Todos os Documentos Abertos**</span><span class="sxs-lookup"><span data-stu-id="e8942-130">**All Open Documents**</span></span>  
+ <span data-ttu-id="e8942-131">Pesquisa todos os arquivos abertos para edição atualmente.</span><span class="sxs-lookup"><span data-stu-id="e8942-131">Searches all files currently opened for editing.</span></span>  
+  
+ <span data-ttu-id="e8942-132">**Projeto Atual**</span><span class="sxs-lookup"><span data-stu-id="e8942-132">**Current Project**</span></span>  
+ <span data-ttu-id="e8942-133">Pesquisa todos os arquivos no projeto ativo.</span><span class="sxs-lookup"><span data-stu-id="e8942-133">Searches all files in the active project.</span></span>  
+  
+ <span data-ttu-id="e8942-134">**Solução Completa**</span><span class="sxs-lookup"><span data-stu-id="e8942-134">**Entire Solution**</span></span>  
+ <span data-ttu-id="e8942-135">Pesquisa todos os arquivos na solução ativa.</span><span class="sxs-lookup"><span data-stu-id="e8942-135">Searches all files in the active solution.</span></span>  
+  
+ <span data-ttu-id="e8942-136">**Incluir subpastas**</span><span class="sxs-lookup"><span data-stu-id="e8942-136">**Include subfolders**</span></span>  
+ <span data-ttu-id="e8942-137">Especifica que serão pesquisadas as subpastas da pasta especificada em **Examinar** .</span><span class="sxs-lookup"><span data-stu-id="e8942-137">Specifies that subfolders of the folder specified in **Look in** will be searched.</span></span> <span data-ttu-id="e8942-138">Isso requer um conjunto de diretórios personalizados.</span><span class="sxs-lookup"><span data-stu-id="e8942-138">It requires a custom directory set.</span></span>  
+  
+ <span data-ttu-id="e8942-139">**Procurar**</span><span class="sxs-lookup"><span data-stu-id="e8942-139">**Browse**</span></span>  
+ <span data-ttu-id="e8942-140">Clique nesse botão para exibir a caixa de diálogo **Personalizar Conjunto de Diretórios** , na qual é possível reunir, editar, salvar e selecionar conjuntos nomeados de diretórios a serem inseridos na caixa **Examinar** .</span><span class="sxs-lookup"><span data-stu-id="e8942-140">Click this button to display the **Custom Directory Set** dialog box, where you can assemble, edit, save, and select named sets of directories to enter in the **Look in** box.</span></span>  
+  
+## <a name="find-options"></a><span data-ttu-id="e8942-141">Opções de Busca</span><span class="sxs-lookup"><span data-stu-id="e8942-141">Find Options</span></span>  
+ <span data-ttu-id="e8942-142">Você pode expandir ou recolher a seção **Opções de Busca** .</span><span class="sxs-lookup"><span data-stu-id="e8942-142">You can expand or collapse the **Find Options** section.</span></span> <span data-ttu-id="e8942-143">As opções seguintes podem ser marcadas ou desmarcadas.</span><span class="sxs-lookup"><span data-stu-id="e8942-143">The following options can be selected or cleared.</span></span>  
+  
+ <span data-ttu-id="e8942-144">**Diferenciar maiúsculas de minúsculas**</span><span class="sxs-lookup"><span data-stu-id="e8942-144">**Match case**</span></span>  
+ <span data-ttu-id="e8942-145">Quando essa caixa é selecionada, as janelas Localizar Resultados só exibem instâncias da cadeia de caracteres especificada em **Localizar** que correspondam tanto no conteúdo como nas letras maiúsculas e minúsculas.</span><span class="sxs-lookup"><span data-stu-id="e8942-145">When this check box is selected, the Find Results windows will only display instances of the string specified in **Find what** that are matched both by content and by case.</span></span> <span data-ttu-id="e8942-146">Por exemplo, uma pesquisa por **MyObject** com a caixa de seleção **Diferenciar maiúsculas de minúsculas** retornará “MyObject”, mas não “myobject” nem “MYOBJECT”.</span><span class="sxs-lookup"><span data-stu-id="e8942-146">For example, a search for **MyObject** with the **Match case** check box selected will return "MyObject" but not "myobject" or "MYOBJECT."</span></span>  
+  
+ <span data-ttu-id="e8942-147">**Coincidir palavra inteira**</span><span class="sxs-lookup"><span data-stu-id="e8942-147">**Match whole word**</span></span>  
+ <span data-ttu-id="e8942-148">Quando essa caixa é selecionada, as janelas Localizar Resultados só exibem instâncias da cadeia de caracteres especificada em **Localizar** que correspondam a palavras completas.</span><span class="sxs-lookup"><span data-stu-id="e8942-148">When this check box is selected, the Find Results windows will only display instances of the string specified in **Find what** that are matched in complete words.</span></span> <span data-ttu-id="e8942-149">Por exemplo, uma pesquisa por **MyObject** retornará "MyObject" mas não "CMyObject" nem "MyObjectC".</span><span class="sxs-lookup"><span data-stu-id="e8942-149">For example, a search for **MyObject** will return "MyObject" but not "CMyObject" or "MyObjectC."</span></span>  
+  
+ <span data-ttu-id="e8942-150">**Uso**</span><span class="sxs-lookup"><span data-stu-id="e8942-150">**Use**</span></span>  
+ <span data-ttu-id="e8942-151">Indica como interpretar caracteres especiais digitados nas caixas de texto **Localizar** ou **Substituir por** .</span><span class="sxs-lookup"><span data-stu-id="e8942-151">Indicates how to interpret special characters entered in the **Find what** or **Replace with** text boxes.</span></span> <span data-ttu-id="e8942-152">As opções incluem **Curingas** e **Expressões Regulares**.</span><span class="sxs-lookup"><span data-stu-id="e8942-152">The options include **Wildcards** and **Regular Expressions**.</span></span>  
+  
+ <span data-ttu-id="e8942-153">**Regular Expressions**</span><span class="sxs-lookup"><span data-stu-id="e8942-153">**Regular Expressions**</span></span>  
+ <span data-ttu-id="e8942-154">Notações especiais definem padrões de texto para correspondência.</span><span class="sxs-lookup"><span data-stu-id="e8942-154">Special notations define patterns of text to match.</span></span> <span data-ttu-id="e8942-155">Para obter uma lista, veja [Pesquisar texto com expressões regulares](search-text-with-regular-expressions.md).</span><span class="sxs-lookup"><span data-stu-id="e8942-155">For a list, see [Search Text with Regular Expressions](search-text-with-regular-expressions.md).</span></span>  
+  
+ <span data-ttu-id="e8942-156">**Curingas**</span><span class="sxs-lookup"><span data-stu-id="e8942-156">**Wildcards**</span></span>  
+ <span data-ttu-id="e8942-157">Caracteres especiais, como asteriscos (`*`) e pontos de interrogação (`?`) representam um ou mais caracteres.</span><span class="sxs-lookup"><span data-stu-id="e8942-157">Special characters such as asterisks (`*`) and question marks (`?`) represent one or more characters.</span></span> <span data-ttu-id="e8942-158">Para obter uma lista, veja [Pesquisar texto com curingas](search-text-with-wildcards.md).</span><span class="sxs-lookup"><span data-stu-id="e8942-158">For a list, see [Search Text with Wildcards](search-text-with-wildcards.md).</span></span>  
+  
+ <span data-ttu-id="e8942-159">**Pesquisar nestes tipos de arquivo**</span><span class="sxs-lookup"><span data-stu-id="e8942-159">**Look at these file types**</span></span>  
+ <span data-ttu-id="e8942-160">Essa lista indica os tipos de arquivos a serem pesquisados nos diretórios especificados em **Examinar**.</span><span class="sxs-lookup"><span data-stu-id="e8942-160">This list indicates the types of files to search through in the directories specified in **Look in**.</span></span> <span data-ttu-id="e8942-161">Se esse campo ficar em branco, serão pesquisados todos os arquivos nos diretórios especificados em **Examinar** .</span><span class="sxs-lookup"><span data-stu-id="e8942-161">If this field is left blank, all of the files in the directories specified in **Look in** will be searched.</span></span>  
+  
+```  
+*.[ext]; *.[ext] (manual)  
+```  
+  
+ <span data-ttu-id="e8942-162">Para localizar arquivos de um determinado tipo, insira um curinga asterisco (`*`) para o nome do arquivo, seguido de um ponto final (`.`) e a extensão do arquivo.</span><span class="sxs-lookup"><span data-stu-id="e8942-162">To find files of a particular type, enter an asterisk wildcard (`*`) for the file name, followed by a period (`.`) and the file extension.</span></span> <span data-ttu-id="e8942-163">Para localizar mais de um tipo de arquivo, insira várias cadeias de caracteres de pesquisa separadas por ponto-e-vírgula (`;`).</span><span class="sxs-lookup"><span data-stu-id="e8942-163">To find more than one file type, enter multiple search strings separated by a semicolon (`;`).</span></span>  
+  
+```  
+*.[ext]; *.[ext] (from list)  
+```  
+  
+ <span data-ttu-id="e8942-164">Selecione qualquer item na lista para inserir uma cadeia de caracteres de pesquisa pré-configurada que localizará arquivos de tipos específicos.</span><span class="sxs-lookup"><span data-stu-id="e8942-164">Select any item in the list to enter a preconfigured search string that will find files of particular types.</span></span>  
+  
+## <a name="result-options"></a><span data-ttu-id="e8942-165">Opções de Resultados</span><span class="sxs-lookup"><span data-stu-id="e8942-165">Result Options</span></span>  
+ <span data-ttu-id="e8942-166">Determina o local dos resultados quando você clica em **Localizar Tudo**.</span><span class="sxs-lookup"><span data-stu-id="e8942-166">Determines the location of the results when you click **Find All**.</span></span> <span data-ttu-id="e8942-167">Você pode expandir ou recolher a seção **Opções de Resultados** .</span><span class="sxs-lookup"><span data-stu-id="e8942-167">You can expand or collapse the **Result Options** section.</span></span> <span data-ttu-id="e8942-168">As opções seguintes podem ser marcadas ou desmarcadas.</span><span class="sxs-lookup"><span data-stu-id="e8942-168">The following options can be selected or cleared.</span></span>  
+  
+ <span data-ttu-id="e8942-169">**Janela Localizar Resultados 1**</span><span class="sxs-lookup"><span data-stu-id="e8942-169">**Find Results 1 window**</span></span>  
+ <span data-ttu-id="e8942-170">Quando essa caixa de seleção estiver marcada, os resultados da pesquisa atual serão anexados ao conteúdo da janela Localizar Resultados 1.</span><span class="sxs-lookup"><span data-stu-id="e8942-170">When this check box is selected, the results of the current search will be appended to the content of the Find Results 1 window.</span></span> <span data-ttu-id="e8942-171">Essa janela será aberta automaticamente para exibir seus resultados de pesquisa.</span><span class="sxs-lookup"><span data-stu-id="e8942-171">This window opens automatically to display your search results.</span></span> <span data-ttu-id="e8942-172">Para abrir essa janela manualmente, clique em **Outras Janelas** no menu **Exibir** e clique em **Localizar Resultados 1**.</span><span class="sxs-lookup"><span data-stu-id="e8942-172">To open this window manually, click **Other Windows** on the **View** menu and then click **Find Results 1**.</span></span>  
+  
+ <span data-ttu-id="e8942-173">**Janela Localizar Resultados 2**</span><span class="sxs-lookup"><span data-stu-id="e8942-173">**Find Results 2 window**</span></span>  
+ <span data-ttu-id="e8942-174">Quando essa caixa for selecionada, os resultados da pesquisa atual serão anexados ao conteúdo da janela Localizar Resultados 2.</span><span class="sxs-lookup"><span data-stu-id="e8942-174">When this check box is selected, the results of the current search will be appended to the content of the Find Results 2 window.</span></span> <span data-ttu-id="e8942-175">Essa janela será aberta automaticamente para exibir seus resultados de pesquisa.</span><span class="sxs-lookup"><span data-stu-id="e8942-175">This window opens automatically to display your search results.</span></span> <span data-ttu-id="e8942-176">Para abrir essa janela manualmente, clique em **Outras Janelas** no menu **Exibir** e clique em **Localizar Resultados 2**.</span><span class="sxs-lookup"><span data-stu-id="e8942-176">To open this window manually, click **Other Windows** on the **View** menu and then click **Find Results 2**.</span></span>  
+  
+ <span data-ttu-id="e8942-177">**Exibir somente nomes de arquivo**</span><span class="sxs-lookup"><span data-stu-id="e8942-177">**Display file names only**</span></span>  
+ <span data-ttu-id="e8942-178">Exibe uma entrada por arquivo contendo uma correspondência de pesquisa em vez de uma entrada por correspondência de pesquisa na janela Localizar Resultados 1 ou Localizar Resultados 2.</span><span class="sxs-lookup"><span data-stu-id="e8942-178">Displays one entry per file containing a search match rather than one entry per search match in either the Find Results 1 or Find Results 2 window.</span></span> <span data-ttu-id="e8942-179">Essa opção não está disponível no [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)].</span><span class="sxs-lookup"><span data-stu-id="e8942-179">This option is not available in [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)].</span></span>  
+  
+ <span data-ttu-id="e8942-180">**Manter arquivos modificados abertos após Substituir Tudo**</span><span class="sxs-lookup"><span data-stu-id="e8942-180">**Keep modified files open after Replace All**</span></span>  
+ <span data-ttu-id="e8942-181">Quando selecionada, essa opção deixa abertos todos os arquivos em que foram feitas substituições, para você poder desfazer ou salvar as alterações.</span><span class="sxs-lookup"><span data-stu-id="e8942-181">When selected, leaves open all files in which replacements have been made, so you can undo or save the changes.</span></span> <span data-ttu-id="e8942-182">Restrições de memória podem limitar o número de arquivos que podem permanecer abertos após uma operação de substituição.</span><span class="sxs-lookup"><span data-stu-id="e8942-182">Memory constraints might limit the number of files that can remain open after a replace operation.</span></span>  
+  
+> [!CAUTION]  
+>  <span data-ttu-id="e8942-183">Você só pode usar o comando **Desfazer** em arquivos que permaneçam abertos para edição.</span><span class="sxs-lookup"><span data-stu-id="e8942-183">You can use **Undo** only on files that remain open for editing.</span></span> <span data-ttu-id="e8942-184">Se essa opção não for selecionada, os arquivos que ainda não estiverem abertos para edição continuarão fechados e nenhuma opção **Desfazer** ficará disponível para eles.</span><span class="sxs-lookup"><span data-stu-id="e8942-184">If this option is not selected, files that were not already open for editing will remain closed, and no **Undo** option will be available in those files.</span></span>  
+  
+## <a name="find-and-replace-views"></a><span data-ttu-id="e8942-185">Localizar e substituir exibições</span><span class="sxs-lookup"><span data-stu-id="e8942-185">Find and Replace Views</span></span>  
+ <span data-ttu-id="e8942-186">As guias no topo da janela Localizar e Substituir incluem menus **Exibir** .</span><span class="sxs-lookup"><span data-stu-id="e8942-186">The tabs at the top of the Find and Replace window include **View** menus.</span></span> <span data-ttu-id="e8942-187">Esses menus permitem escolher um conjunto de campos para serem exibidos no painel ativo.</span><span class="sxs-lookup"><span data-stu-id="e8942-187">These menus enable you to choose a set of fields to display in the active pane.</span></span> <span data-ttu-id="e8942-188">Você pode deixar a janela Localizar e Substituir encaixada em um local conveniente e depois mudar de guia para guia e de exibição para exibição a fim de fazer qualquer tipo de operação de localizar e substituir.</span><span class="sxs-lookup"><span data-stu-id="e8942-188">You can leave the Find and Replace window docked in a convenient location and then change from tab to tab and view to view to perform any type of find or replace operation.</span></span>  
+  
+ <span data-ttu-id="e8942-189">**Alternar para Localização Rápida**</span><span class="sxs-lookup"><span data-stu-id="e8942-189">**Switch to Quick Find**</span></span>  
+ <span data-ttu-id="e8942-190">Essa barra de ferramentas altera a caixa de diálogo para uma caixa de diálogo **Localização Rápida** .</span><span class="sxs-lookup"><span data-stu-id="e8942-190">This toolbar tab changes the dialog box to a **Quick Find** dialog box.</span></span>  
+  
+ <span data-ttu-id="e8942-191">**Alternar para Localizar em Arquivos**</span><span class="sxs-lookup"><span data-stu-id="e8942-191">**Switch to Find in Files**</span></span>  
+ <span data-ttu-id="e8942-192">Essa barra de ferramentas altera a caixa de diálogo para uma caixa de diálogo **Localizar nos Arquivos** .</span><span class="sxs-lookup"><span data-stu-id="e8942-192">This toolbar tab changes the dialog box to a **Find in Files** dialog box.</span></span>  
+  
+ <span data-ttu-id="e8942-193">**Alternar para Localizar Símbolos**</span><span class="sxs-lookup"><span data-stu-id="e8942-193">**Switch to Find Symbols**</span></span>  
+ <span data-ttu-id="e8942-194">Essa barra de ferramentas altera a caixa de diálogo para uma caixa de diálogo **Localizar Símbolos** .</span><span class="sxs-lookup"><span data-stu-id="e8942-194">This toolbar tab changes the dialog box to a **Find in Symbols** dialog box.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="e8942-195">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="e8942-195">See Also</span></span>  
+ [<span data-ttu-id="e8942-196">Atalhos de teclado do SQL Server Management Studio</span><span class="sxs-lookup"><span data-stu-id="e8942-196">SQL Server Management Studio Keyboard Shortcuts</span></span>](../../ssms/sql-server-management-studio-keyboard-shortcuts.md)  
