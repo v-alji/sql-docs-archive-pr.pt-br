@@ -1,0 +1,139 @@
+---
+title: Instalar Distributed Replay (instalação) | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: database-engine
+ms.topic: conceptual
+ms.assetid: 64479cdc-661a-4e32-a381-8f8b5a238337
+author: mashamsft
+ms.author: mathoma
+ms.openlocfilehash: 029737874fdab53669aab3be25b139d98d2907df
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87685012"
+---
+# <a name="install-distributed-replay-setup"></a><span data-ttu-id="66cef-102">Instalar o Distributed Replay (instalação)</span><span class="sxs-lookup"><span data-stu-id="66cef-102">Install Distributed Replay (Setup)</span></span>
+  <span data-ttu-id="66cef-103">Instale os recursos do [!INCLUDE[msCoName](../../includes/msconame-md.md)][!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Distributed Replay com o Assistente de Instalação do [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="66cef-103">Install the [!INCLUDE[msCoName](../../includes/msconame-md.md)][!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Distributed Replay features with the [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)] Installation Wizard.</span></span> <span data-ttu-id="66cef-104">Ao planejar onde instalar os recursos, considere o seguinte:</span><span class="sxs-lookup"><span data-stu-id="66cef-104">When planning where to install the features, consider the following:</span></span>  
+  
+-   <span data-ttu-id="66cef-105">Você pode instalar a ferramenta de administração no mesmo computador que o controlador do Distributed Replay ou em computadores diferentes.</span><span class="sxs-lookup"><span data-stu-id="66cef-105">You can install the administration tool on the same computer as the Distributed Replay controller, or on different computers.</span></span>  
+  
+-   <span data-ttu-id="66cef-106">Pode haver apenas um controlador em cada ambiente do Distributed Replay.</span><span class="sxs-lookup"><span data-stu-id="66cef-106">There can only be one controller in each Distributed Replay environment.</span></span>  
+  
+-   <span data-ttu-id="66cef-107">Você pode instalar o serviço de cliente em até 16 computadores (físicos ou virtuais).</span><span class="sxs-lookup"><span data-stu-id="66cef-107">You can install the client service on up to 16 (physical or virtual) computers.</span></span>  
+  
+-   <span data-ttu-id="66cef-108">Apenas uma instância do serviço de cliente pode ser instalada no computador do controlador do Distributed Replay.</span><span class="sxs-lookup"><span data-stu-id="66cef-108">Only one instance of the client service can be installed on the Distributed Replay controller computer.</span></span> <span data-ttu-id="66cef-109">Se o ambiente do seu Distributed Replay tiver mais de um cliente, não é recomendável instalar o serviço de cliente no mesmo computador que o controlador.</span><span class="sxs-lookup"><span data-stu-id="66cef-109">If your Distributed Replay environment will have more than one client, we do not recommend installing the client service on the same computer as the controller.</span></span> <span data-ttu-id="66cef-110">Fazer assim pode reduzir a velocidade global de Distributed Replay.</span><span class="sxs-lookup"><span data-stu-id="66cef-110">Doing so may decrease the overall speed of the distributed replay.</span></span>  
+  
+-   <span data-ttu-id="66cef-111">Para cenários de teste de desempenho, não é recomendável instalar a ferramenta de administração, o serviço de controlador do Distributed Replay ou serviço de cliente na instância de destino do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].</span><span class="sxs-lookup"><span data-stu-id="66cef-111">For performance testing scenarios, we do not recommend installing the administration tool, Distributed Replay controller service, or client service on the target instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].</span></span> <span data-ttu-id="66cef-112">A instalação de todos esses recursos no servidor de destino deve ser limitada a testes funcionais de compatibilidade de aplicativos.</span><span class="sxs-lookup"><span data-stu-id="66cef-112">Installing all of these features on the target server should be limited to functional testing for application compatibility.</span></span>  
+  
+-   <span data-ttu-id="66cef-113">Depois da instalação, o serviço de controlador, [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Distributed Replay Controller, deve estar em execução antes de você iniciar o serviço de cliente do Distributed Replay nos clientes.</span><span class="sxs-lookup"><span data-stu-id="66cef-113">After installation, the controller service, [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Distributed Replay controller, must be running before you start the Distributed Replay client service on the clients.</span></span>  
+  
+> [!NOTE]  
+>  <span data-ttu-id="66cef-114">Para remover ou alterar os recursos do Distributed Replay, use a janela **Programas e Recursos** do Windows no **Painel de Controle**.</span><span class="sxs-lookup"><span data-stu-id="66cef-114">To remove or change the Distributed Replay features, use the Windows **Programs and Features** window in **Control Panel**.</span></span> <span data-ttu-id="66cef-115">Selecione [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)] na janela **Desinstalar ou alterar um programa** e clique em **Remover** para abrir o Assistente de Instalação do [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="66cef-115">Select [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)] in the **Uninstall or change a program** window, and then click **Remove** to open the [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)] Installation Wizard.</span></span> <span data-ttu-id="66cef-116">Na página **Selecionar Recursos** , marque os recursos do Distributed Replay que você deseja remover.</span><span class="sxs-lookup"><span data-stu-id="66cef-116">On the **Select Features** page, check the Distributed Replay features you want to remove.</span></span>  
+  
+ <span data-ttu-id="66cef-117">**Pré-requisitos:**</span><span class="sxs-lookup"><span data-stu-id="66cef-117">**Prerequisites:**</span></span>  
+  
+-   <span data-ttu-id="66cef-118">Verifique se os computadores que você deseja usar atendem aos requisitos descritos no tópico [Requisitos do Distributed Replay](../../tools/sql-server-profiler/replay-requirements.md).</span><span class="sxs-lookup"><span data-stu-id="66cef-118">Make sure that the computers that you want to use meet the requirements that are described in the topic [Distributed Replay Requirements](../../tools/sql-server-profiler/replay-requirements.md).</span></span>  
+  
+-   <span data-ttu-id="66cef-119">Antes de começar este procedimento, você cria as contas de usuário de domínio com as quais os serviços de controlador e de cliente serão executados.</span><span class="sxs-lookup"><span data-stu-id="66cef-119">Before you begin this procedure, you create the domain user accounts that the controller and client services will run under.</span></span> <span data-ttu-id="66cef-120">É recomendável que essas contas não sejam membros do grupo Administradores do Windows.</span><span class="sxs-lookup"><span data-stu-id="66cef-120">We recommend that these accounts are not members of the Windows Administrators group.</span></span> <span data-ttu-id="66cef-121">Para obter mais informações, veja a seção Contas de usuário e serviço no tópico [Segurança do Distributed Replay](../../tools/distributed-replay/distributed-replay-security.md) .</span><span class="sxs-lookup"><span data-stu-id="66cef-121">For more information, see the User and Service Accounts section in the [Distributed Replay Security](../../tools/distributed-replay/distributed-replay-security.md) topic.</span></span>  
+  
+    > [!NOTE]  
+    >  <span data-ttu-id="66cef-122">É possível usar contas de usuários locais se você estiver executando a ferramenta de administração, o serviço de controlador e o serviço de cliente no mesmo computador.</span><span class="sxs-lookup"><span data-stu-id="66cef-122">You can use local user accounts if you are running the administration tool, controller service, and client service on the same computer.</span></span>  
+  
+ <span data-ttu-id="66cef-123">**Locais de instalação:**</span><span class="sxs-lookup"><span data-stu-id="66cef-123">**Installation Locations:**</span></span>  
+  
+ <span data-ttu-id="66cef-124">Supondo que você use os locais de arquivo padrão e uma instalação padrão, o diretório base estará localizado em C:\Arquivos de Programas\Microsoft SQL Server.</span><span class="sxs-lookup"><span data-stu-id="66cef-124">Assuming you use the default file locations and a standard installation, the base directory is found at C:\Program Files\Microsoft SQL Server.</span></span> <span data-ttu-id="66cef-125">Dentro dele, os binários e assemblies são instalados nos seguintes locais:</span><span class="sxs-lookup"><span data-stu-id="66cef-125">Within that, following are where the binaries and assemblies are installed to:</span></span>  
+  
+-   <span data-ttu-id="66cef-126">Em um sistema de 32 bits:</span><span class="sxs-lookup"><span data-stu-id="66cef-126">On a 32-bit system:</span></span>  
+  
+     [!INCLUDE[ssInstallPath](../../includes/ssinstallpath-md.md)]<span data-ttu-id="66cef-127">Ferramentas</span><span class="sxs-lookup"><span data-stu-id="66cef-127">Tools</span></span>  
+  
+     <span data-ttu-id="66cef-128">\- OU -</span><span class="sxs-lookup"><span data-stu-id="66cef-128">\- OR -</span></span>  
+  
+     <span data-ttu-id="66cef-129">\<Share Feature Directory>\Tools \\ (diretório de recurso compartilhado alternativo fornecido pelo usuário)</span><span class="sxs-lookup"><span data-stu-id="66cef-129">\<Share Feature Directory>\Tools\\(user-supplied alternative shared feature directory)</span></span>  
+  
+-   <span data-ttu-id="66cef-130">Em um sistema de 64 bits:</span><span class="sxs-lookup"><span data-stu-id="66cef-130">On a 64-bit system:</span></span>  
+  
+     <span data-ttu-id="66cef-131">C:\Arquivos \\ [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] de programas (x86) \120\Tools</span><span class="sxs-lookup"><span data-stu-id="66cef-131">C:\Program Files\\[!INCLUDE[msCoName](../../includes/msconame-md.md)][!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (x86) \120\Tools</span></span>  
+  
+     <span data-ttu-id="66cef-132">\- OU -</span><span class="sxs-lookup"><span data-stu-id="66cef-132">\- OR -</span></span>  
+  
+     <span data-ttu-id="66cef-133">\<Share Feature Directory (x86)>\Tools \\ (diretório de recurso compartilhado alternativo fornecido pelo usuário (x86))</span><span class="sxs-lookup"><span data-stu-id="66cef-133">\<Share Feature Directory (x86)>\Tools\\(user-supplied alternative shared feature (x86) directory)</span></span>  
+  
+### <a name="to-install-distributed-replay-features"></a><span data-ttu-id="66cef-134">Para instalar recursos do Distributed Replay</span><span class="sxs-lookup"><span data-stu-id="66cef-134">To install Distributed Replay features</span></span>  
+  
+1.  <span data-ttu-id="66cef-135">Para iniciar a instalação de qualquer um dos recursos do Distributed Replay, inicie o Assistente de Instalação do [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="66cef-135">To start the installation of any of the Distributed Replay features, start the [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)] Installation Wizard.</span></span>  
+  
+2.  <span data-ttu-id="66cef-136">A página **Regras de Suporte à Instalação** identifica problemas que podem ocorrer ao instalar os arquivos de suporte da Instalação do SQL Server.</span><span class="sxs-lookup"><span data-stu-id="66cef-136">The **Setup Support Rules** page identifies issues that might occur when installing the SQL Server Setup support files.</span></span> <span data-ttu-id="66cef-137">Você deve corrigir qualquer falha de suporte à Instalação antes de continuá-la.</span><span class="sxs-lookup"><span data-stu-id="66cef-137">You must correct any Setup support failures before continuing with Setup.</span></span>  
+  
+3.  <span data-ttu-id="66cef-138">Na página **Chave do Produto (Product Key)** , selecione um botão de opção para indicar se você está instalando uma edição gratuita do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]ou uma versão de produção do produto que tem uma chave de PID.</span><span class="sxs-lookup"><span data-stu-id="66cef-138">On the **Product Key** page, select an option button to indicate whether you are installing a free edition of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], or a production version of the product that has a PID key.</span></span> <span data-ttu-id="66cef-139">Para obter mais informações, consulte [edições e componentes do SQL Server 2014](../editions-and-components-of-sql-server-2016.md).</span><span class="sxs-lookup"><span data-stu-id="66cef-139">For more information, see [Editions and Components of SQL Server 2014](../editions-and-components-of-sql-server-2016.md).</span></span>  
+  
+4.  <span data-ttu-id="66cef-140">Na página **Termos de Licença** , leia o contrato de licença e marque a caixa de seleção para aceitar os termos e as condições da licença.</span><span class="sxs-lookup"><span data-stu-id="66cef-140">On the **License Terms** page, read the license agreement, and then select the check box to accept the license terms and conditions.</span></span> <span data-ttu-id="66cef-141">Para ajudar a aperfeiçoar o [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], você também pode habilitar a opção de uso de recursos e enviar relatórios à [!INCLUDE[msCoName](../../includes/msconame-md.md)].</span><span class="sxs-lookup"><span data-stu-id="66cef-141">To help improve [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], you can also enable the feature usage option and send reports to [!INCLUDE[msCoName](../../includes/msconame-md.md)].</span></span>  
+  
+5.  <span data-ttu-id="66cef-142">Na página **Arquivos de Suporte à Instalação** , clique em **Instalar** para instalar ou atualizar os arquivos de Suporte à Instalação do [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)].</span><span class="sxs-lookup"><span data-stu-id="66cef-142">On the **Setup Support Files** page, click **Install** to install or update the Setup Support files for [!INCLUDE[ssCurrent](../../includes/sscurrent-md.md)].</span></span>  
+  
+6.  <span data-ttu-id="66cef-143">Na página **Função de Instalação**, selecione **Instalação de Recurso do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]** e clique em **Avançar** para continuar para a página **Seleção de Recursos**.</span><span class="sxs-lookup"><span data-stu-id="66cef-143">On the **Setup Role** page, select **[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Feature Installation**, and then click **Next** to continue to the **Feature Selection** page.</span></span>  
+  
+7.  <span data-ttu-id="66cef-144">Na página **Seleção de Recursos** , configure quais recursos você deseja instalar.</span><span class="sxs-lookup"><span data-stu-id="66cef-144">On the **Feature Selection** page, configure which features you want to install.</span></span>  
+  
+    -   <span data-ttu-id="66cef-145">Para instalar a ferramenta de administração, selecione **Ferramentas de Gerenciamento – Básicas**.</span><span class="sxs-lookup"><span data-stu-id="66cef-145">To install the administration tool, select **Management Tools - Basic**.</span></span>  
+  
+    -   <span data-ttu-id="66cef-146">Para instalar o serviço do controlador, selecione **Distributed Replay Controller**.</span><span class="sxs-lookup"><span data-stu-id="66cef-146">To install the controller service, select **Distributed Replay Controller**.</span></span>  
+  
+    -   <span data-ttu-id="66cef-147">Para instalar o serviço do cliente, selecione **Distributed Replay Client**.</span><span class="sxs-lookup"><span data-stu-id="66cef-147">To install the client service, select **Distributed Replay Client**.</span></span>  
+  
+     <span data-ttu-id="66cef-148">**Importante**: Ao configurar o Distributed Replay Controller é possível especificar uma ou mais contas de usuário que serão usadas para executar os serviços de cliente do Distributed Replay.</span><span class="sxs-lookup"><span data-stu-id="66cef-148">**Important**: When you configure Distributed Replay controller, you can specify one or more user accounts that will be used to run the Distributed Replay client services.</span></span> <span data-ttu-id="66cef-149">Esta é a lista das contas com suporte:</span><span class="sxs-lookup"><span data-stu-id="66cef-149">The following is the list of supported accounts:</span></span>  
+  
+    -   <span data-ttu-id="66cef-150">Conta de usuário do domínio</span><span class="sxs-lookup"><span data-stu-id="66cef-150">Domain user account</span></span>  
+  
+    -   <span data-ttu-id="66cef-151">Conta de usuário local criada pelo usuário</span><span class="sxs-lookup"><span data-stu-id="66cef-151">User created local user account</span></span>  
+  
+    -   <span data-ttu-id="66cef-152">Administrador</span><span class="sxs-lookup"><span data-stu-id="66cef-152">Administrator</span></span>  
+  
+    -   <span data-ttu-id="66cef-153">Conta virtual e MSA (Conta de Serviço Gerenciada)</span><span class="sxs-lookup"><span data-stu-id="66cef-153">Virtual account and MSA (Managed Service Account)</span></span>  
+  
+    -   <span data-ttu-id="66cef-154">Serviços de rede, serviços locais e sistema</span><span class="sxs-lookup"><span data-stu-id="66cef-154">Network Services, Local Services, and System</span></span>  
+  
+     <span data-ttu-id="66cef-155">Não são aceitas contas de grupo (local ou domínio) e outras contas internas (como Todos).</span><span class="sxs-lookup"><span data-stu-id="66cef-155">Group accounts (local or domain) and other built-in accounts (like Everyone) are not accepted.</span></span>  
+  
+8.  <span data-ttu-id="66cef-156">Opcionalmente, clique no botão de reticências (...) para alterar o caminho do diretório de recursos compartilhados.</span><span class="sxs-lookup"><span data-stu-id="66cef-156">Optionally, click the ellipsis (...) button to change the shared feature directory path.</span></span>  
+  
+    1.  <span data-ttu-id="66cef-157">Em computadores de 32 bits, o caminho de instalação padrão é **C:\Arquivos de Programas\\[!INCLUDE[msCoName](../../includes/msconame-md.md)][!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]\\**</span><span class="sxs-lookup"><span data-stu-id="66cef-157">On 32-bit computers, the default installation path is **C:\Program Files\\[!INCLUDE[msCoName](../../includes/msconame-md.md)][!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]\\**</span></span>  
+  
+    2.  <span data-ttu-id="66cef-158">Em computadores de 64 bits, o caminho de instalação padrão é **C:\Arquivos de Programas (x86)\\[!INCLUDE[msCoName](../../includes/msconame-md.md)][!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]\\**</span><span class="sxs-lookup"><span data-stu-id="66cef-158">On 64-bit computers, the default installation path is **C:\Program Files (x86)\\[!INCLUDE[msCoName](../../includes/msconame-md.md)][!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]\\**</span></span>  
+  
+9. <span data-ttu-id="66cef-159">Quando tiver terminado, clique em **Avançar**.</span><span class="sxs-lookup"><span data-stu-id="66cef-159">When you are finished, click **Next**.</span></span>  
+  
+10. <span data-ttu-id="66cef-160">Na página **Regras de Instalação** , a Instalação do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] valida sua configuração de computador.</span><span class="sxs-lookup"><span data-stu-id="66cef-160">On the **Installation Rules** page, [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Setup validates your computer configuration.</span></span> <span data-ttu-id="66cef-161">Quando o processo de validação for concluído, clique em **Avançar**.</span><span class="sxs-lookup"><span data-stu-id="66cef-161">Once the validation process is completed, click **Next**.</span></span>  
+  
+11. <span data-ttu-id="66cef-162">A página **Requisitos de Espaço em Disco** calcula o espaço em disco necessário para os recursos especificados.</span><span class="sxs-lookup"><span data-stu-id="66cef-162">The **Disk Space Requirements** page calculates the required disk space for the features that you specify.</span></span> <span data-ttu-id="66cef-163">Em seguida, ele compara o espaço necessário com o espaço em disco disponível.</span><span class="sxs-lookup"><span data-stu-id="66cef-163">Then it compares the required space to the available disk space.</span></span>  
+  
+12. <span data-ttu-id="66cef-164">Na página **Relatório de Erros** , especifique as informações que deseja enviar à [!INCLUDE[msCoName](../../includes/msconame-md.md)] para ajudar a aperfeiçoar o [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].</span><span class="sxs-lookup"><span data-stu-id="66cef-164">On the **Error Reporting** page, specify the information that you want to send to [!INCLUDE[msCoName](../../includes/msconame-md.md)] to help improve [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].</span></span> <span data-ttu-id="66cef-165">Por padrão, a opção de relatório de erros está habilitada.</span><span class="sxs-lookup"><span data-stu-id="66cef-165">By default, option for error reporting is enabled.</span></span>  
+  
+13. <span data-ttu-id="66cef-166">Na página **Regras de Configuração da Instalação** , o Verificador de Configuração do Sistema executará mais um conjunto de regras para validar a configuração do seu computador com os recursos do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] que você especificou.</span><span class="sxs-lookup"><span data-stu-id="66cef-166">On the **Installation Configuration Rules** page, the System Configuration Checker will run one more set of rules to validate your computer configuration with the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] features that you have specified.</span></span>  
+  
+14. <span data-ttu-id="66cef-167">Na página **Pronto para Instalar o Programa** , clique em **Instalar**.</span><span class="sxs-lookup"><span data-stu-id="66cef-167">On the **Ready to Install the Program** page, click **Install**.</span></span>  
+  
+    > [!IMPORTANT]  
+    >  <span data-ttu-id="66cef-168">Depois de instalar o Distributed Replay, crie regras de firewall no controlador e nos computadores cliente e conceda permissões a cada computador cliente no servidor de destino.</span><span class="sxs-lookup"><span data-stu-id="66cef-168">After you install Distributed Replay you must create firewall rules on the controller and client computers, and grant each client computer permissions on the target server.</span></span> <span data-ttu-id="66cef-169">Para obter mais informações, veja [Concluir as etapas de pós-instalação](../../tools/distributed-replay/complete-the-post-installation-steps.md).</span><span class="sxs-lookup"><span data-stu-id="66cef-169">For more information, see [Complete the Post-Installation Steps](../../tools/distributed-replay/complete-the-post-installation-steps.md).</span></span>  
+  
+ <span data-ttu-id="66cef-170">Estes tópicos adicionais documentam outras maneiras de instalar o Distributed Replay:</span><span class="sxs-lookup"><span data-stu-id="66cef-170">These additional topics document other ways to install Distributed Replay:</span></span>  
+  
+-   [<span data-ttu-id="66cef-171">Instalar o Distributed Replay usando o prompt de comando</span><span class="sxs-lookup"><span data-stu-id="66cef-171">Install Distributed Replay from the Command Prompt</span></span>](../../tools/distributed-replay/install-distributed-replay-overview.md)  
+  
+-   [<span data-ttu-id="66cef-172">Instalar o Distributed Replay usando um arquivo de configuração</span><span class="sxs-lookup"><span data-stu-id="66cef-172">Install Distributed Replay Using a Configuration File</span></span>](../../../2014/sql-server/install/install-distributed-replay-using-a-configuration-file.md)  
+  
+## <a name="net-framework-security"></a><span data-ttu-id="66cef-173">Segurança do .NET Framework</span><span class="sxs-lookup"><span data-stu-id="66cef-173">.NET Framework Security</span></span>  
+ <span data-ttu-id="66cef-174">Você deve ter permissões administrativas para instalar qualquer recurso do Distributed Replay.</span><span class="sxs-lookup"><span data-stu-id="66cef-174">You must have administrative permissions in order to install any of the Distributed Replay features.</span></span> <span data-ttu-id="66cef-175">Apenas um logon do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] que tenha permissões sysadmin pode adicionar as contas de serviço de cliente à função de servidor sysadmin do servidor de teste.</span><span class="sxs-lookup"><span data-stu-id="66cef-175">Only a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] login having sysadmin permissions can add the client service accounts to the sysadmin server role of the test server.</span></span> <span data-ttu-id="66cef-176">Para obter mais informações sobre as considerações de segurança do Distributed Replay, veja [Segurança do Distributed Replay](../../tools/distributed-replay/distributed-replay-security.md).</span><span class="sxs-lookup"><span data-stu-id="66cef-176">For more information about Distributed Replay security considerations, see [Distributed Replay Security](../../tools/distributed-replay/distributed-replay-security.md).</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="66cef-177">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="66cef-177">See Also</span></span>  
+ <span data-ttu-id="66cef-178">[Recursos com suporte nas edições do SQL Server 2014](../../../2014/getting-started/features-supported-by-the-editions-of-sql-server-2014.md) </span><span class="sxs-lookup"><span data-stu-id="66cef-178">[Features Supported by the Editions of SQL Server 2014](../../../2014/getting-started/features-supported-by-the-editions-of-sql-server-2014.md) </span></span>  
+ <span data-ttu-id="66cef-179">[SQL Server Distributed Replay](../../tools/distributed-replay/sql-server-distributed-replay.md) </span><span class="sxs-lookup"><span data-stu-id="66cef-179">[SQL Server Distributed Replay](../../tools/distributed-replay/sql-server-distributed-replay.md) </span></span>  
+ <span data-ttu-id="66cef-180">[Distributed Replay Requirements](../../tools/sql-server-profiler/replay-requirements.md) </span><span class="sxs-lookup"><span data-stu-id="66cef-180">[Distributed Replay Requirements](../../tools/sql-server-profiler/replay-requirements.md) </span></span>  
+ <span data-ttu-id="66cef-181">[Opções de linha de comando da ferramenta de administração &#40;Distributed Replay Utility&#41;](../../tools/distributed-replay/administration-tool-command-line-options-distributed-replay-utility.md) </span><span class="sxs-lookup"><span data-stu-id="66cef-181">[Administration Tool Command-line Options &#40;Distributed Replay Utility&#41;](../../tools/distributed-replay/administration-tool-command-line-options-distributed-replay-utility.md) </span></span>  
+ [<span data-ttu-id="66cef-182">Configurar o Distributed Replay</span><span class="sxs-lookup"><span data-stu-id="66cef-182">Configure Distributed Replay</span></span>](../../tools/distributed-replay/configure-distributed-replay.md)  
+  
+  

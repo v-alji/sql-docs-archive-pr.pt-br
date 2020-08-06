@@ -1,0 +1,47 @@
+---
+title: Alterar as configurações de fuso horário e relógio em um servidor de relatório | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: reporting-services-native
+ms.topic: conceptual
+helpviewer_keywords:
+- time zones [Reporting Services]
+- clocks [Reporting Services]
+- schedules [Reporting Services], clock settings
+- schedules [Reporting Services], time zones
+ms.assetid: 69a19468-baa1-40f6-b158-8afdab0f8968
+author: maggiesMSFT
+ms.author: maggies
+manager: kfile
+ms.openlocfilehash: 566e421cd120010ea32f6936853e4319ec2efa11
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87684465"
+---
+# <a name="change-time-zones-and-clock-settings-on-a-report-server"></a><span data-ttu-id="85c54-102">Alterar configurações de fuso horário e relógio em um servidor de relatório</span><span class="sxs-lookup"><span data-stu-id="85c54-102">Change Time Zones and Clock Settings on a Report Server</span></span>
+  <span data-ttu-id="85c54-103">Um servidor de relatório sempre usa a hora local do computador no qual é instalado.</span><span class="sxs-lookup"><span data-stu-id="85c54-103">A report server always uses the local time of the computer on which it is installed.</span></span> <span data-ttu-id="85c54-104">Você não pode configurá-lo para usar um fuso horário diferente.</span><span class="sxs-lookup"><span data-stu-id="85c54-104">You cannot configure it to use a different time zone.</span></span> <span data-ttu-id="85c54-105">Se um aplicativo cliente apontar para um servidor de relatório em um fuso horário diferente, o fuso horário do servidor de relatório será usado para executar uma operação agendada.</span><span class="sxs-lookup"><span data-stu-id="85c54-105">If a client application points to a report server in a different time zone, the report server time zone is used to execute a scheduled operation.</span></span> <span data-ttu-id="85c54-106">No Gerenciador de Relatórios e nas páginas de gerenciamento do SharePoint, o fuso horário é indicado em cada página de agendamento para que você saiba exatamente quando uma operação agendada ocorrerá.</span><span class="sxs-lookup"><span data-stu-id="85c54-106">In Report Manager and SharePoint management pages, the time zone is indicated on each scheduling page so that you know exactly when a scheduled operation will occur.</span></span> <span data-ttu-id="85c54-107">Por exemplo, a página para criar agendas personalizadas informará "O horário será expresso em (UTC-08:00) hora do Pacífico (EUA e Canadá)".</span><span class="sxs-lookup"><span data-stu-id="85c54-107">For example, the page for creating custom schedules will note "Times are expressed in (UTC-08:00) Pacific time (US and Canada)."</span></span>  
+  
+## <a name="changing-the-time-zone-native-mode"></a><span data-ttu-id="85c54-108">Alterando o fuso horário (modo nativo)</span><span class="sxs-lookup"><span data-stu-id="85c54-108">Changing the Time Zone (Native Mode)</span></span>  
+ <span data-ttu-id="85c54-109">Se o fuso horário for alterado em um computador que hospeda um servidor de relatório, reinicie o serviço Servidor de Relatório para validar a alteração.</span><span class="sxs-lookup"><span data-stu-id="85c54-109">If you change the time zone on a computer hosting a report server, you must restart the Report Server service in order for the time zone change to take effect.</span></span>  
+  
+ <span data-ttu-id="85c54-110">Os valores de carimbo de data e hora de instantâneos existentes do histórico de relatórios são sincronizados com a nova configuração de fuso horário.</span><span class="sxs-lookup"><span data-stu-id="85c54-110">Timestamp values of existing report history snapshots are synchronized to the new time zone setting.</span></span> <span data-ttu-id="85c54-111">Se um instantâneo do histórico de relatório for gerado às 9h00 e, em seguida, o fuso horário seguinte, o carimbo de data e hora no instantâneo gerado será alterado de 9h00</span><span class="sxs-lookup"><span data-stu-id="85c54-111">If you generated a report history snapshot at 9:00 A.M., and then reset the time zone ahead one time zone, the timestamp on the generated snapshot will change from 9:00 A.M.</span></span> <span data-ttu-id="85c54-112">para 10h00.</span><span class="sxs-lookup"><span data-stu-id="85c54-112">to 10:00 A.M.</span></span>  
+  
+ <span data-ttu-id="85c54-113">As agendas retêm as configurações existentes, exceto as mapeadas para o novo fuso horário.</span><span class="sxs-lookup"><span data-stu-id="85c54-113">Schedules retain existing settings, except that they are mapped to the new time zone.</span></span> <span data-ttu-id="85c54-114">Por exemplo, se uma agenda for executada às 2h00</span><span class="sxs-lookup"><span data-stu-id="85c54-114">For example, if a schedule runs at 2:00 A.M.</span></span> <span data-ttu-id="85c54-115">no horário padrão do Pacífico e o fuso horário for alterado para o horário padrão do leste australiano, a agenda será executada às 2h00</span><span class="sxs-lookup"><span data-stu-id="85c54-115">Pacific Standard Time and you change the time zone to East Australia Standard Time, the schedule runs at 2:00 A.M.</span></span> <span data-ttu-id="85c54-116">do horário padrão do leste australiano.</span><span class="sxs-lookup"><span data-stu-id="85c54-116">East Australia Standard Time.</span></span>  
+  
+ <span data-ttu-id="85c54-117">Os valores de propriedade de carimbo de data e hora (por exemplo, o horário em que uma pasta ou item de relatório vinculado é criado) não são sincronizados com uma nova configuração de fuso horário.</span><span class="sxs-lookup"><span data-stu-id="85c54-117">Property timestamp values (for example, the time at which a folder or linked report item is created) are not synchronized to a new time zone setting.</span></span> <span data-ttu-id="85c54-118">Se você criar um item em 25 de junho às 9h00 e, em seguida, redefinir o fuso horário ou o horário, o carimbo de data e hora permanecerá como 25 de junho às 9h00.</span><span class="sxs-lookup"><span data-stu-id="85c54-118">If you create an item on June 25 at 9:00 A.M., and then reset the time zone or clock, the timestamp remains June 25 at 9:00 A.M.</span></span>  
+  
+## <a name="changing-the-time-zone-sharepoint-mode"></a><span data-ttu-id="85c54-119">Alterando o fuso horário (modo do SharePoint)</span><span class="sxs-lookup"><span data-stu-id="85c54-119">Changing the Time Zone (SharePoint Mode)</span></span>  
+ <span data-ttu-id="85c54-120">A configuração de fuso horário para o modo do SharePoint do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] é gerenciada como parte das configurações regionais do SharePoint.</span><span class="sxs-lookup"><span data-stu-id="85c54-120">The time zone configuration for [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] SharePoint mode is managed as part of the SharePoint regional settings.</span></span> <span data-ttu-id="85c54-121">Para saber mais, veja [Configurações regionais (SharePoint Server 2010 (https://technet.microsoft.com/library/cc824907.aspx)](https://technet.microsoft.com/library/cc824907.aspx).</span><span class="sxs-lookup"><span data-stu-id="85c54-121">For more information, see [Regional settings (SharePoint Server 2010 (https://technet.microsoft.com/library/cc824907.aspx)](https://technet.microsoft.com/library/cc824907.aspx).</span></span>  
+  
+## <a name="changing-the-clock-settings"></a><span data-ttu-id="85c54-122">Alterando as configurações de horário</span><span class="sxs-lookup"><span data-stu-id="85c54-122">Changing the Clock Settings</span></span>  
+ <span data-ttu-id="85c54-123">A alteração do horário do computador não afeta os valores de carimbo de data e hora existentes (por exemplo, se você adiantar uma hora, os carimbos de data e hora dos instantâneos do histórico de relatórios não serão alterados).</span><span class="sxs-lookup"><span data-stu-id="85c54-123">Changing the computer clock has no effect on existing timestamp values (for example, if you move the clock forward an hour, the timestamps of report history snapshots do not change).</span></span> <span data-ttu-id="85c54-124">Pode haver um atraso de 10 segundos antes do Processador de Agendamento e Entrega usar a nova configuração.</span><span class="sxs-lookup"><span data-stu-id="85c54-124">There may be a delay of 10 seconds before the Scheduling and Delivery Processor uses the new setting.</span></span> <span data-ttu-id="85c54-125">O atraso real pode variar se as configurações de intervalo de sondagem forem modificadas nos arquivos de configuração.</span><span class="sxs-lookup"><span data-stu-id="85c54-125">The actual delay may vary if you modified polling interval settings in the configuration files.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="85c54-126">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="85c54-126">See Also</span></span>  
+ <span data-ttu-id="85c54-127">[Iniciar e parar o serviço Servidor de Relatório](../report-server/start-and-stop-the-report-server-service.md) </span><span class="sxs-lookup"><span data-stu-id="85c54-127">[Start and Stop the Report Server Service](../report-server/start-and-stop-the-report-server-service.md) </span></span>  
+ [<span data-ttu-id="85c54-128">Agendas</span><span class="sxs-lookup"><span data-stu-id="85c54-128">Schedules</span></span>](schedules.md)  
+  
+  

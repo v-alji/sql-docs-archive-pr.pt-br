@@ -1,0 +1,143 @@
+---
+title: Implantar um banco de dados usando um DAC | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.technology: ''
+ms.topic: conceptual
+f1_keywords:
+- sql12.swb.dbdeployment.settings.f1
+- sql12.swb.dbdeployment.progress.f1
+- sql12.swb.dbdeployment.summary.f1
+- sql12.swb.dbdeployment.results.f1
+- sql12.swb.dbdeployment.welcome.f1
+helpviewer_keywords:
+- deploy database wizard
+- database deploy [SQL Server]
+ms.assetid: 08c506e8-4ba0-4a19-a066-6e6a5c420539
+author: stevestein
+ms.author: sstein
+ms.openlocfilehash: f753cfaf44e51b5bd3ffb939e38e2a300acb9703
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87684764"
+---
+# <a name="deploy-a-database-by-using-a-dac"></a><span data-ttu-id="92350-102">Implantar um banco de dados usando um DAC</span><span class="sxs-lookup"><span data-stu-id="92350-102">Deploy a Database By Using a DAC</span></span>
+  <span data-ttu-id="92350-103">Use o Assistente **Implantar Banco de Dados no SQL Azure** para implantar um banco de dados entre uma instância do [!INCLUDE[ssDE](../../includes/ssde-md.md)] e um servidor [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] ou entre dois servidores [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)].</span><span class="sxs-lookup"><span data-stu-id="92350-103">Use the **Deploy a Database to SQL Azure** Wizard to deploy a database between an instance of the [!INCLUDE[ssDE](../../includes/ssde-md.md)] and a [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] server, or between two [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)]servers.</span></span>  
+  
+##  <a name="before-you-begin"></a><a name="BeforeBegin"></a> <span data-ttu-id="92350-104">Antes de começar</span><span class="sxs-lookup"><span data-stu-id="92350-104">Before You Begin</span></span>  
+ <span data-ttu-id="92350-105">O assistente usa um arquivo morto BACPAC DAC (aplicativo da camada de dados) para implantar os dados e as definições dos objetos de banco de dados.</span><span class="sxs-lookup"><span data-stu-id="92350-105">The wizard uses a Data-tier Application (DAC) BACPAC archive file to deploy both the data and the definitions of database objects.</span></span> <span data-ttu-id="92350-106">Ele executa uma operação de exportação de DAC do banco de dados de origem, e uma importação de DAC para o destino.</span><span class="sxs-lookup"><span data-stu-id="92350-106">It performs a DAC export operation from the source database, and a DAC import to the destination.</span></span>  
+  
+###  <a name="database-options-and-settings"></a><a name="DBOptSettings"></a> <span data-ttu-id="92350-107">Opções e configurações de banco de dados</span><span class="sxs-lookup"><span data-stu-id="92350-107">Database Options and Settings</span></span>  
+ <span data-ttu-id="92350-108">Por padrão, o banco de dados criado durante a implantação terá todas as configurações padrão da instrução CREATE DATABASE.</span><span class="sxs-lookup"><span data-stu-id="92350-108">By default, the database created during the deployment will have the default settings from the CREATE DATABASE statement.</span></span> <span data-ttu-id="92350-109">A exceção é que a ordenação e o nível de compatibilidade do banco de dados estão definidos como valores do banco de dados de origem.</span><span class="sxs-lookup"><span data-stu-id="92350-109">The exception is that the database collation and compatibility level are set to the values from the source database.</span></span>  
+  
+ <span data-ttu-id="92350-110">As opções de banco de dados, como TRUSTWORTHY, DB_CHAINING e HONOR_BROKER_PRIORITY, não podem ser ajustadas como parte do processo de implantação.</span><span class="sxs-lookup"><span data-stu-id="92350-110">Database options, such as TRUSTWORTHY, DB_CHAINING and HONOR_BROKER_PRIORITY, cannot be adjusted as part of the deployment process.</span></span> <span data-ttu-id="92350-111">Propriedades físicas, como o número de grupos de arquivos ou os números e os tamanhos de arquivos, não podem ser alteradas como parte do processo de implantação.</span><span class="sxs-lookup"><span data-stu-id="92350-111">Physical properties, such as the number of filegroups, or the numbers and sizes of files cannot be altered as part of the deployment process.</span></span> <span data-ttu-id="92350-112">Após a conclusão da implantação, você pode usar a instrução ALTER DATABASE, o [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)]ou o [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] PowerShell para personalizar o banco de dados.</span><span class="sxs-lookup"><span data-stu-id="92350-112">After the deployment completes, you can use the ALTER DATABASE statement, [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)], or [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] PowerShell to tailor the database.</span></span>  
+  
+###  <a name="limitations-and-restrictions"></a><a name="LimitationsRestrictions"></a> <span data-ttu-id="92350-113">Limitações e restrições</span><span class="sxs-lookup"><span data-stu-id="92350-113">Limitations and Restrictions</span></span>  
+ <span data-ttu-id="92350-114">O assistente para **Implantar Banco de Dados** oferece suporte à implantação de um banco de dados:</span><span class="sxs-lookup"><span data-stu-id="92350-114">The **Deploy Database** wizard supports deploying a database:</span></span>  
+  
+-   <span data-ttu-id="92350-115">De uma instância do [!INCLUDE[ssDE](../../includes/ssde-md.md)] para o [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)].</span><span class="sxs-lookup"><span data-stu-id="92350-115">From an instance of the [!INCLUDE[ssDE](../../includes/ssde-md.md)] to [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)].</span></span>  
+  
+-   <span data-ttu-id="92350-116">Do [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] para uma instância do [!INCLUDE[ssDE](../../includes/ssde-md.md)].</span><span class="sxs-lookup"><span data-stu-id="92350-116">From [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] to an instance of the [!INCLUDE[ssDE](../../includes/ssde-md.md)].</span></span>  
+  
+-   <span data-ttu-id="92350-117">Entre dois servidores [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="92350-117">Between two [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] servers.</span></span>  
+  
+ <span data-ttu-id="92350-118">O assistente não oferece suporte à implantação de bancos de dados entre duas instâncias do [!INCLUDE[ssDE](../../includes/ssde-md.md)].</span><span class="sxs-lookup"><span data-stu-id="92350-118">The wizard does not support deploying databases between two instances of the [!INCLUDE[ssDE](../../includes/ssde-md.md)].</span></span>  
+  
+ <span data-ttu-id="92350-119">Uma instância do [!INCLUDE[ssDE](../../includes/ssde-md.md)] deve estar executando o [!INCLUDE[ssVersion2005](../../includes/ssversion2005-md.md)] Service Pack 4 (SP4) ou posterior para funcionar com o assistente.</span><span class="sxs-lookup"><span data-stu-id="92350-119">An instance of the [!INCLUDE[ssDE](../../includes/ssde-md.md)] must be running [!INCLUDE[ssVersion2005](../../includes/ssversion2005-md.md)] Service Pack 4 (SP4) or later to work with the wizard.</span></span> <span data-ttu-id="92350-120">Se um banco de dados em uma instância do [!INCLUDE[ssDE](../../includes/ssde-md.md)] contiver objetos sem suporte no [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)], você não poderá usar o assistente para implantar o banco de dados no [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)].</span><span class="sxs-lookup"><span data-stu-id="92350-120">If a database on an instance of the [!INCLUDE[ssDE](../../includes/ssde-md.md)] contains objects not supported on [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)], you cannot use the wizard to deploy the database to [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)].</span></span> <span data-ttu-id="92350-121">Se um banco de dados no [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] contiver objetos sem suporte no [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], você não poderá usar o assistente para implantar o banco de dados nas instâncias do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].</span><span class="sxs-lookup"><span data-stu-id="92350-121">If a database on [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] contains objects not supported by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], you cannot use the wizard to deploy the database to instances of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].</span></span>  
+  
+###  <a name="security"></a><a name="Security"></a> <span data-ttu-id="92350-122">Segurança</span><span class="sxs-lookup"><span data-stu-id="92350-122">Security</span></span>  
+ <span data-ttu-id="92350-123">Para melhorar a segurança, os logons de Autenticação do SQL Server são armazenados em um arquivo BACPAC DAC sem senha.</span><span class="sxs-lookup"><span data-stu-id="92350-123">To improve security, SQL Server Authentication logins are stored in a DAC BACPAC file without a password.</span></span> <span data-ttu-id="92350-124">Quando o arquivo BACPAC é importado, o logon é criado como um logon desabilitado com uma senha gerada.</span><span class="sxs-lookup"><span data-stu-id="92350-124">When the BACPAC is imported, the login is created as a disabled login with a generated password.</span></span> <span data-ttu-id="92350-125">Para habilitar os logons, faça logon usando um logon que tenha a permissão de ALTER ANY LOGIN e use ALTER LOGIN para habilitar o logon e atribuir uma nova senha que possa ser comunicada ao usuário.</span><span class="sxs-lookup"><span data-stu-id="92350-125">To enable the logins, log in using a login that has ALTER ANY LOGIN permission and use ALTER LOGIN to enable the login and assign a new password that can be communicated to the user.</span></span> <span data-ttu-id="92350-126">Isso não é necessário para logons de Autenticação do Windows porque suas senhas não são gerenciadas pelo SQL Server.</span><span class="sxs-lookup"><span data-stu-id="92350-126">This is not needed for Windows Authentication logins because their passwords are not managed by SQL Server.</span></span>  
+  
+#### <a name="permissions"></a><span data-ttu-id="92350-127">Permissões</span><span class="sxs-lookup"><span data-stu-id="92350-127">Permissions</span></span>  
+ <span data-ttu-id="92350-128">O assistente requer permissões de exportação de DAC no banco de dados de origem.</span><span class="sxs-lookup"><span data-stu-id="92350-128">The wizard requires DAC export permissions on the source database.</span></span> <span data-ttu-id="92350-129">O logon exige pelo menos as permissões ALTER ANY LOGIN e VIEW DEFINITION no escopo do banco de dados, bem como as permissões SELECT em **sys.sql_expression_dependencies**.</span><span class="sxs-lookup"><span data-stu-id="92350-129">The login requires at least ALTER ANY LOGIN and database scope VIEW DEFINITION permissions, as well as SELECT permissions on **sys.sql_expression_dependencies**.</span></span> <span data-ttu-id="92350-130">A exportação de um DAC pode ser feita por membros da função de servidor fixa securityadmin que também são membros da função de banco de dados fixa database_owner no banco de dados do qual o DAC é exportado.</span><span class="sxs-lookup"><span data-stu-id="92350-130">Exporting a DAC can be done by members of the securityadmin fixed server role who are also members of the database_owner fixed database role in the database from which the DAC is exported.</span></span> <span data-ttu-id="92350-131">Membros da função de servidor fixa sysadmin ou da conta interna do administrador do sistema do SQL Server denominada **sa** também podem exportar um DAC.</span><span class="sxs-lookup"><span data-stu-id="92350-131">Members of the sysadmin fixed server role or the built-in SQL Server system administrator account named **sa** can also export a DAC.</span></span>  
+  
+ <span data-ttu-id="92350-132">O assistente requer permissões de importação de DAC no servidor ou na instância de destino.</span><span class="sxs-lookup"><span data-stu-id="92350-132">The wizard requires DAC import permissions on the destination instance or server.</span></span> <span data-ttu-id="92350-133">O logon deve ser um membro das funções de servidor fixas **sysadmin** ou **serveradmin** , ou da função de servidor fixa **dbcreator** e ter as permissões ALTER ANY LOGIN.</span><span class="sxs-lookup"><span data-stu-id="92350-133">The login must be a member of the **sysadmin** or **serveradmin** fixed server roles, or in the **dbcreator** fixed server role and have ALTER ANY LOGIN permissions.</span></span> <span data-ttu-id="92350-134">A conta interna do administrador de sistema do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] chamada **sa** também pode importar um DAC.</span><span class="sxs-lookup"><span data-stu-id="92350-134">The built-in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] system administrator account named **sa** can also import a DAC.</span></span> <span data-ttu-id="92350-135">A importação de um DAC com logons no [!INCLUDE[ssSDS](../../includes/sssds-md.md)] exige associação nas funções loginmanager ou serveradmin.</span><span class="sxs-lookup"><span data-stu-id="92350-135">Importing a DAC with logins to [!INCLUDE[ssSDS](../../includes/sssds-md.md)] requires membership in the loginmanager or serveradmin roles.</span></span> <span data-ttu-id="92350-136">A importação de um DAC sem logons no [!INCLUDE[ssSDS](../../includes/sssds-md.md)] exige a associação nas funções dbmanager ou serveradmin.</span><span class="sxs-lookup"><span data-stu-id="92350-136">Importing a DAC without logins to [!INCLUDE[ssSDS](../../includes/sssds-md.md)] requires membership in the dbmanager or serveradmin roles.</span></span>  
+  
+##  <a name="using-the-deploy-database-wizard"></a><a name="UsingDeployDACWizard"></a> <span data-ttu-id="92350-137">Usando o Assistente para Implantar Banco de Dados</span><span class="sxs-lookup"><span data-stu-id="92350-137">Using the Deploy Database Wizard</span></span>  
+ <span data-ttu-id="92350-138">**Para migrar um banco de dados usando o Assistente para Implantar Banco de dados**</span><span class="sxs-lookup"><span data-stu-id="92350-138">**To migrate a database using the Deploy Database Wizard**</span></span>  
+  
+1.  <span data-ttu-id="92350-139">Conecte-se ao local do banco de dados que você deseja implantar.</span><span class="sxs-lookup"><span data-stu-id="92350-139">Connect to the location of the database you want to deploy.</span></span> <span data-ttu-id="92350-140">Você pode especificar uma instância do [!INCLUDE[ssDE](../../includes/ssde-md.md)] ou um servidor [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="92350-140">You can specify either an instance of [!INCLUDE[ssDE](../../includes/ssde-md.md)] or a [!INCLUDE[ssSDSfull](../../includes/sssdsfull-md.md)] server.</span></span>  
+  
+2.  <span data-ttu-id="92350-141">No **Pesquisador de Objetos**, expanda o nó da instância que contém o banco de dados.</span><span class="sxs-lookup"><span data-stu-id="92350-141">In **Object Explorer**, expand the node for the instance that has the database.</span></span>  
+  
+3.  <span data-ttu-id="92350-142">Expanda o nó **Bancos de Dados** .</span><span class="sxs-lookup"><span data-stu-id="92350-142">Expand the **Databases** node.</span></span>  
+  
+4.  <span data-ttu-id="92350-143">Clique com o botão direito do mouse no banco de dados que deseja implantar, selecione **Tarefas**e selecione **Implantar Banco de Dados no SQL Azure...**</span><span class="sxs-lookup"><span data-stu-id="92350-143">Right click the database you want to deploy, select **Tasks**, and then select **Deploy Database to SQL Azure...**</span></span>  
+  
+5.  <span data-ttu-id="92350-144">Conclua as etapas das caixas de diálogo do assistente:</span><span class="sxs-lookup"><span data-stu-id="92350-144">Complete the Wizard dialogs:</span></span>  
+  
+    -   [<span data-ttu-id="92350-145">Página de Introdução</span><span class="sxs-lookup"><span data-stu-id="92350-145">Introduction Page</span></span>](#Introduction)  
+  
+    -   [<span data-ttu-id="92350-146">Configurações de Implantação</span><span class="sxs-lookup"><span data-stu-id="92350-146">Deployment Settings</span></span>](#Deployment_settings)  
+  
+    -   [<span data-ttu-id="92350-147">Página de Resumo</span><span class="sxs-lookup"><span data-stu-id="92350-147">Summary Page</span></span>](#Summary)  
+  
+    -   [<span data-ttu-id="92350-148">Resultados</span><span class="sxs-lookup"><span data-stu-id="92350-148">Results</span></span>](#Results)  
+  
+##  <a name="introduction-page"></a><a name="Introduction"></a> <span data-ttu-id="92350-149">Página de Introdução</span><span class="sxs-lookup"><span data-stu-id="92350-149">Introduction Page</span></span>  
+ <span data-ttu-id="92350-150">Esta página descreve as etapas do Assistente para **Implantar Banco de Dados** .</span><span class="sxs-lookup"><span data-stu-id="92350-150">This page describes the steps for the **Deploy Database** Wizard.</span></span>  
+  
+ <span data-ttu-id="92350-151">**Opções**</span><span class="sxs-lookup"><span data-stu-id="92350-151">**Options**</span></span>  
+  
+-   <span data-ttu-id="92350-152">**Não mostrar esta página novamente.**</span><span class="sxs-lookup"><span data-stu-id="92350-152">**Do not show this page again.**</span></span> <span data-ttu-id="92350-153">- Clique na caixa de seleção para interromper a exibição da página de Introdução no futuro.</span><span class="sxs-lookup"><span data-stu-id="92350-153">- Click the check box to stop the Introduction page from being displayed in the future.</span></span>  
+  
+-   <span data-ttu-id="92350-154">**Avançar** - Continua na página **Configurações de Implantação** .</span><span class="sxs-lookup"><span data-stu-id="92350-154">**Next** - Proceeds to the **Deployment Settings** page.</span></span>  
+  
+-   <span data-ttu-id="92350-155">**Cancelar** – cancela a operação e fecha o assistente.</span><span class="sxs-lookup"><span data-stu-id="92350-155">**Cancel** - Cancels the operation and closes the Wizard.</span></span>  
+  
+##  <a name="deployment-settings-page"></a><a name="Deployment_settings"></a><span data-ttu-id="92350-156">Página Configurações de implantação</span><span class="sxs-lookup"><span data-stu-id="92350-156">Deployment Settings Page</span></span>  
+ <span data-ttu-id="92350-157">Use esta página para especificar o servidor de destino e fornecer detalhes sobre seu novo banco de dados.</span><span class="sxs-lookup"><span data-stu-id="92350-157">Use this page to specify the destination server and to provide details about your new database.</span></span>  
+  
+ <span data-ttu-id="92350-158">**Host local:**</span><span class="sxs-lookup"><span data-stu-id="92350-158">**Local host:**</span></span>  
+  
+-   <span data-ttu-id="92350-159">**Conexão do servidor** – especifique os detalhes de conexão do servidor e clique em **conectar** para verificar a conexão.</span><span class="sxs-lookup"><span data-stu-id="92350-159">**Server connection** - Specify server connection details and then click **Connect** to verify the connection.</span></span>  
+  
+-   <span data-ttu-id="92350-160">**Nome do novo banco de dados** – especifique um nome para o novo banco de dados.</span><span class="sxs-lookup"><span data-stu-id="92350-160">**New database name** - Specify a name for the new database.</span></span>  
+  
+ <span data-ttu-id="92350-161">**[!INCLUDE[ssSDS](../../includes/sssds-md.md)]configurações do banco de dados:**</span><span class="sxs-lookup"><span data-stu-id="92350-161">**[!INCLUDE[ssSDS](../../includes/sssds-md.md)] database settings:**</span></span>  
+  
+-   <span data-ttu-id="92350-162">\*\* [!INCLUDE[ssSDS](../../includes/sssds-md.md)] edição\*\* – selecione a edição do [!INCLUDE[ssSDS](../../includes/sssds-md.md)] no menu suspenso.</span><span class="sxs-lookup"><span data-stu-id="92350-162">**[!INCLUDE[ssSDS](../../includes/sssds-md.md)] edition** - Select the edition of [!INCLUDE[ssSDS](../../includes/sssds-md.md)] from the drop-down menu.</span></span>  
+  
+-   <span data-ttu-id="92350-163">**Tamanho máximo do banco de dados** – selecione o tamanho máximo do banco de dados no menu suspenso.</span><span class="sxs-lookup"><span data-stu-id="92350-163">**Maximum database size** - Select the maximum database size from the drop-down menu.</span></span>  
+  
+ <span data-ttu-id="92350-164">**Outras configurações:**</span><span class="sxs-lookup"><span data-stu-id="92350-164">**Other settings:**</span></span>  
+  
+-   <span data-ttu-id="92350-165">Especifique um diretório local para o arquivo temporário, que é o arquivo morto BACPAC.</span><span class="sxs-lookup"><span data-stu-id="92350-165">Specify a local directory for the temporary file, which is the BACPAC archive file.</span></span> <span data-ttu-id="92350-166">Observe que o arquivo será criado no local especificado e permanecerá lá depois que a operação for concluída.</span><span class="sxs-lookup"><span data-stu-id="92350-166">Note that the file will be created at the specified location and will remain there after the operation completes.</span></span>  
+  
+##  <a name="summary-page"></a><a name="Summary"></a> <span data-ttu-id="92350-167">Página de Resumo</span><span class="sxs-lookup"><span data-stu-id="92350-167">Summary Page</span></span>  
+ <span data-ttu-id="92350-168">Use esta página para analisar a origem especificada e as configurações de destino para a operação.</span><span class="sxs-lookup"><span data-stu-id="92350-168">Use this page to review the specified source and target settings for the operation.</span></span> <span data-ttu-id="92350-169">Para concluir a operação de implantação usando as configurações especificadas, clique em **Concluir**.</span><span class="sxs-lookup"><span data-stu-id="92350-169">To complete the deploy operation using the specified settings, click **Finish**.</span></span> <span data-ttu-id="92350-170">Para cancelar a operação de implantação e sair do Assistente, clique em **Cancelar**.</span><span class="sxs-lookup"><span data-stu-id="92350-170">To cancel the deploy operation and exit the Wizard, click **Cancel**.</span></span>  
+  
+##  <a name="progress-page"></a><a name="Progress"></a> <span data-ttu-id="92350-171">Página Progresso</span><span class="sxs-lookup"><span data-stu-id="92350-171">Progress Page</span></span>  
+ <span data-ttu-id="92350-172">Esta página exibe a barra de progresso que indica o status da operação.</span><span class="sxs-lookup"><span data-stu-id="92350-172">This page displays a progress bar that indicates the status of the operation.</span></span> <span data-ttu-id="92350-173">Para exibir o status detalhado, clique na opção **Exibir detalhes** .</span><span class="sxs-lookup"><span data-stu-id="92350-173">To view detailed status, click the **View details** option.</span></span>  
+  
+##  <a name="results-page"></a><a name="Results"></a><span data-ttu-id="92350-174">Página de resultados</span><span class="sxs-lookup"><span data-stu-id="92350-174">Results Page</span></span>  
+ <span data-ttu-id="92350-175">Esta página reporta o êxito ou falha da operação de implantação, mostrando os resultados de cada ação.</span><span class="sxs-lookup"><span data-stu-id="92350-175">This page reports the success or failure of the deploy operation, showing the results of each action.</span></span> <span data-ttu-id="92350-176">Todas as ações que encontrarem um erro terão um link na coluna **Resultado** .</span><span class="sxs-lookup"><span data-stu-id="92350-176">Any action that encountered an error will have a link in the **Result** column.</span></span> <span data-ttu-id="92350-177">Clique no link para exibir um relatório do erro para essa ação.</span><span class="sxs-lookup"><span data-stu-id="92350-177">Click the link to view a report of the error for that action.</span></span>  
+  
+ <span data-ttu-id="92350-178">Clique em **concluir** para fechar o assistente.</span><span class="sxs-lookup"><span data-stu-id="92350-178">Click **Finish** to close the Wizard.</span></span>  
+  
+## <a name="using-a-net-framework-application"></a><span data-ttu-id="92350-179">Usando um aplicativo .NET Framework</span><span class="sxs-lookup"><span data-stu-id="92350-179">Using a .Net Framework Application</span></span>  
+ <span data-ttu-id="92350-180">**Para implantar um banco de dados usando os métodos DacStoreExport() e Import() em um aplicativo .Net Framework.**</span><span class="sxs-lookup"><span data-stu-id="92350-180">**To deploy a database using the DacStoreExport() and Import() methods in a .Net Framework application.**</span></span>  
+  
+ <span data-ttu-id="92350-181">Para exibir um exemplo de código, baixe o aplicativo de exemplo do DAC em [Codeplex](https://go.microsoft.com/fwlink/?LinkId=219575)</span><span class="sxs-lookup"><span data-stu-id="92350-181">To view a code example, download the DAC sample application on [Codeplex](https://go.microsoft.com/fwlink/?LinkId=219575)</span></span>  
+  
+1.  <span data-ttu-id="92350-182">Crie um objeto de servidor SMO e defina-o como a instância ou o servidor que contém o banco de dados a ser implantado.</span><span class="sxs-lookup"><span data-stu-id="92350-182">Create a SMO Server object and set it to the instance or server that contains the database to be deployed.</span></span>  
+  
+2.  <span data-ttu-id="92350-183">Abra um objeto `ServerConnection` e conecte-se à mesma instância.</span><span class="sxs-lookup"><span data-stu-id="92350-183">Open a `ServerConnection` object and connect to the same instance.</span></span>  
+  
+3.  <span data-ttu-id="92350-184">Use o método `Export` do tipo `Microsoft.SqlServer.Management.Dac.DacStore` para exportar o banco de dados para um arquivo BACPAC.</span><span class="sxs-lookup"><span data-stu-id="92350-184">Use the `Export` method of the `Microsoft.SqlServer.Management.Dac.DacStore` type to export the database to a BACPAC file.</span></span> <span data-ttu-id="92350-185">Especifique o nome do banco de dados a ser exportado e o caminho para a pasta onde o arquivo BACPAC será colocado.</span><span class="sxs-lookup"><span data-stu-id="92350-185">Specify the name of the database to be exported, and the path to the folder where the BACPAC file is to be placed.</span></span>  
+  
+4.  <span data-ttu-id="92350-186">Crie um objeto de servidor SMO e defina-o como a instância ou o servidor de destino.</span><span class="sxs-lookup"><span data-stu-id="92350-186">Create a SMO Server object and set it to the destination instance or server.</span></span>  
+  
+5.  <span data-ttu-id="92350-187">Abra um objeto `ServerConnection` e conecte-se à mesma instância.</span><span class="sxs-lookup"><span data-stu-id="92350-187">Open a `ServerConnection` object and connect to the same instance.</span></span>  
+  
+6.  <span data-ttu-id="92350-188">Use o método `Import` do tipo `Microsoft.SqlServer.Management.Dac.DacStore` para importar o BACPAC.</span><span class="sxs-lookup"><span data-stu-id="92350-188">Use the `Import` method of the `Microsoft.SqlServer.Management.Dac.DacStore` type to import the BACPAC.</span></span> <span data-ttu-id="92350-189">Especifique o arquivo BACPAC criado pela exportação.</span><span class="sxs-lookup"><span data-stu-id="92350-189">Specify the BACPAC file created by the export.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="92350-190">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="92350-190">See Also</span></span>  
+ <span data-ttu-id="92350-191">[Aplicativos da Camada de Dados](data-tier-applications.md) </span><span class="sxs-lookup"><span data-stu-id="92350-191">[Data-tier Applications](data-tier-applications.md) </span></span>  
+ <span data-ttu-id="92350-192">[Exportar um aplicativo da camada de dados](export-a-data-tier-application.md) </span><span class="sxs-lookup"><span data-stu-id="92350-192">[Export a Data-tier Application](export-a-data-tier-application.md) </span></span>  
+ [<span data-ttu-id="92350-193">Importar um arquivo BACPAC para criar um novo banco de dados de usuário</span><span class="sxs-lookup"><span data-stu-id="92350-193">Import a BACPAC File to Create a New User Database</span></span>](import-a-bacpac-file-to-create-a-new-user-database.md)  
+  
+  
