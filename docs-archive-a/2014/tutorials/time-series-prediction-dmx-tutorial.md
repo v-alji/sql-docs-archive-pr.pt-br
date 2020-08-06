@@ -1,0 +1,76 @@
+---
+title: Tutorial DMX de previsão de série temporal | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: analysis-services
+ms.topic: conceptual
+ms.assetid: 38ea7c03-4754-4e71-896a-f68cc2c98ce2
+author: minewiskan
+ms.author: owend
+manager: kfile
+ms.openlocfilehash: fbc9a0640767b3fbae04cebb9a047c2ec2b669b6
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87570374"
+---
+# <a name="time-series-prediction-dmx-tutorial"></a><span data-ttu-id="0a235-102">Tutorial DMX de previsão de série temporal</span><span class="sxs-lookup"><span data-stu-id="0a235-102">Time Series Prediction DMX Tutorial</span></span>
+  <span data-ttu-id="0a235-103">Neste tutorial, você aprenderá a criar uma estrutura de mineração de série temporal, a criar três modelos de mineração de série temporal e a fazer previsões usando esses modelos.</span><span class="sxs-lookup"><span data-stu-id="0a235-103">In this tutorial, you will learn how to create a time series mining structure, create three custom time series mining models, and then make predictions by using those models.</span></span>  
+  
+ <span data-ttu-id="0a235-104">Os modelos de mineração são baseados nos dados contidos no banco de dados de exemplo do  [!INCLUDE[ssSampleDBDWobject](../includes/sssampledbdwobject-md.md)] , que armazena dados para a empresa fictícia [!INCLUDE[ssSampleDBCoFull](../includes/sssampledbcofull-md.md)].</span><span class="sxs-lookup"><span data-stu-id="0a235-104">The mining models are based on the data contained in the  [!INCLUDE[ssSampleDBDWobject](../includes/sssampledbdwobject-md.md)] sample database, which stores data for the fictitious company [!INCLUDE[ssSampleDBCoFull](../includes/sssampledbcofull-md.md)].</span></span> [!INCLUDE[ssSampleDBCoFull](../includes/sssampledbcofull-md.md)] <span data-ttu-id="0a235-105">é uma grande empresa industrial e multinacional.</span><span class="sxs-lookup"><span data-stu-id="0a235-105">is a large, multinational manufacturing company.</span></span>  
+  
+## <a name="tutorial-scenario"></a><span data-ttu-id="0a235-106">Cenário do tutorial</span><span class="sxs-lookup"><span data-stu-id="0a235-106">Tutorial Scenario</span></span>  
+ <span data-ttu-id="0a235-107">A [!INCLUDE[ssSampleDBCoFull](../includes/sssampledbcofull-md.md)] decidiu usar a mineração de dados para gerar projeções de vendas.</span><span class="sxs-lookup"><span data-stu-id="0a235-107">[!INCLUDE[ssSampleDBCoFull](../includes/sssampledbcofull-md.md)] has decided to use data mining to generate sales projections.</span></span> <span data-ttu-id="0a235-108">Eles já criaram alguns modelos de previsão regionais; para obter mais informações, consulte [lição 2: Criando um cenário de previsão &#40;tutorial de mineração de dados intermediário&#41;](../../2014/tutorials/lesson-2-building-a-forecasting-scenario-intermediate-data-mining-tutorial.md).</span><span class="sxs-lookup"><span data-stu-id="0a235-108">They have already built some regional forecasting models; for more information, see [Lesson 2: Building a Forecasting Scenario &#40;Intermediate Data Mining Tutorial&#41;](../../2014/tutorials/lesson-2-building-a-forecasting-scenario-intermediate-data-mining-tutorial.md).</span></span> <span data-ttu-id="0a235-109">No entanto, o Departamento de Vendas precisa ser capaz de atualizar periodicamente o modelo de mineração de dados com novos dados de vendas.</span><span class="sxs-lookup"><span data-stu-id="0a235-109">However, the Sales Department needs to be able to periodically update the data mining model with new sales data.</span></span> <span data-ttu-id="0a235-110">Eles também desejam personalizar os modelos para oferecer projeções diferentes.</span><span class="sxs-lookup"><span data-stu-id="0a235-110">They also want to customize the models to provide different projections.</span></span>  
+  
+ [!INCLUDE[msCoName](../includes/msconame-md.md)]<span data-ttu-id="0a235-111">[!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)] fornece várias ferramentas que podem ser usadas para realizar essa tarefa:</span><span class="sxs-lookup"><span data-stu-id="0a235-111">[!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)] provides several tools that can be used to accomplish this task:</span></span>  
+  
+-   <span data-ttu-id="0a235-112">A linguagem de consulta de Extensões de Mineração de Dados (DMX)</span><span class="sxs-lookup"><span data-stu-id="0a235-112">The Data Mining Extensions (DMX) query language</span></span>  
+  
+-   <span data-ttu-id="0a235-113">O algoritmo MTS</span><span class="sxs-lookup"><span data-stu-id="0a235-113">The Microsoft Time Series Algorithm</span></span>  
+  
+-   <span data-ttu-id="0a235-114">Editor de Consultas do [!INCLUDE[ssManStudioFull](../includes/ssmanstudiofull-md.md)]</span><span class="sxs-lookup"><span data-stu-id="0a235-114">Query Editor in [!INCLUDE[ssManStudioFull](../includes/ssmanstudiofull-md.md)]</span></span>  
+  
+ <span data-ttu-id="0a235-115">O algoritmo [!INCLUDE[msCoName](../includes/msconame-md.md)] Time Series cria modelos que podem ser usados para previsão de dados relacionados a tempo.</span><span class="sxs-lookup"><span data-stu-id="0a235-115">The [!INCLUDE[msCoName](../includes/msconame-md.md)] Time Series algorithm creates models that can be used for prediction of time-related data.</span></span> <span data-ttu-id="0a235-116">DMX (Extensões de Mineração de Dados) é uma linguagem de consulta fornecida pelo [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)] que pode ser usada para criar modelos de mineração e consultas de previsão.</span><span class="sxs-lookup"><span data-stu-id="0a235-116">Data Mining Extensions (DMX) is a query language provided by [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)] that you can use to create mining models and prediction queries.</span></span>  
+  
+## <a name="what-you-will-learn"></a><span data-ttu-id="0a235-117">O que você aprenderá</span><span class="sxs-lookup"><span data-stu-id="0a235-117">What You Will Learn</span></span>  
+ <span data-ttu-id="0a235-118">Este tutorial pressupõe que você já conheça os objetos usados pelo [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)] para a criação de modelos de mineração.</span><span class="sxs-lookup"><span data-stu-id="0a235-118">This tutorial assumes that you are already familiar with the objects that [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)] uses to create mining models.</span></span> <span data-ttu-id="0a235-119">Se você ainda não criou uma estrutura de mineração ou um modelo de mineração usando DMX, consulte [Bike Buyer DMX Tutorial](../../2014/tutorials/bike-buyer-dmx-tutorial.md).</span><span class="sxs-lookup"><span data-stu-id="0a235-119">If you have not previously created a mining structure or mining model by using DMX, see [Bike Buyer DMX Tutorial](../../2014/tutorials/bike-buyer-dmx-tutorial.md).</span></span>  
+  
+ <span data-ttu-id="0a235-120">Ele se divide nas lições a seguir:</span><span class="sxs-lookup"><span data-stu-id="0a235-120">This tutorial is divided into the following lessons:</span></span>  
+  
+ [<span data-ttu-id="0a235-121">Lição 1: Criando um modelo de mineração de série temporal e uma estrutura de mineração</span><span class="sxs-lookup"><span data-stu-id="0a235-121">Lesson 1: Creating a Time Series Mining Model and Mining Structure</span></span>](../../2014/tutorials/lesson-1-creating-a-time-series-mining-model-and-mining-structure.md)  
+ <span data-ttu-id="0a235-122">Nesta lição, você aprenderá a usar a instrução `CREATE MINING MODEL` para adicionar um novo modelo de previsão e um modelo de mineração relacionado.</span><span class="sxs-lookup"><span data-stu-id="0a235-122">In this lesson, you will learn how to use the `CREATE MINING MODEL` statement to add a new forecasting model and a related mining model.</span></span>  
+  
+ [<span data-ttu-id="0a235-123">Lição 2: Adicionando modelos de mineração à estrutura de mineração de série temporal</span><span class="sxs-lookup"><span data-stu-id="0a235-123">Lesson 2: Adding Mining Models to the Time Series Mining Structure</span></span>](../../2014/tutorials/lesson-2-adding-mining-models-to-the-time-series-mining-structure.md)  
+ <span data-ttu-id="0a235-124">Nesta lição, você aprenderá a usar a instrução ALTER MINING STRUCTURE para adicionar novos modelos de mineração a uma estrutura de série temporal.</span><span class="sxs-lookup"><span data-stu-id="0a235-124">In this lesson, you will learn how to use the ALTER MINING STRUCTURE statement to add new mining models to the time series structure.</span></span> <span data-ttu-id="0a235-125">Você também aprenderá a personalizar o algoritmo usado para análise de uma série temporal.</span><span class="sxs-lookup"><span data-stu-id="0a235-125">You will also learn how to customize the algorithm used for analyzing a time series.</span></span>  
+  
+ [<span data-ttu-id="0a235-126">Lição 3: Processando a estrutura e os modelos de série temporal</span><span class="sxs-lookup"><span data-stu-id="0a235-126">Lesson 3: Processing the Time Series Structure and Models</span></span>](../../2014/tutorials/lesson-3-processing-the-time-series-structure-and-models.md)  
+ <span data-ttu-id="0a235-127">Nesta lição, você aprenderá a treinar os modelos usando a instrução `INSERT INTO` e populando a estrutura com dados do banco de dados [!INCLUDE[ssSampleDBDWobject](../includes/sssampledbdwobject-md.md)].</span><span class="sxs-lookup"><span data-stu-id="0a235-127">In this lesson, you will learn how to train the models by using the `INSERT INTO` statement and populating the structure with data from the [!INCLUDE[ssSampleDBDWobject](../includes/sssampledbdwobject-md.md)] database.</span></span>  
+  
+ [<span data-ttu-id="0a235-128">Lição 4: Criando previsões de série temporal usando DMX</span><span class="sxs-lookup"><span data-stu-id="0a235-128">Lesson 4: Creating Time Series Predictions Using DMX</span></span>](../../2014/tutorials/lesson-4-creating-time-series-predictions-using-dmx.md)  
+ <span data-ttu-id="0a235-129">Nesta lição, você aprenderá a criar previsões de série temporal.</span><span class="sxs-lookup"><span data-stu-id="0a235-129">In this lesson, you will learn how to create time series predictions.</span></span>  
+  
+ [<span data-ttu-id="0a235-130">Lição 5: Estendendo o modelo de série temporal</span><span class="sxs-lookup"><span data-stu-id="0a235-130">Lesson 5: Extending the Time Series Model</span></span>](../../2014/tutorials/lesson-5-extending-the-time-series-model.md)  
+ <span data-ttu-id="0a235-131">Nesta lição, você aprenderá a usar o parâmetro `EXTEND_MODEL_CASES` para atualizar o modelo com novos dados quando fizer previsões.</span><span class="sxs-lookup"><span data-stu-id="0a235-131">In this lesson, you will learn how to use the `EXTEND_MODEL_CASES` parameter to update the model with new data when you make predictions.</span></span>  
+  
+## <a name="requirements"></a><span data-ttu-id="0a235-132">Requisitos</span><span class="sxs-lookup"><span data-stu-id="0a235-132">Requirements</span></span>  
+ <span data-ttu-id="0a235-133">Antes de fazer este tutorial, verifique se os seguintes itens estão instalados:</span><span class="sxs-lookup"><span data-stu-id="0a235-133">Before doing this tutorial, make sure that the following are installed:</span></span>  
+  
+-   [!INCLUDE[msCoName](../includes/msconame-md.md)] <span data-ttu-id="0a235-134">[!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]</span><span class="sxs-lookup"><span data-stu-id="0a235-134">[!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]</span></span>  
+  
+-   [!INCLUDE[msCoName](../includes/msconame-md.md)] <span data-ttu-id="0a235-135">[!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)]</span><span class="sxs-lookup"><span data-stu-id="0a235-135">[!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)]</span></span>  
+  
+-   <span data-ttu-id="0a235-136">O banco de dados [!INCLUDE[ssSampleDBDWobject](../includes/sssampledbdwobject-md.md)]</span><span class="sxs-lookup"><span data-stu-id="0a235-136">The [!INCLUDE[ssSampleDBDWobject](../includes/sssampledbdwobject-md.md)] database</span></span>  
+  
+ <span data-ttu-id="0a235-137">Por padrão, e para reforçar a segurança, os bancos de dados de exemplo não são instalados.</span><span class="sxs-lookup"><span data-stu-id="0a235-137">By default, the sample databases are not installed, to enhance security.</span></span> <span data-ttu-id="0a235-138">Para instalar os bancos de dados de exemplo oficiais do [!INCLUDE[msCoName](../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] , vá para [http://www.CodePlex.com/MSFTDBProdSamples](https://go.microsoft.com/fwlink/?LinkId=88417) ou no Microsoft SQL Server exemplos e projetos da Comunidade home page na seção Microsoft SQL Server exemplos de produto.</span><span class="sxs-lookup"><span data-stu-id="0a235-138">To install the official sample databases for [!INCLUDE[msCoName](../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)], go to [http://www.CodePlex.com/MSFTDBProdSamples](https://go.microsoft.com/fwlink/?LinkId=88417) or on the Microsoft SQL Server Samples and Community Projects home page in the section Microsoft SQL Server Product Samples.</span></span> <span data-ttu-id="0a235-139">Clique em **Bancos de Dados**e, em seguida, clique na guia **Releases** e selecione o banco de dados desejado.</span><span class="sxs-lookup"><span data-stu-id="0a235-139">Click **Databases**, then click the **Releases** tab and select the databases that you want.</span></span>  
+  
+> [!NOTE]  
+>  <span data-ttu-id="0a235-140">Ao examinar os tutoriais, recomendamos que você adicione os botões **Próximo Tópico** e **Tópico Anterior** à barra de ferramentas do visualizador de documentos.</span><span class="sxs-lookup"><span data-stu-id="0a235-140">When you review tutorials, we recommend that you add **Next topic** and **Previous topic** buttons to the document viewer toolbar.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="0a235-141">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="0a235-141">See Also</span></span>  
+ <span data-ttu-id="0a235-142">[Tutorial de mineração de dados básico](../../2014/tutorials/basic-data-mining-tutorial.md) </span><span class="sxs-lookup"><span data-stu-id="0a235-142">[Basic Data Mining Tutorial](../../2014/tutorials/basic-data-mining-tutorial.md) </span></span>  
+ [<span data-ttu-id="0a235-143">Tutorial de mineração de dados intermediário &#40;Analysis Services de mineração de dados&#41;</span><span class="sxs-lookup"><span data-stu-id="0a235-143">Intermediate Data Mining Tutorial &#40;Analysis Services - Data Mining&#41;</span></span>](../../2014/tutorials/intermediate-data-mining-tutorial-analysis-services-data-mining.md)  
+  
+  

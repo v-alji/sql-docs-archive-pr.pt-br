@@ -1,0 +1,58 @@
+---
+title: Tipos de dados (mineração de dados) | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: analysis-services
+ms.topic: conceptual
+helpviewer_keywords:
+- data types [data mining]
+- columns [data mining], data types
+- data mining [Analysis Services], data types
+ms.assetid: 4af5b7db-790b-459c-b2b4-00f0cf6b5ce4
+author: minewiskan
+ms.author: owend
+ms.openlocfilehash: 9027ff3928f40d43f16bb31b52e0c1d52e072847
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87583905"
+---
+# <a name="data-types-data-mining"></a><span data-ttu-id="a6f9d-102">Tipos de dados (Mineração de Dados)</span><span class="sxs-lookup"><span data-stu-id="a6f9d-102">Data Types (Data Mining)</span></span>
+  <span data-ttu-id="a6f9d-103">Ao criar um modelo de mineração ou uma estrutura de mineração no [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE[ssASnoversion](../../includes/ssasnoversion-md.md)] , você deve definir os tipos de dados para cada uma das colunas na estrutura de mineração.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-103">When you create a mining model or a mining structure in [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE[ssASnoversion](../../includes/ssasnoversion-md.md)], you must define the data types for each of the columns in the mining structure.</span></span> <span data-ttu-id="a6f9d-104">O tipo de dados informa ao mecanismo de mineração de dados se os dados na fonte de dados são numéricos ou de texto, e como devem ser processados.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-104">The data type tells the data mining engine whether the data in the data source is numerical or text, and how the data should be processed.</span></span> <span data-ttu-id="a6f9d-105">Por exemplo, se a fonte de dados contiver dados numéricos, você poderá especificar se os números serão tratados como inteiros ou com o uso de casas decimais.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-105">For example, if your source data contains numerical data, you can specify whether the numbers be treated as integers or by using decimal places.</span></span>  
+  
+ <span data-ttu-id="a6f9d-106">Cada tipo de dados suporta um ou mais tipos de conteúdo.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-106">Each data type supports one or more content types.</span></span> <span data-ttu-id="a6f9d-107">Ao configurar o tipo de conteúdo, você pode personalizar o modo como os dados na coluna são processados ou calculados no modelo de mineração.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-107">By setting the content type, you can customize the way that data in the column is processed or calculated in the mining model.</span></span>  
+  
+ <span data-ttu-id="a6f9d-108">Por exemplo, se houver dados numéricos em uma coluna, você poderá optar por tratá-los como um tipo de dados numérico ou de texto.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-108">For example, if you have numeric data in a column, you can choose to handle it either as a numeric or text data type.</span></span> <span data-ttu-id="a6f9d-109">Se você escolher o tipo de dados numérico, poderá definir vários tipos de conteúdo diferentes: é possível discretizar os números ou tratá-los como valores contínuos.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-109">If you choose the numeric data type, you can set several different content types: you can discretize the numbers, or handle them as continuous values.</span></span> <span data-ttu-id="a6f9d-110">Para obter uma lista de todos os tipos de conteúdo, consulte [Tipos de conteúdo &#40;Data Mining&#41;](content-types-data-mining.md).</span><span class="sxs-lookup"><span data-stu-id="a6f9d-110">For a list of all the content types, see [Content Types &#40;Data Mining&#41;](content-types-data-mining.md).</span></span>  
+  
+ [!INCLUDE[ssASnoversion](../../includes/ssasnoversion-md.md)] <span data-ttu-id="a6f9d-111">dá suporte aos seguintes tipos de dados para colunas de estrutura de mineração:</span><span class="sxs-lookup"><span data-stu-id="a6f9d-111">supports the following data types for mining structure columns:</span></span>  
+  
+|<span data-ttu-id="a6f9d-112">Tipo de Dados</span><span class="sxs-lookup"><span data-stu-id="a6f9d-112">Data Type</span></span>|<span data-ttu-id="a6f9d-113">Tipos de conteúdo com suporte</span><span class="sxs-lookup"><span data-stu-id="a6f9d-113">Supported Content Types</span></span>|  
+|---------------|-----------------------------|  
+|`Text`|<span data-ttu-id="a6f9d-114">Cyclical, Discrete, Discretized, Key Sequence, Ordered, Sequence</span><span class="sxs-lookup"><span data-stu-id="a6f9d-114">Cyclical, Discrete, Discretized, Key Sequence, Ordered, Sequence</span></span>|  
+|`Long`|<span data-ttu-id="a6f9d-115">Continuous, Cyclical, Discrete, Discretized, Key, Key Sequence, Key Time, Ordered, Sequence, Time</span><span class="sxs-lookup"><span data-stu-id="a6f9d-115">Continuous, Cyclical, Discrete, Discretized, Key, Key Sequence, Key Time, Ordered, Sequence, Time</span></span><br /><br /> <span data-ttu-id="a6f9d-116">Classificados</span><span class="sxs-lookup"><span data-stu-id="a6f9d-116">Classified</span></span>|  
+|`Boolean`|<span data-ttu-id="a6f9d-117">Cyclical, Discrete, Ordered</span><span class="sxs-lookup"><span data-stu-id="a6f9d-117">Cyclical, Discrete, Ordered</span></span>|  
+|`Double`|<span data-ttu-id="a6f9d-118">Continuous, Cyclical, Discrete, Discretized, Key, Key Sequence, Key Time, Ordered, Sequence, Time</span><span class="sxs-lookup"><span data-stu-id="a6f9d-118">Continuous, Cyclical, Discrete, Discretized, Key, Key Sequence, Key Time, Ordered, Sequence, Time</span></span><br /><br /> <span data-ttu-id="a6f9d-119">Classificados</span><span class="sxs-lookup"><span data-stu-id="a6f9d-119">Classified</span></span>|  
+|`Date`|<span data-ttu-id="a6f9d-120">Continuous, Cyclical, Discrete, Discretized, Key, Key Sequence, Key Time, Ordered</span><span class="sxs-lookup"><span data-stu-id="a6f9d-120">Continuous, Cyclical, Discrete, Discretized, Key, Key Sequence, Key Time, Ordered</span></span>|  
+  
+> [!NOTE]  
+>  <span data-ttu-id="a6f9d-121">Os tipos de conteúdo Tempo e Sequência têm suporte apenas por algoritmos de terceiros.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-121">The Time and Sequence content types are only supported by third-party algorithms.</span></span> <span data-ttu-id="a6f9d-122">Os tipos de conteúdo Cyclical e Ordered têm suporte, mas a maioria dos algoritmos os tratam como valores discretos e não executam processamento especial.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-122">The Cyclical and Ordered content types are supported, but most algorithms treat them as discrete values and do not perform special processing.</span></span>  
+  
+## <a name="specifying-a-data-type"></a><span data-ttu-id="a6f9d-123">Especificando um tipo de dados</span><span class="sxs-lookup"><span data-stu-id="a6f9d-123">Specifying a Data Type</span></span>  
+ <span data-ttu-id="a6f9d-124">Se você criar o modelo de mineração diretamente usando DMX, poderá definir o tipo de dados para cada coluna à medida que definir o modelo, e o Analysis Services criará a estrutura de mineração correspondente com os tipos de dados especificados ao mesmo tempo.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-124">If you create the mining model directly by using Data Mining Extensions (DMX), you can define the data type for each column as you define the model, and Analysis Services will create the corresponding mining structure with the specified data types at the same time.</span></span> <span data-ttu-id="a6f9d-125">Se você criar o modelo ou a estrutura de mineração usando um assistente, o Analysis Services vai sugerir um tipo de dados ou será possível escolher um tipo de dados em uma lista.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-125">If you create the mining model or mining structure by using a wizard, Analysis Services will suggest a data type, or you can choose a data type from a list.</span></span>  
+  
+## <a name="changing-a-data-type"></a><span data-ttu-id="a6f9d-126">Alterando um tipo de dados</span><span class="sxs-lookup"><span data-stu-id="a6f9d-126">Changing a Data Type</span></span>  
+ <span data-ttu-id="a6f9d-127">Se você alterar o tipo de dados de uma coluna, sempre terá que reprocessar a estrutura de mineração e qualquer modelo de mineração baseado nessa estrutura.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-127">If you change the data type of a column, you must always reprocess the mining structure and any mining models that are based on that structure.</span></span> <span data-ttu-id="a6f9d-128">Às vezes, se você alterar o tipo de dados, essa coluna não poderá mais ser usada em um modelo específico.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-128">Sometimes if you change the data type, that column can no longer be used in a particular model.</span></span> <span data-ttu-id="a6f9d-129">Nesse caso, o Analysis Services gerará um erro quando você reprocessar o modelo ou processará o modelo, mas omitirá essa coluna em particular.</span><span class="sxs-lookup"><span data-stu-id="a6f9d-129">In that case, Analysis Services will either raise an error when you reprocess the model, or will process the model but leave out that particular column.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="a6f9d-130">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="a6f9d-130">See Also</span></span>  
+ <span data-ttu-id="a6f9d-131">[Tipos de conteúdo &#40;mineração de dados&#41;](content-types-data-mining.md) </span><span class="sxs-lookup"><span data-stu-id="a6f9d-131">[Content Types &#40;Data Mining&#41;](content-types-data-mining.md) </span></span>  
+ <span data-ttu-id="a6f9d-132">[Tipos de conteúdo &#40;&#41;DMX](/sql/dmx/content-types-dmx) </span><span class="sxs-lookup"><span data-stu-id="a6f9d-132">[Content Types &#40;DMX&#41;](/sql/dmx/content-types-dmx) </span></span>  
+ <span data-ttu-id="a6f9d-133">[Algoritmos de mineração de dados &#40;mineração de dados Analysis Services&#41;](data-mining-algorithms-analysis-services-data-mining.md) </span><span class="sxs-lookup"><span data-stu-id="a6f9d-133">[Data Mining Algorithms &#40;Analysis Services - Data Mining&#41;](data-mining-algorithms-analysis-services-data-mining.md) </span></span>  
+ <span data-ttu-id="a6f9d-134">[Estruturas de mineração &#40;Analysis Services de mineração de dados&#41;](mining-structures-analysis-services-data-mining.md) </span><span class="sxs-lookup"><span data-stu-id="a6f9d-134">[Mining Structures &#40;Analysis Services - Data Mining&#41;](mining-structures-analysis-services-data-mining.md) </span></span>  
+ <span data-ttu-id="a6f9d-135">[Tipos de dados &#40;&#41;DMX](/sql/dmx/data-types-dmx) </span><span class="sxs-lookup"><span data-stu-id="a6f9d-135">[Data Types &#40;DMX&#41;](/sql/dmx/data-types-dmx) </span></span>  
+ <span data-ttu-id="a6f9d-136">[Colunas do modelo de mineração](mining-model-columns.md) </span><span class="sxs-lookup"><span data-stu-id="a6f9d-136">[Mining Model Columns](mining-model-columns.md) </span></span>  
+ [<span data-ttu-id="a6f9d-137">Colunas da estrutura de mineração</span><span class="sxs-lookup"><span data-stu-id="a6f9d-137">Mining Structure Columns</span></span>](mining-structure-columns.md)  
+  
+  
