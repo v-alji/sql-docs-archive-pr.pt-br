@@ -1,0 +1,69 @@
+---
+title: Instalação somente de arquivos (Reporting Services) | Microsoft Docs
+ms.custom: ''
+ms.date: 03/09/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: database-engine
+ms.topic: conceptual
+helpviewer_keywords:
+- files-only installation [Reporting Services]
+- installation options [Reporting Services]
+ms.assetid: bdc74a8f-046c-4aa0-bfbd-4f1711dfb9ce
+author: maggiesMSFT
+ms.author: maggies
+manager: kfile
+ms.openlocfilehash: 3ec5c595dce3e292d37117453ccbbc6d19f8b87d
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87680830"
+---
+# <a name="files-only-installation-reporting-services"></a><span data-ttu-id="369a7-102">Instalação somente de arquivos (Reporting Services)</span><span class="sxs-lookup"><span data-stu-id="369a7-102">Files-Only Installation (Reporting Services)</span></span>
+  <span data-ttu-id="369a7-103">O termo*instalação somente de arquivos* refere-se a uma instalação do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] em que a instalação cria a estrutura de pastas para os arquivos de programas do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] , copia os arquivos para o disco, registra o serviço Servidor de Relatório no computador local, configura a conta de serviço, concede permissões de arquivo a essa conta e registra o provedor WMI do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="369a7-103">*Files-only installation* refers to a [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] installation where Setup creates the folder structure for [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] program files, copies the files to disk, registers the Report Server service on the local computer, configures the service account, grants files permissions to the service account, and registers the [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] WMI provider.</span></span>  
+  
+ <span data-ttu-id="369a7-104">Uma instalação somente de arquivos inclui os seguintes recursos do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] : serviço Servidor de Relatório (que hospeda o serviço Web Servidor de Relatório, o aplicativo de processamento em segundo plano e o Gerenciador de Relatórios), Construtor de Relatórios, a ferramenta Configuração do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] e os utilitários de linha de comando do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] (rsconfig.exe, rskeymgmt.exe e rs.exe).</span><span class="sxs-lookup"><span data-stu-id="369a7-104">A files-only installation includes the following [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] features: Report Server service (which hosts the Report Server Web service, background processing application, and Report Manager), Report Builder, the [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] Configuration tool, and the [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] command line utilities (rsconfig.exe, rskeymgmt.exe and rs.exe).</span></span> <span data-ttu-id="369a7-105">Ela não se aplica a recursos compartilhados, como o [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE[ssManStudio](../../includes/ssmanstudio-md.md)] ou o [!INCLUDE[ssBIDevStudioFull](../../includes/ssbidevstudiofull-md.md)], que deverão ser especificados como itens separados se você quiser instalá-los.</span><span class="sxs-lookup"><span data-stu-id="369a7-105">It does not apply to shared features such as [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE[ssManStudio](../../includes/ssmanstudio-md.md)] or [!INCLUDE[ssBIDevStudioFull](../../includes/ssbidevstudiofull-md.md)], which must be specified as separate items if you want to install them.</span></span>  
+  
+ <span data-ttu-id="369a7-106">Diferentemente de outros modos de instalação, um servidor de relatório que é instalado no modo somente arquivos não estará operacional quando a Instalação for concluída.</span><span class="sxs-lookup"><span data-stu-id="369a7-106">In contrast with other installation modes, a report server that is installed in files-only mode is not operational when Setup is finished.</span></span> <span data-ttu-id="369a7-107">Será necessária a configuração adicional para colocar o servidor de relatório online usando o [Gerenciador de Configurações do Reporting Services &#40;Modo Nativo&#41;](../../sql-server/install/reporting-services-configuration-manager-native-mode.md).</span><span class="sxs-lookup"><span data-stu-id="369a7-107">Additional configuration will be required to bring the report server online by using the [Reporting Services Configuration Manager &#40;Native Mode&#41;](../../sql-server/install/reporting-services-configuration-manager-native-mode.md).</span></span>  
+  
+## <a name="when-to-select-files-only-installation-mode"></a><span data-ttu-id="369a7-108">Quando selecionar o modo de instalação somente arquivos</span><span class="sxs-lookup"><span data-stu-id="369a7-108">When to Select Files-Only Installation Mode</span></span>  
+ <span data-ttu-id="369a7-109">Uma instalação somente arquivos deve ser executada quando:</span><span class="sxs-lookup"><span data-stu-id="369a7-109">A files-only installation must be performed when:</span></span>  
+  
+-   <span data-ttu-id="369a7-110">Você deseja conectar o servidor de relatório a um banco de dados de servidor de relatório remoto.</span><span class="sxs-lookup"><span data-stu-id="369a7-110">You want to connect the report server to a remote report server database.</span></span>  
+  
+-   <span data-ttu-id="369a7-111">Você deseja instalar o servidor de relatório como uma instância nomeada.</span><span class="sxs-lookup"><span data-stu-id="369a7-111">You want to install the report server as a named instance.</span></span>  
+  
+-   <span data-ttu-id="369a7-112">Você tem requisitos de implantação que incluem o uso de configurações ou funcionalidade personalizada, e deseja controle total sobre quando e como o servidor é configurado.</span><span class="sxs-lookup"><span data-stu-id="369a7-112">You have deployment requirements that include using custom settings or functionality, and you want full control over when and how the server is configured.</span></span>  
+  
+-   <span data-ttu-id="369a7-113">Instalar um cluster de failover do [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] que inclua o [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)].</span><span class="sxs-lookup"><span data-stu-id="369a7-113">Installing a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] failover cluster that includes [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)].</span></span>  
+  
+## <a name="how-to-perform-a-files-only-installation"></a><span data-ttu-id="369a7-114">Como executar uma instalação somente arquivos</span><span class="sxs-lookup"><span data-stu-id="369a7-114">How to Perform a Files-Only Installation</span></span>  
+ <span data-ttu-id="369a7-115">A instalação somente de arquivos é o padrão para [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)].</span><span class="sxs-lookup"><span data-stu-id="369a7-115">Files-only installation is the default for [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)].</span></span>  
+  
+ <span data-ttu-id="369a7-116">Você pode especificar uma instalação somente arquivos pela linha de comando ou no Assistente de Instalação.</span><span class="sxs-lookup"><span data-stu-id="369a7-116">You can specify a files-only installation through the command line or in the Installation wizard.</span></span> <span data-ttu-id="369a7-117">Os tópicos a seguir fornecem instruções passo a passo:</span><span class="sxs-lookup"><span data-stu-id="369a7-117">The following topics provide step-by-step instructions:</span></span>  
+  
+-   <span data-ttu-id="369a7-118">[Instale o SQL Server 2014 do assistente de instalação &#40;&#41;de ](../../database-engine/install-windows/install-sql-server-from-the-installation-wizard-setup.md)instalação.</span><span class="sxs-lookup"><span data-stu-id="369a7-118">[Install SQL Server 2014 from the Installation Wizard &#40;Setup&#41;](../../database-engine/install-windows/install-sql-server-from-the-installation-wizard-setup.md).</span></span>  
+  
+-   <span data-ttu-id="369a7-119">[Instale o SQL Server 2014 no prompt de comando](../../database-engine/install-windows/install-sql-server-from-the-command-prompt.md).</span><span class="sxs-lookup"><span data-stu-id="369a7-119">[Install SQL Server 2014 from the Command Prompt](../../database-engine/install-windows/install-sql-server-from-the-command-prompt.md).</span></span>  
+  
+#### <a name="example-command-line-script"></a><span data-ttu-id="369a7-120">Exemplo de script de linha de comando</span><span class="sxs-lookup"><span data-stu-id="369a7-120">Example Command Line Script</span></span>  
+ <span data-ttu-id="369a7-121">Para maior clareza, o exemplo inclui /RSINSTALLMODE="FilesOnlyMode".</span><span class="sxs-lookup"><span data-stu-id="369a7-121">For clarity, the example includes /RSINSTALLMODE="FilesOnlyMode".</span></span> <span data-ttu-id="369a7-122">Entretanto, como o modo somente arquivos é o padrão, você pode omitir isso e ainda obter uma instalação no modo somente arquivos.</span><span class="sxs-lookup"><span data-stu-id="369a7-122">However, because files-only mode is the default, you can omit this and still get a files-only mode installation.</span></span>  
+  
+```  
+setup /q /ACTION=install /FEATURES=RS /InstanceName=MSSQLSERVER /RSSVCACCOUNT="NT AUTHORITY\NETWORK SERVICE" /RSINSTALLMODE="FilesOnlyMode"  
+```  
+  
+#### <a name="installation-wizard"></a><span data-ttu-id="369a7-123">Assistente de instalação</span><span class="sxs-lookup"><span data-stu-id="369a7-123">Installation Wizard</span></span>  
+ <span data-ttu-id="369a7-124">Quando você seleciona [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] na página Seleção de Recursos, a instalação apresenta uma página Configuração do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] que permite especificar o modo de instalação.</span><span class="sxs-lookup"><span data-stu-id="369a7-124">When you select [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] in the Feature Selection page, Setup provides a [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] Configuration page that enables you to specify the installation mode.</span></span> <span data-ttu-id="369a7-125">Para especificar uma instalação somente de arquivos, selecione **Instalar, mas não configurar o servidor de relatório** na página Configuração do [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] .</span><span class="sxs-lookup"><span data-stu-id="369a7-125">To specify a files-only installation, select **Install but do not configure the report server** on the [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] Configuration page.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="369a7-126">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="369a7-126">See Also</span></span>  
+ <span data-ttu-id="369a7-127">[Verificar uma instalação do Reporting Services](verify-a-reporting-services-installation.md) </span><span class="sxs-lookup"><span data-stu-id="369a7-127">[Verify a Reporting Services Installation](verify-a-reporting-services-installation.md) </span></span>  
+ <span data-ttu-id="369a7-128">[Configurar a conta de serviço do servidor de relatório &#40;SSRS Configuration Manager&#41;](configure-the-report-server-service-account-ssrs-configuration-manager.md) </span><span class="sxs-lookup"><span data-stu-id="369a7-128">[Configure the Report Server Service Account &#40;SSRS Configuration Manager&#41;](configure-the-report-server-service-account-ssrs-configuration-manager.md) </span></span>  
+ <span data-ttu-id="369a7-129">[Configurar as URLs do servidor de relatório &#40;SSRS Configuration Manager&#41;](configure-report-server-urls-ssrs-configuration-manager.md) </span><span class="sxs-lookup"><span data-stu-id="369a7-129">[Configure Report Server URLs  &#40;SSRS Configuration Manager&#41;](configure-report-server-urls-ssrs-configuration-manager.md) </span></span>  
+ <span data-ttu-id="369a7-130">[Configurar uma conexão de banco de dados do servidor de relatório &#40;Configuration Manager SSRS&#41;](../../sql-server/install/configure-a-report-server-database-connection-ssrs-configuration-manager.md) </span><span class="sxs-lookup"><span data-stu-id="369a7-130">[Configure a Report Server Database Connection  &#40;SSRS Configuration Manager&#41;](../../sql-server/install/configure-a-report-server-database-connection-ssrs-configuration-manager.md) </span></span>  
+ <span data-ttu-id="369a7-131">[Reporting Services a instalação do modo do SharePoint &#40;SharePoint 2010 e SharePoint 2013&#41;](install-reporting-services-sharepoint-mode.md) </span><span class="sxs-lookup"><span data-stu-id="369a7-131">[Reporting Services SharePoint Mode Installation &#40;SharePoint 2010 and SharePoint 2013&#41;](install-reporting-services-sharepoint-mode.md) </span></span>  
+ <span data-ttu-id="369a7-132">[Instalar o servidor de relatórios de modo nativo do Reporting Services](install-reporting-services-native-mode-report-server.md) </span><span class="sxs-lookup"><span data-stu-id="369a7-132">[Install Reporting Services Native Mode Report Server](install-reporting-services-native-mode-report-server.md) </span></span>  
+ [<span data-ttu-id="369a7-133">Ferramentas do Reporting Services</span><span class="sxs-lookup"><span data-stu-id="369a7-133">Reporting Services Tools</span></span>](../tools/reporting-services-tools.md)  
+  
+  
