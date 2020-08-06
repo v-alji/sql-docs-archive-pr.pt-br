@@ -1,0 +1,87 @@
+---
+title: Destino ODBC | Microsoft Docs
+ms.custom: ''
+ms.date: 06/14/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: integration-services
+ms.topic: conceptual
+f1_keywords:
+- sql12.ssis.designer.odbcdest.f1
+ms.assetid: bffa63e0-c737-4b54-b4ea-495a400ffcf8
+author: chugugrace
+ms.author: chugu
+ms.openlocfilehash: beb29c511af62ba69ca0b9e2c595f61c57edab6f
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87582070"
+---
+# <a name="odbc-destination"></a><span data-ttu-id="7deb1-102">Destino ODBC</span><span class="sxs-lookup"><span data-stu-id="7deb1-102">ODBC Destination</span></span>
+  <span data-ttu-id="7deb1-103">O destino ODBC carrega dados em massa em tabelas de bancos de dados com suporte ODBC.</span><span class="sxs-lookup"><span data-stu-id="7deb1-103">The ODBC destination bulk loads data into ODBC-supported database tables.</span></span> <span data-ttu-id="7deb1-104">O destino ODBC usa um gerenciador de conexões ODBC para se conectar à fonte de dados.</span><span class="sxs-lookup"><span data-stu-id="7deb1-104">The ODBC destination uses an ODBC connection manager to connect to the data source.</span></span>  
+  
+ <span data-ttu-id="7deb1-105">Um destino ODBC inclui mapeamentos entre as colunas de entrada e as colunas da fonte de dados de destino.</span><span class="sxs-lookup"><span data-stu-id="7deb1-105">An ODBC destination includes mappings between input columns and columns in the destination data source.</span></span> <span data-ttu-id="7deb1-106">Você não precisa mapear as colunas de entrada para todas as colunas de destino, mas, dependendo das propriedades das colunas de destino, poderão ocorrer erros se nenhuma das colunas de entrada for mapeada para as colunas de destino.</span><span class="sxs-lookup"><span data-stu-id="7deb1-106">You do not have to map input columns to all destination columns, but depending on the properties of the destination columns, errors may occur if no input columns are mapped to the destination columns.</span></span> <span data-ttu-id="7deb1-107">Por exemplo, se uma coluna de destino não permitir valores nulos, uma coluna de entrada deve ser mapeada para aquela coluna de destino.</span><span class="sxs-lookup"><span data-stu-id="7deb1-107">For example, if a destination column does not allow null values, an input column must be mapped to that column.</span></span> <span data-ttu-id="7deb1-108">Além disso, colunas de tipos diferentes podem ser mapeadas, porém se os dados de entrada não forem compatíveis com o tipo de coluna de destino, um erro ocorrerá em runtime.</span><span class="sxs-lookup"><span data-stu-id="7deb1-108">In addition, columns of different types can be mapped, however if the input data is not compatible for the destination column type, an error occurs at runtime.</span></span> <span data-ttu-id="7deb1-109">Dependendo da configuração de comportamento do erro, o erro será ignorado, causará uma falha ou a linha será enviada à saída de erro.</span><span class="sxs-lookup"><span data-stu-id="7deb1-109">Depending on the error behavior setting, the error will be ignored, cause a failure, or the row is sent to the error output.</span></span>  
+  
+ <span data-ttu-id="7deb1-110">O destino ODBC tem uma saída regular e uma saída de erro.</span><span class="sxs-lookup"><span data-stu-id="7deb1-110">The ODBC destination has one regular output and one error output.</span></span>  
+  
+##  <a name="load-options"></a><a name="BKMK_odbcdestination_loadoptions"></a> <span data-ttu-id="7deb1-111">Opções de carregamento</span><span class="sxs-lookup"><span data-stu-id="7deb1-111">Load Options</span></span>  
+ <span data-ttu-id="7deb1-112">O destino ODBC pode usar um de dois módulos de carga de acesso.</span><span class="sxs-lookup"><span data-stu-id="7deb1-112">The ODBC destination can use one of two access load modules.</span></span> <span data-ttu-id="7deb1-113">Defina o modo no [Editor de Fonte ODBC &#40;Página Gerenciador de Conexões&#41;](../odbc-source-editor-connection-manager-page.md).</span><span class="sxs-lookup"><span data-stu-id="7deb1-113">You set the mode in the [ODBC Source Editor &#40;Connection Manager Page&#41;](../odbc-source-editor-connection-manager-page.md).</span></span> <span data-ttu-id="7deb1-114">Os dois modos são:</span><span class="sxs-lookup"><span data-stu-id="7deb1-114">The two modes are:</span></span>  
+  
+-   <span data-ttu-id="7deb1-115">**Lote**: nesse modo, o destino ODBC tenta usar o método de inserção mais eficiente com base nos recursos do provedor ODBC percebido.</span><span class="sxs-lookup"><span data-stu-id="7deb1-115">**Batch**: In this mode the ODBC destination attempts to use the most efficient insertion method based on the perceived ODBC provider capabilities.</span></span> <span data-ttu-id="7deb1-116">Para a maioria dos provedores ODBC modernos, isso significa preparar uma instrução INSERT com parâmetros e usar uma associação de parâmetro de matriz row-wise (em que o tamanho da matriz é controlado pela propriedade **BatchSize** ).</span><span class="sxs-lookup"><span data-stu-id="7deb1-116">For most modern ODBC providers, this would mean preparing an INSERT statement with parameters and then using a row-wise array parameter binding (where the array size is controlled by the **BatchSize** property).</span></span> <span data-ttu-id="7deb1-117">Se você selecionar **Lote** e o provedor não oferecer suporte a esse método, o destino ODBC alternará automaticamente para modo **Linha a linha** .</span><span class="sxs-lookup"><span data-stu-id="7deb1-117">If you select **Batch** and the provider does not support this method, the ODBC destination automatically switches to the **Row-by-row** mode.</span></span>  
+  
+-   <span data-ttu-id="7deb1-118">**Linha a Linha**: nesse modo, o destino ODBC prepara uma instrução INSERT com parâmetros e usa **SQL Execute** para inserir linhas uma de cada vez.</span><span class="sxs-lookup"><span data-stu-id="7deb1-118">**Row-by-row**: In this mode, the ODBC destination prepares an INSERT statement with parameters and uses **SQL Execute** to insert rows one at a time.</span></span>  
+  
+## <a name="error-handling"></a><span data-ttu-id="7deb1-119">Tratamento de erros</span><span class="sxs-lookup"><span data-stu-id="7deb1-119">Error Handling</span></span>  
+ <span data-ttu-id="7deb1-120">O destino ODBC tem uma saída de erro.</span><span class="sxs-lookup"><span data-stu-id="7deb1-120">The ODBC destination has an error output.</span></span> <span data-ttu-id="7deb1-121">A saída de erro de componente inclui as colunas de saída seguintes:</span><span class="sxs-lookup"><span data-stu-id="7deb1-121">The component error output includes the following output columns:</span></span>  
+  
+-   <span data-ttu-id="7deb1-122">**Código de Erro**: o número que corresponde ao erro atual.</span><span class="sxs-lookup"><span data-stu-id="7deb1-122">**Error Code**: The number that corresponds to the current error.</span></span> <span data-ttu-id="7deb1-123">Consulte a documentação do seu banco de dados de origem para obter uma lista de erros.</span><span class="sxs-lookup"><span data-stu-id="7deb1-123">See the documentation for your source database for a list of errors.</span></span> <span data-ttu-id="7deb1-124">Para obter uma lista dos códigos de erro SSIS, consulte a Referência de código e mensagem de erro SSIS.</span><span class="sxs-lookup"><span data-stu-id="7deb1-124">For a list of SSIS error codes, see the SSIS Error Code and Message Reference.</span></span>  
+  
+-   <span data-ttu-id="7deb1-125">**Coluna de Erro**: a coluna de origem que causa o erro (para erros de conversão).</span><span class="sxs-lookup"><span data-stu-id="7deb1-125">**Error Column**: The source column causing the error (for conversion errors).</span></span>  
+  
+-   <span data-ttu-id="7deb1-126">As colunas de dados de saída padrão.</span><span class="sxs-lookup"><span data-stu-id="7deb1-126">The standard output data columns.</span></span>  
+  
+ <span data-ttu-id="7deb1-127">Dependendo da configuração de comportamento de erro, o destino ODBC oferece suporte ao retorno de erros (conversão de dados, truncamento) que ocorre durante o processo de extração na saída de erro.</span><span class="sxs-lookup"><span data-stu-id="7deb1-127">Depending on the error behavior setting, the ODBC destination supports returning errors (data conversion, truncation) that occur during the extraction process in the error output.</span></span> <span data-ttu-id="7deb1-128">Para obter mais informações, consulte [Editor de origem ODBC &#40;Página Saída de Erro&#41;](../odbc-source-editor-error-output-page.md).</span><span class="sxs-lookup"><span data-stu-id="7deb1-128">For more information, see [ODBC Source Editor &#40;Error Output Page&#41;](../odbc-source-editor-error-output-page.md).</span></span>  
+  
+## <a name="parallelism"></a><span data-ttu-id="7deb1-129">Paralelismo</span><span class="sxs-lookup"><span data-stu-id="7deb1-129">Parallelism</span></span>  
+ <span data-ttu-id="7deb1-130">Não há nenhuma limitação no número de componentes de destino ODBC que podem ser executados em paralelo na mesma tabela ou tabelas diferentes, na mesma máquina ou em máquinas diferentes (diferente de limites de sessão globais normais).</span><span class="sxs-lookup"><span data-stu-id="7deb1-130">There is no limitation on the number of ODBC destination components that can run in parallel against the same table or different tables, on the same machine or on different machines (other than normal global session limits).</span></span>  
+  
+ <span data-ttu-id="7deb1-131">No entanto, as imitações do provedor ODBC sendo usado podem restringir o número de conexões simultâneas pelo provedor.</span><span class="sxs-lookup"><span data-stu-id="7deb1-131">However, limitations of the ODBC provider being used may restrict the number of concurrent connections through the provider.</span></span> <span data-ttu-id="7deb1-132">Essas limitações restringem o número de instâncias paralelas com suporte possível para o destino ODBC.</span><span class="sxs-lookup"><span data-stu-id="7deb1-132">These limitations limit the number of supported parallel instances possible for the ODBC destination.</span></span> <span data-ttu-id="7deb1-133">O desenvolvedor SSIS deve estar consciente das limitações de qualquer provedor ODBC usado e considerá-las ao compilar pacotes SSIS.</span><span class="sxs-lookup"><span data-stu-id="7deb1-133">The SSIS developer must be aware of the limitations of any ODBC provider being used and take them into consideration when building SSIS packages.</span></span>  
+  
+ <span data-ttu-id="7deb1-134">Você também deve estar ciente de que i carregamento simultâneo na mesma tabela pode reduzir o desempenho devido ao bloqueio de registro padrão.</span><span class="sxs-lookup"><span data-stu-id="7deb1-134">You must also be aware that concurrently loading into the same table may reduce performance because of standard record locking.</span></span> <span data-ttu-id="7deb1-135">Isso depende dos dados sendo carregados e da organização da tabela.</span><span class="sxs-lookup"><span data-stu-id="7deb1-135">This depends on the data being loaded and on the table organization.</span></span>  
+  
+## <a name="troubleshooting-the-odbc-destination"></a><span data-ttu-id="7deb1-136">Solucionando problemas do destino ODBC</span><span class="sxs-lookup"><span data-stu-id="7deb1-136">Troubleshooting the ODBC Destination</span></span>  
+ <span data-ttu-id="7deb1-137">Você pode registrar as chamadas que a origem ODBC faz para provedores de dados externos.</span><span class="sxs-lookup"><span data-stu-id="7deb1-137">You can log the calls that the ODBC source makes to external data providers.</span></span> <span data-ttu-id="7deb1-138">É possível usar essa capacidade de registro para solucionar o problema de salvar os dados em fontes de dados externas que o destino ODBC executa.</span><span class="sxs-lookup"><span data-stu-id="7deb1-138">You can use this logging capability to troubleshoot the saving of data to external data sources that the ODBC destination performs.</span></span> <span data-ttu-id="7deb1-139">Para registrar em log as chamadas que o destino ODBC faz a provedores de dados externos, habilite o rastreamento do gerenciador de driver ODBC.</span><span class="sxs-lookup"><span data-stu-id="7deb1-139">To log the calls that the ODBC destination makes to external data providers, enable the ODBC driver manager trace.</span></span> <span data-ttu-id="7deb1-140">Para obter mais informações, consulte a documentação da Microsoft em *Como gerar um rastreamento ODBC com o administrador de fonte de dados*.</span><span class="sxs-lookup"><span data-stu-id="7deb1-140">For more information, see the Microsoft documentation on *How To Generate an ODBC Trace with ODBC the Data Source Administrator*.</span></span>  
+  
+## <a name="configuring-the-odbc-destination"></a><span data-ttu-id="7deb1-141">Configurando o destino ODBC</span><span class="sxs-lookup"><span data-stu-id="7deb1-141">Configuring the ODBC Destination</span></span>  
+ <span data-ttu-id="7deb1-142">Você pode configurar o destino ODBC programaticamente ou por meio do SSIS Designer</span><span class="sxs-lookup"><span data-stu-id="7deb1-142">You can configure the ODBC destination programatically or through the SSIS Designer</span></span>  
+  
+ <span data-ttu-id="7deb1-143">Para obter mais informações, consulte um dos tópicos a seguir.</span><span class="sxs-lookup"><span data-stu-id="7deb1-143">For more information, see one of the following topics:</span></span>  
+  
+-   [<span data-ttu-id="7deb1-144">Editor do Destino ODBC &#40;Página Gerenciador de Conexões&#41;</span><span class="sxs-lookup"><span data-stu-id="7deb1-144">ODBC Destination Editor &#40;Connection Manager Page&#41;</span></span>](../odbc-destination-editor-connection-manager-page.md)  
+  
+-   [<span data-ttu-id="7deb1-145">Editor de Destinos ODBC &#40;Página Mapeamentos&#41;</span><span class="sxs-lookup"><span data-stu-id="7deb1-145">ODBC Destination Editor &#40;Mappings Page&#41;</span></span>](../odbc-destination-editor-mappings-page.md)  
+  
+-   [<span data-ttu-id="7deb1-146">Editor do Destino ODBC &#40;Página Saída de Erro&#41;</span><span class="sxs-lookup"><span data-stu-id="7deb1-146">ODBC Destination Editor &#40;Error Output Page&#41;</span></span>](../odbc-destination-editor-error-output-page.md)  
+  
+ <span data-ttu-id="7deb1-147">A caixa de diálogo **Editor Avançado** contém as propriedades que podem ser definidas programaticamente.</span><span class="sxs-lookup"><span data-stu-id="7deb1-147">The **Advanced Editor** dialog box contains the properties that can be set programmatically.</span></span>  
+  
+ <span data-ttu-id="7deb1-148">Para abrir a caixa de diálogo **Editor Avançado** :</span><span class="sxs-lookup"><span data-stu-id="7deb1-148">To open the **Advanced Editor** dialog box:</span></span>  
+  
+-   <span data-ttu-id="7deb1-149">Na tela **Fluxo de Dados** do seu projeto do [!INCLUDE[ssISCurrent](../../includes/ssiscurrent-md.md)] , clique com o botão direito do mouse no destino ODBC e selecione **Mostrar Editor Avançado**.</span><span class="sxs-lookup"><span data-stu-id="7deb1-149">In the **Data Flow** screen of your [!INCLUDE[ssISCurrent](../../includes/ssiscurrent-md.md)] project, right click the ODBC destination and select **Show Advanced Editor**.</span></span>  
+  
+ <span data-ttu-id="7deb1-150">Para obter mais informações sobre as propriedades que podem ser definidas na caixa de diálogo Editor Avançado, consulte [Propriedades personalizadas de destino ODBC](odbc-destination-custom-properties.md).</span><span class="sxs-lookup"><span data-stu-id="7deb1-150">For more information about the properties that you can set in the Advanced Editor dialog box, see [ODBC Destination Custom Properties](odbc-destination-custom-properties.md).</span></span>  
+  
+## <a name="in-this-section"></a><span data-ttu-id="7deb1-151">Nesta seção</span><span class="sxs-lookup"><span data-stu-id="7deb1-151">In This Section</span></span>  
+  
+-   [<span data-ttu-id="7deb1-152">Editor do Destino ODBC &#40;Página Saída de Erro&#41;</span><span class="sxs-lookup"><span data-stu-id="7deb1-152">ODBC Destination Editor &#40;Error Output Page&#41;</span></span>](../odbc-destination-editor-error-output-page.md)  
+  
+-   [<span data-ttu-id="7deb1-153">Editor de Destinos ODBC &#40;Página Mapeamentos&#41;</span><span class="sxs-lookup"><span data-stu-id="7deb1-153">ODBC Destination Editor &#40;Mappings Page&#41;</span></span>](../odbc-destination-editor-mappings-page.md)  
+  
+-   [<span data-ttu-id="7deb1-154">Editor do Destino ODBC &#40;Página Gerenciador de Conexões&#41;</span><span class="sxs-lookup"><span data-stu-id="7deb1-154">ODBC Destination Editor &#40;Connection Manager Page&#41;</span></span>](../odbc-destination-editor-connection-manager-page.md)  
+  
+-   [<span data-ttu-id="7deb1-155">Carregar dados por meio do destino ODBC</span><span class="sxs-lookup"><span data-stu-id="7deb1-155">Load Data by Using the ODBC Destination</span></span>](odbc-destination.md)  
+  
+-   [<span data-ttu-id="7deb1-156">Propriedades personalizadas de destino ODBC</span><span class="sxs-lookup"><span data-stu-id="7deb1-156">ODBC Destination Custom Properties</span></span>](odbc-destination-custom-properties.md)  
+  
+  
