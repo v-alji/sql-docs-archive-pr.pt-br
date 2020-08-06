@@ -1,0 +1,43 @@
+---
+title: Coleta de lixo XTP | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: performance
+ms.topic: conceptual
+ms.assetid: 64ae91e5-b420-44b4-af1a-f8bca83d7f41
+author: MikeRayMSFT
+ms.author: mikeray
+ms.openlocfilehash: 341a45c1c103f154672bb01a0648339562ee9750
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87679906"
+---
+# <a name="xtp-garbage-collection"></a><span data-ttu-id="b2550-102">Coleta de Lixo de XTP</span><span class="sxs-lookup"><span data-stu-id="b2550-102">XTP Garbage Collection</span></span>
+  <span data-ttu-id="b2550-103">O objeto de desempenho Coleta de Lixo de XTP contém os contadores relacionados ao coletor de lixo do mecanismo de XTP.</span><span class="sxs-lookup"><span data-stu-id="b2550-103">The XTP Garbage Collection performance object contains counters related to the XTP engine's garbage collector.</span></span>  
+  
+ <span data-ttu-id="b2550-104">Esta tabela descreve os contadores de **Coleta de Lixo de XTP** .</span><span class="sxs-lookup"><span data-stu-id="b2550-104">This table describes the **XTP garbage Collection** counters.</span></span>  
+  
+|<span data-ttu-id="b2550-105">Contador</span><span class="sxs-lookup"><span data-stu-id="b2550-105">Counter</span></span>|<span data-ttu-id="b2550-106">Descrição</span><span class="sxs-lookup"><span data-stu-id="b2550-106">Description</span></span>|  
+|-------------|-----------------|  
+|<span data-ttu-id="b2550-107">**Tentativas de verificação de canto sujo/s (emitido pelo GC)**</span><span class="sxs-lookup"><span data-stu-id="b2550-107">**Dusty corner scan retries/sec (GC-issued)**</span></span>|<span data-ttu-id="b2550-108">O número de tentativas de digitalização devido a conflitos de gravação durante as varreduras de canto sujo emitidas pelo coletor de lixo (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-108">The number of scan retries due to write conflicts during dusty corner sweeps issued by the garbage collector (on average), per second.</span></span> <span data-ttu-id="b2550-109">Este é um contador de nível muito baixo, não planejado para uso do cliente.</span><span class="sxs-lookup"><span data-stu-id="b2550-109">This is a very low-level counter, not intended for customer use.</span></span>|  
+|<span data-ttu-id="b2550-110">**Itens principais do trabalho do GC/s**</span><span class="sxs-lookup"><span data-stu-id="b2550-110">**Main GC work items/sec**</span></span>|<span data-ttu-id="b2550-111">O número de itens de trabalho processados pelo thread principal do GC.</span><span class="sxs-lookup"><span data-stu-id="b2550-111">The number of work items processed by the main GC thread.</span></span>|  
+|<span data-ttu-id="b2550-112">**Item de trabalho do GC em paralelo/s**</span><span class="sxs-lookup"><span data-stu-id="b2550-112">**Parallel GC work item/sec**</span></span>|<span data-ttu-id="b2550-113">O número de vezes que um thread paralelo executou um item de trabalho do GC.</span><span class="sxs-lookup"><span data-stu-id="b2550-113">The number of times a parallel thread has executed a GC work item.</span></span>|  
+|<span data-ttu-id="b2550-114">**Linhas processadas/s**</span><span class="sxs-lookup"><span data-stu-id="b2550-114">**Rows processed/sec**</span></span>|<span data-ttu-id="b2550-115">O número de linhas processadas pelo coletor de lixo (em média), por segundo</span><span class="sxs-lookup"><span data-stu-id="b2550-115">The number of rows processed by the garbage collector (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-116">**Linhas processadas/s (primeiro no bucket e removidas)**</span><span class="sxs-lookup"><span data-stu-id="b2550-116">**Rows processed/sec (first in bucket and removed)**</span></span>|<span data-ttu-id="b2550-117">O número de linhas processadas pelo coletor de lixo que estavam primeiro no bucket de hash correspondente e podiam ser removidas imediatamente (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-117">The number of rows processed by the garbage collector that were first in the corresponding hash bucket, and were able to be removed immediately (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-118">**Linhas processadas/s (primeiro no bucket)**</span><span class="sxs-lookup"><span data-stu-id="b2550-118">**Rows processed/sec (first in bucket)**</span></span>|<span data-ttu-id="b2550-119">O número de linhas processadas pelo coletor de lixo que estavam primeiro no bucket de hash correspondente (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-119">The number of rows processed by the garbage collector that were first in the corresponding hash bucket (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-120">**Linhas processadas/s (marcadas para desvinculação)**</span><span class="sxs-lookup"><span data-stu-id="b2550-120">**Rows processed/sec (marked for unlink)**</span></span>|<span data-ttu-id="b2550-121">O número de linhas processadas pelo coletor de lixo que já estavam marcadas para desvinculação (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-121">The number of rows processed by the garbage collector that were already marked for unlink (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-122">**Linhas processadas/s (sem varredura necessária)**</span><span class="sxs-lookup"><span data-stu-id="b2550-122">**Rows processed/sec (no sweep needed)**</span></span>|<span data-ttu-id="b2550-123">O número de linhas processadas pelo coletor de lixo que não exigirão uma varredura de canto sujo (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-123">The number of rows processed by the garbage collector that will not require a dusty corner sweep (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-124">**Linhas expiradas varridas removidas/s**</span><span class="sxs-lookup"><span data-stu-id="b2550-124">**Sweep expired rows removed/sec**</span></span>|<span data-ttu-id="b2550-125">O número de linhas expiradas removidas durante varreduras de canto sujo (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-125">The number of expired rows removed during dusty corner sweeps (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-126">**Linhas expiradas varridas tocadas/s**</span><span class="sxs-lookup"><span data-stu-id="b2550-126">**Sweep expired rows touched/sec**</span></span>|<span data-ttu-id="b2550-127">O número de linhas expiradas tocadas durante varreduras de canto sujo (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-127">The number of expired rows touched during dusty corner sweeps (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-128">**Linhas expirando varridas tocadas/s**</span><span class="sxs-lookup"><span data-stu-id="b2550-128">**Sweep expiring rows touched/sec**</span></span>|<span data-ttu-id="b2550-129">O número de linhas expirando tocadas durante varreduras de canto sujo (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-129">The number of expiring rows touched during dusty corner sweeps (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-130">**Linhas varridas tocadas/s**</span><span class="sxs-lookup"><span data-stu-id="b2550-130">**Sweep rows touched/sec**</span></span>|<span data-ttu-id="b2550-131">O número de linhas tocadas durante varreduras de canto sujo (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-131">The number of rows touched during dusty corner sweeps (on average), per second.</span></span>|  
+|<span data-ttu-id="b2550-132">**Verificações de varredura iniciadas/s**</span><span class="sxs-lookup"><span data-stu-id="b2550-132">**Sweep scans started/sec**</span></span>|<span data-ttu-id="b2550-133">O número de verificações de varredura de canto sujo iniciadas (em média), por segundo.</span><span class="sxs-lookup"><span data-stu-id="b2550-133">The number of dusty corner sweep scans started (on average), per second.</span></span>|  
+  
+## <a name="see-also"></a><span data-ttu-id="b2550-134">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="b2550-134">See Also</span></span>  
+ [<span data-ttu-id="b2550-135">&#40;de OLTP na memória&#41; contadores de desempenho</span><span class="sxs-lookup"><span data-stu-id="b2550-135">XTP &#40;In-Memory OLTP&#41; Performance Counters</span></span>](../../integration-services/performance/performance-counters.md)  
+  
+  
