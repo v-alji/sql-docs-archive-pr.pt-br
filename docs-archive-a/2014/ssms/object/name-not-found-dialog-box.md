@@ -1,0 +1,42 @@
+---
+title: Caixa de diálogo Nome Não Encontrado | Microsoft Docs
+ms.custom: ''
+ms.date: 03/06/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: ssms
+ms.topic: conceptual
+f1_keywords:
+- sql12.swb.common.namenotfound.f1
+helpviewer_keywords:
+- Name Not Found dialog box
+ms.assetid: 74e34004-091b-4ac8-8824-5d6c6f8b1b6b
+author: stevestein
+ms.author: sstein
+ms.openlocfilehash: f6c4a3e51745ab0f2c67dcba88f71b79f031d7ae
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87685419"
+---
+# <a name="name-not-found-dialog-box"></a>caixa de diálogo Nome Não Encontrado
+  Um ou mais nomes de objeto não pôde ser encontrado na caixa de diálogo. Selecione uma opção para continuar.  
+  
+## <a name="ui-element-list"></a>Lista de elementos da interface do usuário  
+ **Corrija essa informação e pesquise novamente**  
+ Selecione para permitir o uso das áreas **Selecionar este tipo de objeto**, **Tipo de objeto**e **Inserir o nome do objeto** .  
+  
+ **Selecionar este tipo de objeto**  
+ Exibe os tipos de objeto selecionados usando o botão **Tipos de Objeto** .  
+  
+ **Tipos de Objeto**  
+ Clique para abrir a caixa de diálogo **Selecionar Tipos de Objeto** e selecione os tipos de objeto de uma lista.  
+  
+ **Inserir o nome do objeto**  
+ Contém o nome do objeto que não foi encontrado. Corrija o nome do objeto ou digite um nome de objeto novo.  
+  
+ **Remover** *\<object name>* **da seleção**      
+ Selecione para fechar a caixa de diálogo **Nome Não Encontrado** e remover o item da caixa de diálogo **Selecionar Objetos** .  
+  
+  
