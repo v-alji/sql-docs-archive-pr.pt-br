@@ -1,0 +1,36 @@
+---
+title: Formas canônicas e restrições de padrões | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: xml
+ms.topic: conceptual
+helpviewer_keywords:
+- pattern restrictions
+- canonical forms
+ms.assetid: 088314ec-7d0b-4a05-8a33-f35da5bfe59c
+author: rothja
+ms.author: jroth
+ms.openlocfilehash: 569e8c4a01ed1eb9ae26ea9e2f6d471b9aad9fe0
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87569249"
+---
+# <a name="canonical-forms-and-pattern-restrictions"></a><span data-ttu-id="198ca-102">Formas canônicas e restrições de padrões</span><span class="sxs-lookup"><span data-stu-id="198ca-102">Canonical Forms and Pattern Restrictions</span></span>
+  <span data-ttu-id="198ca-103">A faceta de padrão XSD permite restringir o espaço léxico de tipos simples.</span><span class="sxs-lookup"><span data-stu-id="198ca-103">The XSD pattern facet allows for the restriction of the lexical space of simple types.</span></span> <span data-ttu-id="198ca-104">Quando uma restrição de padrão é colocada em um tipo para o qual há mais de uma representação léxica possível, alguns valores podem provocar comportamento inesperado na validação.</span><span class="sxs-lookup"><span data-stu-id="198ca-104">When a pattern restriction is put on a type for which there is more than one possible lexical representation, some values could cause unexpected behavior upon validation.</span></span>  
+  
+ <span data-ttu-id="198ca-105">Esse comportamento ocorre porque representações léxicas desses valores não são armazenados no banco de dados.</span><span class="sxs-lookup"><span data-stu-id="198ca-105">This behavior occurs because lexical representations of these values are not stored in the database.</span></span> <span data-ttu-id="198ca-106">Portanto os valores são convertidos em suas representações canônicas quando serializados como saída.</span><span class="sxs-lookup"><span data-stu-id="198ca-106">Therefore, the values are converted to their canonical representations when serialized as output.</span></span> <span data-ttu-id="198ca-107">Se um documento contiver um valor cuja forma canônica não está em conformidade com a restrição de padrão de seu tipo, o documento será rejeitado se um usuário tentar reinseri-lo.</span><span class="sxs-lookup"><span data-stu-id="198ca-107">If a document contains a value whose canonical form does not comply with the pattern restriction for its type, the document is rejected if a user tries to reinsert it.</span></span>  
+  
+ <span data-ttu-id="198ca-108">Para evitar isso, o [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] rejeita qualquer documento XML que contenha valores que não podem ser reinseridos, por causa da violação de restrições de padrão por suas formas canônicas.</span><span class="sxs-lookup"><span data-stu-id="198ca-108">To prevent this, [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] rejects any XML document that contains values that cannot be reinserted, because of the violation of pattern restrictions by their canonical forms.</span></span> <span data-ttu-id="198ca-109">Por exemplo, o valor "33.000" não é validado em relação a um tipo derivado de **xs:decimal** com uma restrição de padrão de "33\\.0+".</span><span class="sxs-lookup"><span data-stu-id="198ca-109">For example, the value "33.000" does not validate against a type derived from **xs:decimal** with a pattern restriction of "33\\.0+".</span></span> <span data-ttu-id="198ca-110">Embora "33.000" obedeça a esse padrão, a forma canônica, "33", não obedece.</span><span class="sxs-lookup"><span data-stu-id="198ca-110">Although "33.000" complies with this pattern, the canonical form, "33", does not.</span></span>  
+  
+ <span data-ttu-id="198ca-111">Portanto, deve-se ter cuidado ao aplicar facetas de padrão a tipos derivados dos seguintes tipos primitivos: `boolean`, `decimal`, `float`, `double`, `dateTime`, `time`, `date`, `hexBinary` e `base64Binary`.</span><span class="sxs-lookup"><span data-stu-id="198ca-111">Therefore, you should be careful when you apply pattern facets to types derived from the following primitive types: `boolean`, `decimal`, `float`, `double`, `dateTime`, `time`, `date`, `hexBinary`, and `base64Binary`.</span></span> [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] <span data-ttu-id="198ca-112">emite um aviso quando qualquer componente desse tipo é adicionado a um coleção de esquemas.</span><span class="sxs-lookup"><span data-stu-id="198ca-112">issues a warning when you add any such components to a schema collection.</span></span>  
+  
+ <span data-ttu-id="198ca-113">A serialização imprecisa de valores de ponto flutuante tem um problema semelhante.</span><span class="sxs-lookup"><span data-stu-id="198ca-113">Imprecise serialization of floating-point values has a similar problem.</span></span> <span data-ttu-id="198ca-114">Por causa do algoritmo de serialização de ponto flutuante usado pelo [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], é possível que valores semelhantes compartilhem a mesma forma canônica.</span><span class="sxs-lookup"><span data-stu-id="198ca-114">Because of the floating-point serialization algorithm used by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], it is possible for similar values to share the same canonical form.</span></span> <span data-ttu-id="198ca-115">Quando um valor de ponto flutuante é serializado e reinserido, seu valor pode ser ligeiramente alterado.</span><span class="sxs-lookup"><span data-stu-id="198ca-115">When a floating-point value is serialized and then reinserted, its value may change slightly.</span></span> <span data-ttu-id="198ca-116">Em casos raros, isso pode resultar em um valor que viola qualquer uma das facetas de seu tipo na reinserção: **enumeration**, **minInclusive**, **minExclusive**, **maxInclusive**ou **maxExclusive**.</span><span class="sxs-lookup"><span data-stu-id="198ca-116">In rare cases, this may result in a value that violates any of the following facets for its type on reinsertion: **enumeration**, **minInclusive**, **minExclusive**, **maxInclusive**, or **maxExclusive**.</span></span> <span data-ttu-id="198ca-117">Para evitar isso, o [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] rejeita todos os valores de tipos derivados de `xs:float` ou `xs:double` que não podem ser serializados e reinseridos.</span><span class="sxs-lookup"><span data-stu-id="198ca-117">To prevent this, [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] rejects any values of types derived from `xs:float` or `xs:double` that cannot be serialized and reinserted.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="198ca-118">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="198ca-118">See Also</span></span>  
+ [<span data-ttu-id="198ca-119">Requisitos e limitações para o uso de Coleções de Esquemas XML no servidor</span><span class="sxs-lookup"><span data-stu-id="198ca-119">Requirements and Limitations for XML Schema Collections on the Server</span></span>](requirements-and-limitations-for-xml-schema-collections-on-the-server.md)  
+  
+  
