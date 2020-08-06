@@ -1,0 +1,66 @@
+---
+title: Funções de aplicativo | Microsoft Docs
+ms.custom: ''
+ms.date: 06/13/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: security
+ms.topic: conceptual
+helpviewer_keywords:
+- application roles [SQL Server], about application roles
+- principals [SQL Server], application roles
+- credentials [SQL Server], roles
+- application roles [SQL Server]
+- roles [SQL Server], application
+- permissions [SQL Server], roles
+- users [SQL Server], application roles
+- authentication [SQL Server], roles
+- groups [SQL Server], roles
+ms.assetid: dca18b8a-ca03-4b7f-9a46-8474d5b66f76
+author: VanMSFT
+ms.author: vanto
+ms.openlocfilehash: f2fcc7b1e333bb42a00675da5bb9fd559d1c34f1
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87570573"
+---
+# <a name="application-roles"></a><span data-ttu-id="892a1-102">Funções de aplicativo</span><span class="sxs-lookup"><span data-stu-id="892a1-102">Application Roles</span></span>
+  <span data-ttu-id="892a1-103">Uma função de aplicativo é uma entidade de banco de dados que permite que um aplicativo execute com suas próprias permissões de usuário.</span><span class="sxs-lookup"><span data-stu-id="892a1-103">An application role is a database principal that enables an application to run with its own, user-like permissions.</span></span> <span data-ttu-id="892a1-104">As funções de aplicativos podem ser usadas para habilitar acesso a dados específicos somente aos usuários que se conectam por um aplicativo específico.</span><span class="sxs-lookup"><span data-stu-id="892a1-104">You can use application roles to enable access to specific data to only those users who connect through a particular application.</span></span> <span data-ttu-id="892a1-105">Diferentemente de funções de banco de dados, funções de aplicativo não contêm membros e são inativas por padrão.</span><span class="sxs-lookup"><span data-stu-id="892a1-105">Unlike database roles, application roles contain no members and are inactive by default.</span></span> <span data-ttu-id="892a1-106">Funções de aplicativo trabalham com ambos os modos de autenticação.</span><span class="sxs-lookup"><span data-stu-id="892a1-106">Application roles work with both authentication modes.</span></span> <span data-ttu-id="892a1-107">Funções de aplicativo são habilitadas usando **sp_setapprole**, que requer uma senha.</span><span class="sxs-lookup"><span data-stu-id="892a1-107">Application roles are enabled by using **sp_setapprole**, which requires a password.</span></span> <span data-ttu-id="892a1-108">Como as funções de aplicativo são uma entidade de nível de banco de dados, elas só podem acessar outros bancos de dados através de permissões concedidas nesses bancos de dados como **convidado**.</span><span class="sxs-lookup"><span data-stu-id="892a1-108">Because application roles are a database-level principal, they can access other databases only through permissions granted in those databases to **guest**.</span></span> <span data-ttu-id="892a1-109">Portanto, qualquer banco de dados no qual o **convidado** tenha sido desabilitado estará inacessível a funções de aplicativo em outros bancos de dados.</span><span class="sxs-lookup"><span data-stu-id="892a1-109">Therefore, any database in which **guest** has been disabled will be inaccessible to application roles in other databases.</span></span>  
+  
+ <span data-ttu-id="892a1-110">No [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)], funções de aplicativo não podem acessar metadados de nível de servidor porque eles não estão associados a uma entidade de nível de servidor.</span><span class="sxs-lookup"><span data-stu-id="892a1-110">In [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)], application roles cannot access server-level metadata because they are not associated with a server-level principal.</span></span> <span data-ttu-id="892a1-111">Para desabilitar essa restrição e assim permitir que funções de aplicativo acessem metadados de nível de servidor, defina o sinalizador global 4616.</span><span class="sxs-lookup"><span data-stu-id="892a1-111">To disable this restriction and thereby allow application roles to access server-level metadata, set the global flag 4616.</span></span> <span data-ttu-id="892a1-112">Para obter mais informações, consulte [Sinalizadores de rastreamento &#40;Transact-SQL&#41;](/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql) e [DBCC TRACEON &#40;Transact-SQL&#41;](/sql/t-sql/database-console-commands/dbcc-traceon-transact-sql).</span><span class="sxs-lookup"><span data-stu-id="892a1-112">For more information, see [Trace Flags &#40;Transact-SQL&#41;](/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql) and [DBCC TRACEON &#40;Transact-SQL&#41;](/sql/t-sql/database-console-commands/dbcc-traceon-transact-sql).</span></span>  
+  
+## <a name="connecting-with-an-application-role"></a><span data-ttu-id="892a1-113">Conectando com uma função de aplicativo</span><span class="sxs-lookup"><span data-stu-id="892a1-113">Connecting with an Application Role</span></span>  
+ <span data-ttu-id="892a1-114">As etapas seguintes compõem o processo pelo qual uma função de aplicativo alterna contextos de segurança:</span><span class="sxs-lookup"><span data-stu-id="892a1-114">The following steps make up the process by which an application role switches security contexts:</span></span>  
+  
+1.  <span data-ttu-id="892a1-115">Um usuário executa um aplicativo cliente.</span><span class="sxs-lookup"><span data-stu-id="892a1-115">A user executes a client application.</span></span>  
+  
+2.  <span data-ttu-id="892a1-116">O aplicativo cliente conecta com uma instância do [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] como o usuário.</span><span class="sxs-lookup"><span data-stu-id="892a1-116">The client application connects to an instance of [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] as the user.</span></span>  
+  
+3.  <span data-ttu-id="892a1-117">O aplicativo executa o procedimento armazenado **sp_setapprole** com uma senha somente conhecida pelo aplicativo.</span><span class="sxs-lookup"><span data-stu-id="892a1-117">The application then executes the **sp_setapprole** stored procedure with a password known only to the application.</span></span>  
+  
+4.  <span data-ttu-id="892a1-118">Se o nome de função de aplicativo e a senha forem válidos, a função de aplicativo será habilitada.</span><span class="sxs-lookup"><span data-stu-id="892a1-118">If the application role name and password are valid, the application role is enabled.</span></span>  
+  
+5.  <span data-ttu-id="892a1-119">Nesse momento, a conexão perde as permissões de usuário e assume as permissões da função de aplicativo.</span><span class="sxs-lookup"><span data-stu-id="892a1-119">At this point the connection loses the permissions of the user and assumes the permissions of the application role.</span></span>  
+  
+ <span data-ttu-id="892a1-120">As permissões adquiridas pela função de aplicativo permanecem em efeito durante a conexão.</span><span class="sxs-lookup"><span data-stu-id="892a1-120">The permissions acquired through the application role remain in effect for the duration of the connection.</span></span>  
+  
+ <span data-ttu-id="892a1-121">Em versões anteriores do [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)], a única maneira de um usuário readquirir seu contexto de segurança original depois de iniciar uma função de aplicativo é desconectar e conectar-se novamente com o [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)].</span><span class="sxs-lookup"><span data-stu-id="892a1-121">In earlier versions of [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)], the only way for a user to reacquire its original security context after starting an application role is to disconnect and reconnect to [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)].</span></span> <span data-ttu-id="892a1-122">A partir do [!INCLUDE[ssVersion2005](../../../includes/ssversion2005-md.md)], o **sp_setapprole** tem uma opção que cria um cookie.</span><span class="sxs-lookup"><span data-stu-id="892a1-122">Beginning with [!INCLUDE[ssVersion2005](../../../includes/ssversion2005-md.md)], **sp_setapprole** has an option that creates a cookie.</span></span> <span data-ttu-id="892a1-123">O cookie contém informações de contexto anteriores à habilitação da função de aplicativo.</span><span class="sxs-lookup"><span data-stu-id="892a1-123">The cookie contains context information before the application role is enabled.</span></span> <span data-ttu-id="892a1-124">O cookie pode ser usado por **sp_unsetapprole** para reverter a sessão a seu contexto original.</span><span class="sxs-lookup"><span data-stu-id="892a1-124">The cookie can be used by **sp_unsetapprole** to revert the session to its original context.</span></span> <span data-ttu-id="892a1-125">Para obter mais informações sobre essa nova opção e um exemplo, consulte [sp_setapprole &#40;Transact-SQL&#41;](/sql/relational-databases/system-stored-procedures/sp-setapprole-transact-sql).</span><span class="sxs-lookup"><span data-stu-id="892a1-125">For information about this new option and an example, see [sp_setapprole &#40;Transact-SQL&#41;](/sql/relational-databases/system-stored-procedures/sp-setapprole-transact-sql).</span></span>  
+  
+> [!IMPORTANT]  
+>  <span data-ttu-id="892a1-126">A opção ODBC **criptografia** não tem suporte no **SqlClient**.</span><span class="sxs-lookup"><span data-stu-id="892a1-126">The ODBC **encrypt** option is not supported by **SqlClient**.</span></span> <span data-ttu-id="892a1-127">Ao transmitir informações confidenciais pela rede, use SSL (Secure Sockets Layer) ou IPsec para criptografar o canal.</span><span class="sxs-lookup"><span data-stu-id="892a1-127">When you are transmitting confidential information over a network, use Secure Sockets Layer (SSL) or IPsec to encrypt the channel.</span></span> <span data-ttu-id="892a1-128">Se você deve persistir credenciais no aplicativo cliente, criptografe as credenciais usando as funções API de criptografia.</span><span class="sxs-lookup"><span data-stu-id="892a1-128">If you must persist credentials in the client application, encrypt the credentials by using the crypto API functions.</span></span> <span data-ttu-id="892a1-129">No [!INCLUDE[ssVersion2005](../../../includes/ssversion2005-md.md)] e versões posteriores, o parâmetro *senha* é armazenado como um hash de mão única.</span><span class="sxs-lookup"><span data-stu-id="892a1-129">In [!INCLUDE[ssVersion2005](../../../includes/ssversion2005-md.md)] and later versions, the parameter *password* is stored as a one-way hash.</span></span>  
+  
+## <a name="related-tasks"></a><span data-ttu-id="892a1-130">Related Tasks</span><span class="sxs-lookup"><span data-stu-id="892a1-130">Related Tasks</span></span>  
+  
+|||  
+|-|-|  
+|<span data-ttu-id="892a1-131">Criar uma função de aplicativo.</span><span class="sxs-lookup"><span data-stu-id="892a1-131">Create an application role.</span></span>|<span data-ttu-id="892a1-132">[Criar uma função de aplicativo](create-an-application-role.md) e [CREATE APPLICATION ROLE &#40;Transact-SQL&#41;](/sql/t-sql/statements/create-application-role-transact-sql)</span><span class="sxs-lookup"><span data-stu-id="892a1-132">[Create an Application Role](create-an-application-role.md) and [CREATE APPLICATION ROLE &#40;Transact-SQL&#41;](/sql/t-sql/statements/create-application-role-transact-sql)</span></span>|  
+|<span data-ttu-id="892a1-133">Alterar uma função de aplicativo.</span><span class="sxs-lookup"><span data-stu-id="892a1-133">Alter an application role.</span></span>|[<span data-ttu-id="892a1-134">ALTER APPLICATION ROLE &#40;Transact-SQL&#41;</span><span class="sxs-lookup"><span data-stu-id="892a1-134">ALTER APPLICATION ROLE &#40;Transact-SQL&#41;</span></span>](/sql/t-sql/statements/alter-application-role-transact-sql)|  
+|<span data-ttu-id="892a1-135">Excluir uma função de aplicativo.</span><span class="sxs-lookup"><span data-stu-id="892a1-135">Delete an application role.</span></span>|[<span data-ttu-id="892a1-136">DROP APPLICATION ROLE &#40;Transact-SQL&#41;</span><span class="sxs-lookup"><span data-stu-id="892a1-136">DROP APPLICATION ROLE &#40;Transact-SQL&#41;</span></span>](/sql/t-sql/statements/drop-application-role-transact-sql)|  
+|<span data-ttu-id="892a1-137">Usando uma função de aplicativo.</span><span class="sxs-lookup"><span data-stu-id="892a1-137">Using an application role.</span></span>|[<span data-ttu-id="892a1-138">sp_setapprole &#40;Transact-SQL&#41;</span><span class="sxs-lookup"><span data-stu-id="892a1-138">sp_setapprole &#40;Transact-SQL&#41;</span></span>](/sql/relational-databases/system-stored-procedures/sp-setapprole-transact-sql)|  
+  
+## <a name="see-also"></a><span data-ttu-id="892a1-139">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="892a1-139">See Also</span></span>  
+ [<span data-ttu-id="892a1-140">Protegendo o SQL Server</span><span class="sxs-lookup"><span data-stu-id="892a1-140">Securing SQL Server</span></span>](../securing-sql-server.md)  
+  
+  
