@@ -1,0 +1,65 @@
+---
+title: Realizar o balanceamento de carga de pacotes em servidores remotos usando o SQL Server Agent | Microsoft Docs
+ms.custom: ''
+ms.date: 03/06/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: integration-services
+ms.topic: conceptual
+helpviewer_keywords:
+- load-balancing [Integration Services]
+- parent packages [Integration Services]
+- SQL Server Agent [Integration Services]
+ms.assetid: 9281c5f8-8da3-4ae8-8142-53c5919a4cfe
+author: chugugrace
+ms.author: chugu
+ms.openlocfilehash: ea7b132d8cf86d2f211da25989df937d0db34ab2
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87575197"
+---
+# <a name="load-balancing-packages-on-remote-servers-by-using-sql-server-agent"></a><span data-ttu-id="65592-102">Pacotes de balanceamento de carga em servidores remotos usando o SQL Server Agent</span><span class="sxs-lookup"><span data-stu-id="65592-102">Load-Balancing Packages on Remote Servers by Using SQL Server Agent</span></span>
+  <span data-ttu-id="65592-103">Quando for necessário executar muitos pacotes, será conveniente usar outros servidores que estejam disponíveis.</span><span class="sxs-lookup"><span data-stu-id="65592-103">When many packages have to be run, it is convenient to use other servers that are available.</span></span> <span data-ttu-id="65592-104">Este método de usar outros servidores para executar pacotes quando os pacotes estão sob o controle de um pacote pai é chamado balanceamento de carga.</span><span class="sxs-lookup"><span data-stu-id="65592-104">This method of using other servers to run packages when the packages are all under the control of one parent package is called load balancing.</span></span> <span data-ttu-id="65592-105">No [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)], o balanceamento de carga é um procedimento manual que precisa ser projetado pelos proprietários dos pacotes.</span><span class="sxs-lookup"><span data-stu-id="65592-105">In [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)], load balancing is a manual procedure that must be architected by the owners of the packages.</span></span> <span data-ttu-id="65592-106">Balanceamento de carga não é executado automaticamente pelos servidores.</span><span class="sxs-lookup"><span data-stu-id="65592-106">Load balancing is not performed automatically by the servers.</span></span> <span data-ttu-id="65592-107">Além disso, os pacotes que estão em execução nos servidores remotos devem ser pacotes completos, não tarefas individuais em outros pacotes.</span><span class="sxs-lookup"><span data-stu-id="65592-107">Also, the packages that are run on the remote servers must be whole packages, not individual tasks in other packages.</span></span>  
+  
+ <span data-ttu-id="65592-108">Balanceamento de carga é útil nos seguintes cenários:</span><span class="sxs-lookup"><span data-stu-id="65592-108">Load balancing is useful in the following scenarios:</span></span>  
+  
+-   <span data-ttu-id="65592-109">Pacotes podem executar ao mesmo tempo.</span><span class="sxs-lookup"><span data-stu-id="65592-109">Packages can run at the same time.</span></span>  
+  
+-   <span data-ttu-id="65592-110">Pacotes são grandes e, se executados em sequência, podem executar por mais tempo que o permitido para o processamento.</span><span class="sxs-lookup"><span data-stu-id="65592-110">Packages are large and, if run sequentially, can run longer than the time allowed for processing.</span></span>  
+  
+ <span data-ttu-id="65592-111">Administradores e arquitetos podem determinar se usar servidores adicionais para o processamento beneficiaria os processos.</span><span class="sxs-lookup"><span data-stu-id="65592-111">Administrators and architects can determine whether using additional servers for processing would benefit their processes.</span></span>  
+  
+## <a name="illustration-of-load-balancing"></a><span data-ttu-id="65592-112">Ilustração do balanceamento de carga</span><span class="sxs-lookup"><span data-stu-id="65592-112">Illustration of Load-Balancing</span></span>  
+ <span data-ttu-id="65592-113">O diagrama a seguir mostra um pacote pai em um servidor.</span><span class="sxs-lookup"><span data-stu-id="65592-113">The following diagram shows a parent package on a server.</span></span> <span data-ttu-id="65592-114">O pacote pai contém várias tarefas Executar Trabalho do SQL Agent.</span><span class="sxs-lookup"><span data-stu-id="65592-114">The parent package contains multiple Execute SQL Job Agent tasks.</span></span> <span data-ttu-id="65592-115">Cada tarefa no pacote pai chama um SQL Server Agent em um servidor remoto.</span><span class="sxs-lookup"><span data-stu-id="65592-115">Each task in the parent package calls a SQL Server Agent on a remote server.</span></span> <span data-ttu-id="65592-116">Esses servidores remotos contêm trabalhos do SQL Server Agent que incluem uma etapa que chama um pacote naquele servidor.</span><span class="sxs-lookup"><span data-stu-id="65592-116">Those remote servers contain SQL Server Agent jobs that include a step that calls a package on that server.</span></span>  
+  
+ <span data-ttu-id="65592-117">![Visão geral da arquitetura de balanceamento de carga do SSIS](../media/loadbalancingoverview.gif "Visão geral da arquitetura de balanceamento de carga do SSIS")</span><span class="sxs-lookup"><span data-stu-id="65592-117">![Overview of SSIS load balancing architecture](../media/loadbalancingoverview.gif "Overview of SSIS load balancing architecture")</span></span>  
+  
+ <span data-ttu-id="65592-118">As etapas exigidas para balanceamento de carga nesta arquitetura não são conceitos novos.</span><span class="sxs-lookup"><span data-stu-id="65592-118">The steps required for load balancing in this architecture are not new concepts.</span></span> <span data-ttu-id="65592-119">Em vez disso, o balanceamento de carga é alcançado usando conceitos existentes e objetos SSIS comuns em uma nova maneira.</span><span class="sxs-lookup"><span data-stu-id="65592-119">Instead, load balancing is achieved by using existing concepts and common SSIS objects in a new way.</span></span>  
+  
+## <a name="execution-of-packages-on-a-remote-instance-by-using-sql-server-agent"></a><span data-ttu-id="65592-120">Execução de pacotes em uma instância remota por meio do SQL Server Agent</span><span class="sxs-lookup"><span data-stu-id="65592-120">Execution of Packages on a Remote Instance by using SQL Server Agent</span></span>  
+ <span data-ttu-id="65592-121">Na arquitetura básica para execução de pacote remoto, um pacote central está localizado na instância do SQL Server que controla os pacotes remotos.</span><span class="sxs-lookup"><span data-stu-id="65592-121">In the basic architecture for remote package execution, a central package resides on the instance of SQL Server that controls the other remote packages.</span></span> <span data-ttu-id="65592-122">O diagrama mostra esse pacote central, nomeado o Pai do SSIS.</span><span class="sxs-lookup"><span data-stu-id="65592-122">The diagram shows this central package, named the SSIS Parent.</span></span> <span data-ttu-id="65592-123">A instância onde esse pacote pai reside controla a execução dos trabalhos do SQL Server Agent que executam os pacotes filhos.</span><span class="sxs-lookup"><span data-stu-id="65592-123">The instance where this parent package resides controls execution of the SQL Server Agent jobs that run the child packages.</span></span> <span data-ttu-id="65592-124">Os pacotes filhos não executam conforme uma agenda fixa controlada pelo SQL Server Agent no servidor remoto.</span><span class="sxs-lookup"><span data-stu-id="65592-124">The child packages are not run according to a fixed schedule controlled by the SQL Server Agent on the remote server.</span></span> <span data-ttu-id="65592-125">Em vez disso, os pacotes filhos são iniciados pelo SQL Server Agent, quando chamados pelo pacote pai, e são executados na mesma instância do SQL Server em que o SQL Server Agent reside.</span><span class="sxs-lookup"><span data-stu-id="65592-125">Instead, the child packages are started by the SQL Server Agent when called by the parent package and are run on the same instance of SQL Server on which the SQL Server Agent resides.</span></span>  
+  
+ <span data-ttu-id="65592-126">Antes que possa executar um pacote remoto usando um SQL Server Agent, é preciso configurar os pacotes pai e filho e os trabalhos do SQL Server Agent que controlam os pacotes filhos.</span><span class="sxs-lookup"><span data-stu-id="65592-126">Before you can run a remote package by using SQL Server Agent, you must configure the parent and child packages and set up the SQL Server Agent jobs that control the child packages.</span></span> <span data-ttu-id="65592-127">As seções a seguir fornecem mais informações sobre como criar, configurar, executar e manter pacotes que executam em servidores remotos.</span><span class="sxs-lookup"><span data-stu-id="65592-127">The following sections provide more information about how to create, configure, run, and maintain packages that run on remote servers.</span></span> <span data-ttu-id="65592-128">Há várias etapas para esse processo:</span><span class="sxs-lookup"><span data-stu-id="65592-128">There are several steps to this process:</span></span>  
+  
+-   <span data-ttu-id="65592-129">Criando e instalando o pacote filho em servidores remotos.</span><span class="sxs-lookup"><span data-stu-id="65592-129">Creating the child packages and installing them on remote servers.</span></span>  
+  
+-   <span data-ttu-id="65592-130">Criando os trabalhos SQL Server Agent nas instâncias remotas que executarão os pacotes.</span><span class="sxs-lookup"><span data-stu-id="65592-130">Creating the SQL Server Agent jobs on the remote instances that will run the packages.</span></span>  
+  
+-   <span data-ttu-id="65592-131">Criando um pacote pai.</span><span class="sxs-lookup"><span data-stu-id="65592-131">Creating the parent package.</span></span>  
+  
+-   <span data-ttu-id="65592-132">Determine o cenário de log para os pacotes filhos.</span><span class="sxs-lookup"><span data-stu-id="65592-132">Determine the logging scenario for the child packages.</span></span>  
+  
+ <span data-ttu-id="65592-133">A tabela a seguir fornece links a tópicos que o guiam pelo processo.</span><span class="sxs-lookup"><span data-stu-id="65592-133">The following table provides links to topics that guide you through the process.</span></span>  
+  
+|<span data-ttu-id="65592-134">Tópico</span><span class="sxs-lookup"><span data-stu-id="65592-134">Topic</span></span>|<span data-ttu-id="65592-135">Descrição</span><span class="sxs-lookup"><span data-stu-id="65592-135">Description</span></span>|  
+|-----------|-----------------|  
+|[<span data-ttu-id="65592-136">Implementação de pacotes filho</span><span class="sxs-lookup"><span data-stu-id="65592-136">Implementation of Child Packages</span></span>](../implementation-of-child-packages.md)|<span data-ttu-id="65592-137">Descreve a instalação de pacotes e a criação de trabalhos do SQL Server Agent para execução dos pacotes.</span><span class="sxs-lookup"><span data-stu-id="65592-137">Describes the installation of packages, and creation of the SQL Server Agent jobs to run the packages.</span></span>|  
+|[<span data-ttu-id="65592-138">Implementação do pacote pai</span><span class="sxs-lookup"><span data-stu-id="65592-138">Implementation of the Parent Package</span></span>](../implementation-of-the-parent-package.md)|<span data-ttu-id="65592-139">Descreve a criação do pacote pai que contém muitas tarefas de Executar Trabalho do SQL Server Agent.</span><span class="sxs-lookup"><span data-stu-id="65592-139">Describes the creation of the parent package that contains many Execute SQL Server Agent Job tasks.</span></span> <span data-ttu-id="65592-140">Cada tarefa executa um dos pacotes filhos.</span><span class="sxs-lookup"><span data-stu-id="65592-140">Each task runs one of the child packages.</span></span>|  
+|[<span data-ttu-id="65592-141">Log para carga de pacotes balanceados em servidores remotos</span><span class="sxs-lookup"><span data-stu-id="65592-141">Logging for Load Balanced Packages on Remote Servers</span></span>](../logging-for-load-balanced-packages-on-remote-servers.md)|<span data-ttu-id="65592-142">Descreve o cenário de log para os pacotes remotos.</span><span class="sxs-lookup"><span data-stu-id="65592-142">Describes the logging scenario for the remote packages.</span></span>|  
+  
+## <a name="related-tasks"></a><span data-ttu-id="65592-143">Related Tasks</span><span class="sxs-lookup"><span data-stu-id="65592-143">Related Tasks</span></span>  
+ [<span data-ttu-id="65592-144">Agendar um pacote usando SQL Server Agent</span><span class="sxs-lookup"><span data-stu-id="65592-144">Schedule a Package by using SQL Server Agent</span></span>](../schedule-a-package-by-using-sql-server-agent.md)  
+  
+  

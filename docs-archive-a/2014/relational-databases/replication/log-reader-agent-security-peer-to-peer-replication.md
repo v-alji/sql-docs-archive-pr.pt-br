@@ -1,0 +1,48 @@
+---
+title: Segurança do Agente de Leitor de Log (replicação ponto a ponto) | Microsoft Docs
+ms.custom: ''
+ms.date: 03/06/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: replication
+ms.topic: conceptual
+f1_keywords:
+- sql12.rep.p2pwizard.LRA.f1
+ms.assetid: 6575e2a8-16bb-449c-bdca-4a4202d0972f
+author: MashaMSFT
+ms.author: mathoma
+ms.openlocfilehash: dfef98adb622f9da922af0c1cdbb1cf8b7a07da5
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87576296"
+---
+# <a name="log-reader-agent-security-peer-to-peer-replication"></a><span data-ttu-id="12818-102">Segurança do Agente de Leitor de Log (replicação ponto a ponto)</span><span class="sxs-lookup"><span data-stu-id="12818-102">Log Reader Agent Security (Peer-to-Peer Replication)</span></span>
+  <span data-ttu-id="12818-103">A página **Segurança do Agente de Leitor de Log** permite especificar as contas nas quais o Agente de Leitor de Log, em cada computador de mesmo nível, executa e efetua conexões.</span><span class="sxs-lookup"><span data-stu-id="12818-103">The **Log Reader Agent Security** page allows you to specify the accounts under which the Log Reader Agent at each peer runs and makes connections.</span></span> <span data-ttu-id="12818-104">Para obter informações sobre as permissões necessárias para os agentes e as melhores práticas de segurança da replicação, consulte [Modelo de segurança do agente de replicação](security/replication-agent-security-model.md) e [Melhores práticas de segurança da replicação](security/replication-security-best-practices.md).</span><span class="sxs-lookup"><span data-stu-id="12818-104">For information on permissions required by agents and best practices for replication security, see [Replication Agent Security Model](security/replication-agent-security-model.md) and [Replication Security Best Practices](security/replication-security-best-practices.md).</span></span>  
+  
+> [!NOTE]  
+>  <span data-ttu-id="12818-105">Há um Agente de Leitor de Log para cada banco de dados publicado que usa a replicação transacional.</span><span class="sxs-lookup"><span data-stu-id="12818-105">There is one Log Reader Agent for each database that is published using transactional replication.</span></span> <span data-ttu-id="12818-106">Se o Agente de Leitor de Log de um banco de dados já foi configurado (para uma publicação em uma execução anterior desse assistente ou para outra publicação transacional no mesmo banco de dados), você não poderá trocar as credenciais que ele usa nesse assistente.</span><span class="sxs-lookup"><span data-stu-id="12818-106">If the Log Reader Agent for a database has already been configured (either for a publication in a previous run of this wizard or for another transactional publication in the same database), you cannot change the credentials it uses in this wizard.</span></span> <span data-ttu-id="12818-107">Se você especificar credenciais novas, elas serão ignoradas.</span><span class="sxs-lookup"><span data-stu-id="12818-107">If you specify new credentials, they are ignored.</span></span> <span data-ttu-id="12818-108">Para alterar credenciais, use a caixa de diálogo **Propriedades de Publicação** .</span><span class="sxs-lookup"><span data-stu-id="12818-108">To change credentials, use the **Publication Properties** dialog box.</span></span> <span data-ttu-id="12818-109">Para obter mais informações, consulte [View and Modify Replication Security Settings](security/view-and-modify-replication-security-settings.md).</span><span class="sxs-lookup"><span data-stu-id="12818-109">For more information, see [View and Modify Replication Security Settings](security/view-and-modify-replication-security-settings.md).</span></span>  
+  
+## <a name="options"></a><span data-ttu-id="12818-110">Opções</span><span class="sxs-lookup"><span data-stu-id="12818-110">Options</span></span>  
+ <span data-ttu-id="12818-111">Clique no botão de propriedades ( **...** ) na linha de cada computador par para acessar a caixa de diálogo **Segurança do Agente de Leitor de Log** .</span><span class="sxs-lookup"><span data-stu-id="12818-111">Click the properties button (**...**) in the row for each peer to access the **Log Reader Agent Security** dialog box.</span></span> <span data-ttu-id="12818-112">Clique em **Ajuda** na caixa de diálogo **Segurança do Agente de Leitor de Log** iniciada, para obter mais informações sobre as permissões necessárias para as contas usadas pelos agentes.</span><span class="sxs-lookup"><span data-stu-id="12818-112">Click **Help** on the **Log Reader Agent Security** dialog box that is launched for more information on the permissions required for accounts used by the agents.</span></span>  
+  
+ <span data-ttu-id="12818-113">Depois que as configurações forem inseridas na caixa de diálogo, serão exibidas informações de conexão para o Assinante na grade.</span><span class="sxs-lookup"><span data-stu-id="12818-113">After settings have been entered in the dialog box, connection information for the Subscriber is displayed in the grid.</span></span>  
+  
+ <span data-ttu-id="12818-114">**Agentes para o Publicador**</span><span class="sxs-lookup"><span data-stu-id="12818-114">**Agents for Publisher**</span></span>  
+ <span data-ttu-id="12818-115">O nome de cada instância de servidor de computador par.</span><span class="sxs-lookup"><span data-stu-id="12818-115">The name of each peer server instance.</span></span>  
+  
+ <span data-ttu-id="12818-116">**Banco de dados par**</span><span class="sxs-lookup"><span data-stu-id="12818-116">**Peer Database**</span></span>  
+ <span data-ttu-id="12818-117">O banco de dados que serve como banco de dados de publicação e banco de dados de assinatura em cada nível.</span><span class="sxs-lookup"><span data-stu-id="12818-117">The database that serves as the publication database and subscription database at each peer.</span></span>  
+  
+ <span data-ttu-id="12818-118">**Conexão com o Distribuidor**</span><span class="sxs-lookup"><span data-stu-id="12818-118">**Connection to Distributor**</span></span>  
+ <span data-ttu-id="12818-119">O contexto no qual a conexão com o Distribuidor é feita.</span><span class="sxs-lookup"><span data-stu-id="12818-119">The context under which the connection to the Distributor is made.</span></span> <span data-ttu-id="12818-120">A conexão local com o Distribuidor é sempre feita usando o contexto da conta do [!INCLUDE[msCoName](../../includes/msconame-md.md)] Windows na qual o agente é executado e, portanto, esse campo sempre exibirá **Representar '\<Domain>\\<Logon\>'** ou **Representar '\<Computer>\\<Logon\>'** .</span><span class="sxs-lookup"><span data-stu-id="12818-120">The local connection to the Distributor is always made using the context of the [!INCLUDE[msCoName](../../includes/msconame-md.md)] Windows account under which the agent runs, so this field will always display **Impersonate '\<Domain>\\<Login\>'** or **Impersonate '\<Computer>\\<Login\>'**.</span></span>  
+  
+ <span data-ttu-id="12818-121">**Conexão com o Publicador**</span><span class="sxs-lookup"><span data-stu-id="12818-121">**Connection to Publisher**</span></span>  
+ <span data-ttu-id="12818-122">O contexto no qual a conexão com o Publicador é feita.</span><span class="sxs-lookup"><span data-stu-id="12818-122">The context under which the connection to the Publisher is made.</span></span> <span data-ttu-id="12818-123">A conexão com o Publicador pode ser feita usando um logon do [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ou o contexto de uma conta do Windows na qual o agente é executado.</span><span class="sxs-lookup"><span data-stu-id="12818-123">The connection to the Publisher can be made using a [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] login or using the context of the Windows account under which the agent runs.</span></span> <span data-ttu-id="12818-124">O campo exibe uma das opções a seguir: **Usar o logon '\<Login>'** , **Representar '\<Domain>\\<Logon\>'** ou **Representar '\<Computer>\\<Logon\>'** .</span><span class="sxs-lookup"><span data-stu-id="12818-124">The field displays one of the following: **Use login '\<Login>'**, **Impersonate '\<Domain>\\<Login\>'** or **Impersonate '\<Computer>\\<Login\>'**.</span></span> <span data-ttu-id="12818-125">A[!INCLUDE[msCoName](../../includes/msconame-md.md)] recomenda que todas as conexões sejam feitas com o uso do contexto da conta do Windows.</span><span class="sxs-lookup"><span data-stu-id="12818-125">[!INCLUDE[msCoName](../../includes/msconame-md.md)] recommends that all connections be made using the context of the Windows account.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="12818-126">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="12818-126">See Also</span></span>  
+ <span data-ttu-id="12818-127">[Administrar uma topologia ponto a ponto &#40;programação Transact-SQL de replicação&#41;](administration/administer-a-peer-to-peer-topology-replication-transact-sql-programming.md) </span><span class="sxs-lookup"><span data-stu-id="12818-127">[Administer a Peer-to-Peer Topology &#40;Replication Transact-SQL Programming&#41;](administration/administer-a-peer-to-peer-topology-replication-transact-sql-programming.md) </span></span>  
+ [<span data-ttu-id="12818-128">Peer-to-Peer Transactional Replication</span><span class="sxs-lookup"><span data-stu-id="12818-128">Peer-to-Peer Transactional Replication</span></span>](transactional/peer-to-peer-transactional-replication.md)  
+  
+  

@@ -1,0 +1,36 @@
+---
+title: Tratando exceções no Reporting Services | Microsoft Docs
+ms.custom: ''
+ms.date: 04/27/2017
+ms.prod: sql-server-2014
+ms.reviewer: ''
+ms.technology: reporting-services
+ms.topic: reference
+helpviewer_keywords:
+- SOAP [Reporting Services], exceptions
+- .NET Framework [Reporting Services]
+- exceptions [Reporting Services], about exception handling
+- SoapException object
+ms.assetid: 1a443432-2db5-48c5-bc29-433b4688082f
+author: maggiesMSFT
+ms.author: maggies
+manager: kfile
+ms.openlocfilehash: 1d887853b475f7b4d673d7b04343ae9bc71644d3
+ms.sourcegitcommit: ad4d92dce894592a259721a1571b1d8736abacdb
+ms.translationtype: MT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87682117"
+---
+# <a name="handling-exceptions-in-reporting-services"></a><span data-ttu-id="623a4-102">Manipulando exceções no Reporting Services</span><span class="sxs-lookup"><span data-stu-id="623a4-102">Handling Exceptions in Reporting Services</span></span>
+  <span data-ttu-id="623a4-103">Quando uma solicitação de cliente API SOAP do Reporting Services não pode ser concluída, o servidor de relatório retorna um erro em vez dos resultados esperados da chamada.</span><span class="sxs-lookup"><span data-stu-id="623a4-103">When a Reporting Services SOAP API client request cannot be completed, the report server returns an error rather than the expected results of the call.</span></span> <span data-ttu-id="623a4-104">Quando uma chamada não pode ser concluída, é retornado um erro para o serviço Web Servidor de Relatórios como um elemento XML **Falha** de SOAP.</span><span class="sxs-lookup"><span data-stu-id="623a4-104">When a call cannot complete, an error for the Report Server Web service is returned as a SOAP **Fault** XML element.</span></span> <span data-ttu-id="623a4-105">O principal elemento descritivo da falha é o elemento **detail**, que inclui todas as informações de erro fornecidas pelo servidor de relatório, além de informações adicionais de erro do serviço Web.</span><span class="sxs-lookup"><span data-stu-id="623a4-105">The key descriptive element of the fault is the **detail** element, which includes all of the error information provided by the report server as well as any additional Web service error information.</span></span> <span data-ttu-id="623a4-106">A principal informação do elemento **detail** é o código de erro do servidor de relatório.</span><span class="sxs-lookup"><span data-stu-id="623a4-106">The key information in the **detail** element is the report server error code.</span></span> <span data-ttu-id="623a4-107">com base na mensagem e no código de erro, você poderá determinar a próxima ação apropriada a ser tomada levar em seus aplicativos.</span><span class="sxs-lookup"><span data-stu-id="623a4-107">Based on the message and error code, you can determine the next appropriate action to take in your applications.</span></span> <span data-ttu-id="623a4-108">Para saber mais sobre falhas SOAP, veja o site do W3C (World Wide Web Consortium), http://www.w3.org/TR/SOAP.</span><span class="sxs-lookup"><span data-stu-id="623a4-108">For more information about SOAP faults, see the World Wide Web Consortium (W3C) Web site at http://www.w3.org/TR/SOAP.</span></span>  
+  
+## <a name="soap-faults-and-the-net-framework"></a><span data-ttu-id="623a4-109">As falhas SOAP e o .NET Framework</span><span class="sxs-lookup"><span data-stu-id="623a4-109">SOAP Faults and the .NET Framework</span></span>  
+ <span data-ttu-id="623a4-110">No [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[dnprdnshort](../../includes/dnprdnshort-md.md)], se houver um erro em uma solicitação de cliente feita a um serviço Web, o servidor de relatório comunicará o erro ao código do cliente que chama o serviço Web gerando um objeto **SoapException**.</span><span class="sxs-lookup"><span data-stu-id="623a4-110">In the [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[dnprdnshort](../../includes/dnprdnshort-md.md)], if an error occurs in a client request to the Web service, the report server communicates the error to the client code that calls the Web service by throwing a **SoapException** object.</span></span> <span data-ttu-id="623a4-111">**SoapException** encapsula a informações contidas em uma falha de SOAP.</span><span class="sxs-lookup"><span data-stu-id="623a4-111">The **SoapException** wraps the information contained in a SOAP fault.</span></span> <span data-ttu-id="623a4-112">A propriedade **Detail** de **SoapException** é mapeada para o elemento **detail** na falha de SOAP.</span><span class="sxs-lookup"><span data-stu-id="623a4-112">The **Detail** property of the **SoapException** maps to the **detail** element in the SOAP fault.</span></span> <span data-ttu-id="623a4-113">Os aplicativos devem capturar o objeto **SoapException** com um bloco try/catch e usar a propriedade **Detail** de **SoapException** para tomar a ação apropriada.</span><span class="sxs-lookup"><span data-stu-id="623a4-113">Applications should catch the **SoapException** object with a try/catch block and use the **Detail** property of the **SoapException** to take appropriate action.</span></span> <span data-ttu-id="623a4-114">Para obter mais informações sobre a classe **SoapException** e a propriedade **Detail** no [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)], consulte [Classe SoapException do Reporting Services](soapexception-class/reporting-services-soapexception-class.md).</span><span class="sxs-lookup"><span data-stu-id="623a4-114">For more information about the **SoapException** class and the **Detail** property in [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)], see [Reporting Services SoapException Class](soapexception-class/reporting-services-soapexception-class.md).</span></span> <span data-ttu-id="623a4-115">Para obter mais informações sobre a classe **SoapException**, confira a documentação do SDK do [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[dnprdnshort](../../includes/dnprdnshort-md.md)].</span><span class="sxs-lookup"><span data-stu-id="623a4-115">For more information about the **SoapException** class, see the [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[dnprdnshort](../../includes/dnprdnshort-md.md)] SDK documentation.</span></span>  
+  
+## <a name="see-also"></a><span data-ttu-id="623a4-116">Consulte Também</span><span class="sxs-lookup"><span data-stu-id="623a4-116">See Also</span></span>  
+ <span data-ttu-id="623a4-117">[Propriedade Detail](soapexception-class/detail-property.md) </span><span class="sxs-lookup"><span data-stu-id="623a4-117">[Detail Property](soapexception-class/detail-property.md) </span></span>  
+ <span data-ttu-id="623a4-118">[Introdução à manipulação de exceção no Reporting Services](introducing-exception-handling-in-reporting-services.md) </span><span class="sxs-lookup"><span data-stu-id="623a4-118">[Introducing Exception Handling in Reporting Services](introducing-exception-handling-in-reporting-services.md) </span></span>  
+ [<span data-ttu-id="623a4-119">Classe SoapException do Reporting Services</span><span class="sxs-lookup"><span data-stu-id="623a4-119">Reporting Services SoapException Class</span></span>](soapexception-class/reporting-services-soapexception-class.md)  
+  
+  
